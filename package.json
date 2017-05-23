@@ -1,7 +1,14 @@
 {
   "name": "material-ui-elements",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EffcoSoftware/material-ui-elements.git"
+  },
+  "bugs": {
+    "url": "https://github.com/EffcoSoftware/material-ui-elements/issues"
+  },
   "main": "lib/index.js",
   "scripts": {
     "prepublish": "node ./node_modules/babel-cli/bin/babel.js src --out-dir lib",
