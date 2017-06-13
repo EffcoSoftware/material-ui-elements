@@ -1,29 +1,19 @@
 import React from 'react'
-import AppBar from 'material-ui/AppBar'
-import Toolbar from 'material-ui/Toolbar'
-import Typography from 'material-ui/Typography'
-import IconButton from 'material-ui/IconButton'
-import ArrowBack from 'material-ui-icons/ArrowBack'
-import ArrowForward from 'material-ui-icons/ArrowForward'
-import MuiTextfield from '../MuiTextfield'
+import Hidden from 'material-ui/Hidden'
+import FormBase from './layouts/FormBase'
+import FormBasic from './layouts/FormBasic'
+import FormModal from './layouts/FormModal'
 
-const Form = config => {
+const Form = props => {
+  if (!props.config) return null
+  const { type } = props.config
+  if (type === 'base') return <FormBase {...props} />
+  if (type === 'modal') return <FormModal {...props} />
+  if (type === 'basic') return <FormBasic {...props} />
   return (
     <div>
-      <AppBar style={{ position: 'relative', boxShadow: 'none' }}>
-        <Toolbar>
-          <IconButton contrast>
-            <ArrowBack />
-          </IconButton>
-          <div style={{ flex: 1 }} />
-          <Typography type="title" colorInherit>Title</Typography>
-          <div style={{ flex: 1 }} />
-          <IconButton contrast>
-            <ArrowForward />
-          </IconButton>
-        </Toolbar>
-      </AppBar>
-      <MuiTextfield label="hello" error="123" />
+      <Hidden smDown><FormModal {...props} /></Hidden>
+      <Hidden mdUp><FormBasic {...props} /></Hidden>
     </div>
   )
 }

@@ -15,7 +15,8 @@ const BottomToolbar = ({ config, rows }) => {
   const { rowCount, allRows, visibleRows } = toolbarConfig
 
   const rowCountDisplay = rowCount
-    ? <Typography>{`Wyświetlono ${allRows} z ${visibleRows}`}</Typography>
+    ? <Typography
+      >{`Displaying ${allRows} out of ${visibleRows} rows`}</Typography>
     : null
   return (
     <div>

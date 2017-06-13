@@ -1,29 +1,37 @@
 import React from 'react'
-import { TextField } from 'material-ui'
+import { TextField } from 'material-ui-effco'
 
 export default ({
-  field,
-  value,
   disabled,
   style,
-  placeholder,
-  label,
-  error,
+  hintText,
+  floatingLabelText,
   rows,
   type,
   underlineShow,
-  underlineDisabledStyle
-}) => (
-  <div style={{ margin: 10 }}>
+  underlineDisabledStyle,
+  required,
+  onChange,
+  input,
+  meta
+}) =>
+  <div>
     <TextField
-      {...field}
-      value={field ? field.value : value}
-      placeholder={placeholder}
-      label={label}
+      {...input}
+      hintText={hintText}
+      floatingLabelText={
+        floatingLabelText ? `${floatingLabelText}${required ? ' *' : ''}` : null
+      }
       disabled={disabled}
+      fullWidth
+      multiLine={!!rows}
       rows={rows}
-      error={error}
+      errorText={meta ? meta.touched && meta.error && meta.error : null}
+      underlineShow={underlineShow}
+      underlineDisabledStyle={underlineDisabledStyle || { borderColor: '#ccc' }}
+      hintStyle={{ color: '#aaa' }}
+      floatingLabelFixed
       type={type}
+      style={style}
     />
   </div>
-)

@@ -16,18 +16,22 @@ class MuiTable extends Component {
   constructor(props) {
     super(props)
 
-    const { config: { title, header, settings } } = props
+    const { config } = props
 
-    this.state = {
-      ...{
-        title: title || '',
-        orderBy: header[0].name,
-        order: 'asc',
-        selected: null,
-        selectable: false,
-        hover: true
-      },
-      ...settings
+    if (config) {
+      const { title, header, settings } = config
+      this.state = {
+        ...{
+          title: title || '',
+          orderBy: header[0].name,
+          order: 'asc',
+          selected: null,
+          selectable: false,
+          hover: settings.hover === false ? false : settings.hover || true,
+          search: ''
+        },
+        ...settings
+      }
     }
   }
 
@@ -37,7 +41,7 @@ class MuiTable extends Component {
         ...this.state,
         selected: this.state.selected === id ? null : id
       })
-    action(id)
+    if (action) action(id)
   }
 
   handleSort(column) {
@@ -52,41 +56,75 @@ class MuiTable extends Component {
   }
 
   render() {
+    if (!this.props.config) return null
     const { config: { header, data, toolbars, actions } } = this.props
-    let { title, orderBy, order, selectable } = this.state
-    const sortedData = _.orderBy(data, orderBy, order)
+    let { title, orderBy, order, selectable, filter } = this.state
 
-    const tableHeader = header.map((h, i) => (
+    const filteredData = this.state.search && filter
+      ? data.filter(
+          d =>
+            _.get(d, filter)
+              .toLowerCase()
+              .indexOf(this.state.search.toLowerCase()) > -1
+        )
+      : data
+    const sortedData = _.orderBy(filteredData, orderBy, order)
+
+    const tableHeader = header.map((h, i) =>
       <TableCell
         key={i}
         numeric={h.numeric}
         compact={h.compact}
         disablePadding={h.disablePadding}
+        style={h.style}
       >
         <TableSortLabel
+          onClick={() => this.handleSort(h.name)}
           active={h.name === orderBy}
           direction={order}
-          onClick={() => this.handleSort(h.name)}
         >
           {h.label}
         </TableSortLabel>
       </TableCell>
-    ))
+    )
 
-    const tableBody = sortedData.map((row, i) => (
+    const tableBody = sortedData.map((row, i) =>
       <MuiTableRow
         key={i}
         row={row}
+        hover={this.state.hover}
         onRowClick={() =>
-          this.handleRowClick(actions.onRowClick, row.id, selectable)}
+          this.handleRowClick(
+            actions ? actions.onRowClick : null,
+            row.id,
+            selectable
+          )}
         {...this.props}
         {...this.state}
       />
-    ))
+    )
 
     return (
       <Paper>
-        <TopToolbar title={title} config={toolbars ? toolbars.top : {}} />
+        <TopToolbar
+          title={title}
+          config={
+            toolbars
+              ? {
+                  ...toolbars.top,
+                  filter: this.state.filter,
+                  search: this.state.search,
+                  searchChange: (e, v) =>
+                    this.setState({ ...this.state, search: v })
+                }
+              : {
+                  filter: this.state.filter,
+                  search: this.state.search,
+                  searchChange: (e, v) =>
+                    this.setState({ ...this.state, search: v })
+                }
+          }
+        />
         <Table>
           <TableHead>
             <TableRow>
@@ -99,7 +137,10 @@ class MuiTable extends Component {
         </Table>
         <BottomToolbar
           config={toolbars ? toolbars.bottom : {}}
-          rows={{ visibleRows: data.length, allRows: data.length }}
+          rows={{
+            visibleRows: filteredData.length,
+            allRows: filteredData.length
+          }}
         />
       </Paper>
     )
