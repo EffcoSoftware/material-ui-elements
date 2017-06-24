@@ -39,22 +39,6 @@ const FormField = props => {
           numeric={numeric}
         />
       )
-    case 'autocomplete':
-      return (
-        <MuiAutocomplete
-          input={input}
-          meta={meta}
-          disabled={add ? false : disabled}
-          floatingLabelText={label}
-          hintText={hint}
-          required={required}
-          options={options}
-          style={style}
-          value={value}
-          numeric={numeric}
-          showAutocompleteThreshold={showAutocompleteThreshold}
-        />
-      )
     case 'subheading':
       return (
         <div style={style || { marginTop: 30, marginBottom: 5 }}>
