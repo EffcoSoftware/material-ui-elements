@@ -19,16 +19,18 @@ class MuiTable extends Component {
     const { config } = props
 
     if (config) {
-      const { title, header, settings } = config
+      const { header, settings } = config
       this.state = {
         ...{
-          title: title || '',
           orderBy: header[0].name,
           order: 'asc',
           selected: null,
           selectable: false,
-          hover: settings.hover === false ? false : settings.hover || true,
-          search: ''
+          hover: settings
+            ? settings.hover === false ? false : settings.hover || true
+            : true,
+          filterBy: '',
+          filterString: ''
         },
         ...settings
       }
@@ -57,17 +59,15 @@ class MuiTable extends Component {
 
   render() {
     if (!this.props.config) return null
-    const { config: { header, data, toolbars, actions } } = this.props
-    let { title, orderBy, order, selectable, filter } = this.state
+    const { config: { title, header, data, toolbars, actions } } = this.props
+    let { orderBy, order, selectable, filterBy, filterString } = this.state
 
-    const filteredData = this.state.search && filter
-      ? data.filter(
-          d =>
-            _.get(d, filter)
-              .toLowerCase()
-              .indexOf(this.state.search.toLowerCase()) > -1
+    const filteredData = filterBy && filterString
+      ? data.filter(d =>
+          _.get(d, filterBy).toLowerCase().includes(filterString.toLowerCase())
         )
       : data
+
     const sortedData = _.orderBy(filteredData, orderBy, order)
 
     const tableHeader = header.map((h, i) =>
@@ -104,27 +104,19 @@ class MuiTable extends Component {
       />
     )
 
+    const topToolbarConfig = {
+      ...{
+        filterBy,
+        filterString,
+        filterChange: (e, v) =>
+          this.setState({ ...this.state, filterString: v })
+      },
+      ...(toolbars ? toolbars.top : {})
+    }
+
     return (
       <Paper>
-        <TopToolbar
-          title={title}
-          config={
-            toolbars
-              ? {
-                  ...toolbars.top,
-                  filter: this.state.filter,
-                  search: this.state.search,
-                  searchChange: (e, v) =>
-                    this.setState({ ...this.state, search: v })
-                }
-              : {
-                  filter: this.state.filter,
-                  search: this.state.search,
-                  searchChange: (e, v) =>
-                    this.setState({ ...this.state, search: v })
-                }
-          }
-        />
+        <TopToolbar title={title} config={topToolbarConfig} />
         <Table>
           <TableHead>
             <TableRow>

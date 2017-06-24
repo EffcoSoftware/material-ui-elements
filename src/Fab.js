@@ -3,6 +3,7 @@ import Button from 'material-ui/Button'
 import Icon from 'material-ui/Icon'
 
 const styles = {
+  zIndex: 1,
   margin: 0,
   top: 'auto',
   right: 50,
@@ -12,7 +13,7 @@ const styles = {
 }
 
 const Fab = ({ onClick, color }) =>
-  <Button fab style={styles} color={color || 'accent'} onClick={onClick}>
+  <Button fab style={styles} color={color || 'accent'} onTouchTap={onClick}>
     <Icon>add</Icon>
   </Button>
 

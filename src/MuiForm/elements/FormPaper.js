@@ -6,11 +6,12 @@ import FormFields from '../elements/FormFields'
 
 const FormPaper = props => {
   const { label, fieldsGroup, config: { title, fields } } = props
+  const formLabel = label || title || ''
   return (
     <Paper style={{ marginBottom: 24 }}>
-      {title
+      {formLabel
         ? <Toolbar>
-            <Typography type="title">{label || title}</Typography>
+            <Typography type="title">{formLabel}</Typography>
           </Toolbar>
         : null}
       <FormFields fields={fieldsGroup || fields} {...props} />

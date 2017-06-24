@@ -10,7 +10,8 @@ export default ({
   icon,
   style,
   raised,
-  color
+  color,
+  compact
 }) => {
   if (action) {
     return (
@@ -21,6 +22,7 @@ export default ({
         style={style}
         raised={raised}
         color={color}
+        compact={compact}
       >
         {icon ? <Icon style={{ marginRight: 5 }}>{icon}</Icon> : null}
         {label}

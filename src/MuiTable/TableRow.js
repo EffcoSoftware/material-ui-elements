@@ -1,6 +1,7 @@
 import React from 'react'
 import _ from 'lodash'
 import { TableRow, TableCell } from 'material-ui/Table'
+import Typography from 'material-ui/Typography'
 
 const MuiTableRow = ({
   selected,
@@ -14,6 +15,7 @@ const MuiTableRow = ({
       hover={hover}
       selected={row.id === selected}
       onClick={() => onRowClick(row.id)}
+      style={{ cursor: 'pointer' }}
     >
       {header.map((h, i) => {
         const value = _.get(row, h.name)
@@ -25,7 +27,9 @@ const MuiTableRow = ({
             disablePadding={h.disablePadding}
             style={h.style}
           >
-            {h.component ? h.component(value) : value}
+            {h.component
+              ? h.component(value)
+              : <Typography>{value}</Typography>}
           </TableCell>
         )
       })}

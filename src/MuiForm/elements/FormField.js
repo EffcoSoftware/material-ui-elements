@@ -2,9 +2,11 @@ import React from 'react'
 import Typography from 'material-ui/Typography'
 import MuiTextfield from '../../MuiTextfield'
 import MuiSelectfield from '../../MuiSelectfield'
+import MuiAutocomplete from '../../MuiAutocomplete'
 
 const FormField = props => {
   const {
+    add,
     type,
     component,
     label,
@@ -14,7 +16,11 @@ const FormField = props => {
     disabled,
     style,
     input,
-    meta
+    meta,
+    value,
+    showAutocompleteThreshold,
+    underlineShow,
+    numeric
   } = props
 
   switch (type) {
@@ -23,12 +29,30 @@ const FormField = props => {
         <MuiSelectfield
           input={input}
           meta={meta}
-          disabled={disabled}
+          disabled={add ? false : disabled}
           floatingLabelText={label}
           hintText={hint}
           required={required}
           options={options}
           style={style}
+          value={value}
+          numeric={numeric}
+        />
+      )
+    case 'autocomplete':
+      return (
+        <MuiAutocomplete
+          input={input}
+          meta={meta}
+          disabled={add ? false : disabled}
+          floatingLabelText={label}
+          hintText={hint}
+          required={required}
+          options={options}
+          style={style}
+          value={value}
+          numeric={numeric}
+          showAutocompleteThreshold={showAutocompleteThreshold}
         />
       )
     case 'subheading':
@@ -47,11 +71,14 @@ const FormField = props => {
           input={input}
           meta={meta}
           type={type}
-          disabled={disabled}
+          disabled={add ? false : disabled}
           floatingLabelText={label}
           hintText={hint}
           required={required}
           style={style}
+          value={value}
+          numeric={numeric}
+          underlineShow={underlineShow}
         />
       )
   }

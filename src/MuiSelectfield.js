@@ -11,14 +11,18 @@ export default ({
   multiple,
   required,
   input,
-  meta
+  meta,
+  value
 }) => {
   return (
     <SelectField
+      value={value}
       {...input}
       onChange={(e, i, v) => input.onChange(v)}
       hintText={hintText}
-      floatingLabelText={`${floatingLabelText}${required ? ' *' : ''}`}
+      floatingLabelText={
+        floatingLabelText ? `${floatingLabelText}${required ? ' *' : ''}` : ''
+      }
       fullWidth
       errorText={meta ? meta.touched && meta.error && meta.error : null}
       disabled={disabled}
@@ -31,8 +35,8 @@ export default ({
       {options
         ? options.map(o =>
             <MenuItem
-              key={o.value || o}
-              value={o.value || o}
+              key={[false, 0].indexOf(o.value) > -1 ? o.value : o.value || o}
+              value={[false, 0].indexOf(o.value) > -1 ? o.value : o.value || o}
               primaryText={o.label || o}
             />
           )
