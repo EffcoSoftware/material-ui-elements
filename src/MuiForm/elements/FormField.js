@@ -2,7 +2,6 @@ import React from 'react'
 import Typography from 'material-ui/Typography'
 import MuiTextfield from '../../MuiTextfield'
 import MuiSelectfield from '../../MuiSelectfield'
-import MuiAutocomplete from '../../MuiAutocomplete'
 
 const FormField = props => {
   const {
@@ -18,7 +17,6 @@ const FormField = props => {
     input,
     meta,
     value,
-    showAutocompleteThreshold,
     underlineShow,
     numeric
   } = props
