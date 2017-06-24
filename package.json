@@ -11,7 +11,7 @@
   },
   "main": "lib/index.js",
   "scripts": {
-    "prepublish": "node ./node_modules/babel-cli/bin/babel.js src --out-dir lib",
+    "prepublish": "rmdir /S /Q lib && node ./node_modules/babel-cli/bin/babel.js src --out-dir lib",
     "watch": "node ./node_modules/babel-cli/bin/babel.js --watch src --out-dir lib",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
