@@ -35,13 +35,16 @@ export default ({
       {options
         ? options.map(o =>
             <MenuItem
-              key={[false, 0].indexOf(o.value) > -1 ? o.value : o.value || o}
+              key={
+                o.key
+                  ? o.key
+                  : [false, 0].indexOf(o.value) > -1 ? o.value : o.value || o
+              }
               value={[false, 0].indexOf(o.value) > -1 ? o.value : o.value || o}
               primaryText={o.label || o}
             />
           )
         : null}
-
     </SelectField>
   )
 }

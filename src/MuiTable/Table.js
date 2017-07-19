@@ -19,7 +19,8 @@ class MuiTable extends Component {
     const { config } = props
 
     if (config) {
-      const { header, settings } = config
+      const { header = [{}], settings } = config
+
       this.state = {
         ...{
           orderBy: header[0].name,
@@ -30,7 +31,8 @@ class MuiTable extends Component {
             ? settings.hover === false ? false : settings.hover || true
             : true,
           filterBy: '',
-          filterString: ''
+          filterString: '',
+          filterPlaceholder: settings.lang === 'pl' ? 'Wyszukaj' : undefined
         },
         ...settings
       }
@@ -58,15 +60,33 @@ class MuiTable extends Component {
   }
 
   render() {
-    if (!this.props.config) return null
-    const { config: { title, header, data, toolbars, actions } } = this.props
-    let { orderBy, order, selectable, filterBy, filterString } = this.state
+    if (!this.props.config || !this.props.config.header) {
+      console.error(
+        "[MuiTable] To see a table, please add 'header' array to config object. Header has to have at least one element."
+      )
+      return null
+    }
+    const {
+      config: { title, header = [{}], data = [], toolbars, actions }
+    } = this.props
+    let {
+      orderBy,
+      order,
+      selectable,
+      filterBy,
+      filterString,
+      filterPlaceholder,
+      lang
+    } = this.state
 
-    const filteredData = filterBy && filterString
-      ? data.filter(d =>
-          _.get(d, filterBy).toLowerCase().includes(filterString.toLowerCase())
-        )
-      : data
+    const filteredData =
+      filterBy && filterString
+        ? data.filter(d =>
+            _.get(d, filterBy)
+              .toLowerCase()
+              .includes(filterString.toLowerCase())
+          )
+        : data
 
     const sortedData = _.orderBy(filteredData, orderBy, order)
 
@@ -108,6 +128,7 @@ class MuiTable extends Component {
       ...{
         filterBy,
         filterString,
+        filterPlaceholder,
         filterChange: (e, v) =>
           this.setState({ ...this.state, filterString: v })
       },
@@ -128,7 +149,7 @@ class MuiTable extends Component {
           </TableBody>
         </Table>
         <BottomToolbar
-          config={toolbars ? toolbars.bottom : {}}
+          config={{ ...(toolbars ? toolbars.bottom : {}), lang }}
           rows={{
             visibleRows: filteredData.length,
             allRows: filteredData.length

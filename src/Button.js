@@ -22,9 +22,13 @@ export default ({
         style={style}
         raised={raised}
         color={color}
-        compact={compact}
+        dense={compact}
       >
-        {icon ? <Icon style={{ marginRight: 5 }}>{icon}</Icon> : null}
+        {icon
+          ? <Icon style={{ marginRight: 5 }}>
+              {icon}
+            </Icon>
+          : null}
         {label}
       </Button>
     )

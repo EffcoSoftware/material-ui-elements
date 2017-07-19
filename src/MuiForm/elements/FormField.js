@@ -40,7 +40,17 @@ const FormField = props => {
     case 'subheading':
       return (
         <div style={style || { marginTop: 30, marginBottom: 5 }}>
-          <Typography type="body2">{label}</Typography>
+          <Typography type="body2">
+            {label}
+          </Typography>
+        </div>
+      )
+    case 'caption':
+      return (
+        <div style={style || { marginTop: 30, marginBottom: 5 }}>
+          <Typography type="caption">
+            {label}
+          </Typography>
         </div>
       )
     case 'spacer':

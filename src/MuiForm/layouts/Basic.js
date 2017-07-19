@@ -36,13 +36,7 @@ const FormBasic = props => {
               </div>
             </div>
           </Drawer>
-        : <CrudButtons
-            add={add}
-            submittable={!(pristine || submitting || invalid)}
-            disabled={disabled}
-            actions={actions}
-            {...props}
-          />}
+        : null}
       {groups
         ? <FormPapers {...props} />
         : <FormPaper fields={fields} {...props} />}

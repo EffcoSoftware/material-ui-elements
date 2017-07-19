@@ -2,6 +2,7 @@ import React from 'react'
 import Toolbar from 'material-ui/Toolbar'
 import Typography from 'material-ui/Typography'
 import Divider from 'material-ui/Divider'
+import * as helpers from '../helpers'
 
 const BottomToolbar = ({ config, rows }) => {
   if (config === false) return null
@@ -13,9 +14,21 @@ const BottomToolbar = ({ config, rows }) => {
   }
 
   const { rowCount, allRows } = toolbarConfig
+  const rowCountText =
+    config.lang === 'pl'
+      ? `Wyświetlono ${helpers.editingWording(
+          allRows,
+          'rekord',
+          '',
+          'ów',
+          'y'
+        )} `
+      : `Displaying ${helpers.editingWording(allRows, 'row', '', 's')}`
 
   const rowCountDisplay = rowCount
-    ? <Typography>{`Displaying ${allRows} rows`}</Typography>
+    ? <Typography>
+        {rowCountText}
+      </Typography>
     : null
   return (
     <div>

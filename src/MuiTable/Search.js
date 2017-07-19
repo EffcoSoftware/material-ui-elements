@@ -1,13 +1,18 @@
 import React from 'react'
 import MuiTextField from '../MuiTextfield'
 
-const Search = ({ filterString, filterChange, filterBy }) => {
+const Search = ({
+  filterPlaceholder,
+  filterString,
+  filterChange,
+  filterBy
+}) => {
   if (!filterBy) return null
   return (
     <div style={{ display: 'flex' }}>
       <MuiTextField
         value={filterString}
-        hintText="Search"
+        hintText={filterPlaceholder || 'Search'}
         style={{ padding: 0 }}
         onChange={filterChange}
       />
