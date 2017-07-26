@@ -3,13 +3,7 @@ import _ from 'lodash'
 import { TableRow, TableCell } from 'material-ui/Table'
 import Typography from 'material-ui/Typography'
 
-const MuiTableRow = ({
-  selected,
-  hover,
-  row,
-  onRowClick,
-  config: { header }
-}) => {
+const MuiTableRow = ({ selected, hover, row, onRowClick, header }) => {
   return (
     <TableRow
       hover={hover}
@@ -29,7 +23,9 @@ const MuiTableRow = ({
           >
             {h.component
               ? h.component(value)
-              : <Typography>{value}</Typography>}
+              : <Typography>
+                  {value}
+                </Typography>}
           </TableCell>
         )
       })}
