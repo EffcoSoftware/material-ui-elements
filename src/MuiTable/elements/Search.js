@@ -1,8 +1,8 @@
 import React from 'react'
 import MuiTextField from '../../MuiTextfield'
 
-const Search = ({ lang, filterString, filterChange, filterBy }) => {
-  if (!filterBy) return null
+const Search = ({ lang, filterString, filterChange, filterBy, fieldArray }) => {
+  if (!filterBy || fieldArray) return null
   return (
     <div style={{ display: 'flex', marginRight: 24 }}>
       <MuiTextField

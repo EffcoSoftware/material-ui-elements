@@ -1,11 +1,11 @@
 import React from 'react'
 import { TableRow, TableCell, TableSortLabel } from 'material-ui/Table'
 
-const TableHeader = ({ header, orderBy, order, handleSort }) => {
-  if (!header) return null
+const TableHeader = ({ columns, orderBy, order, handleSort, fieldArray }) => {
+  if (!columns) return null
   return (
     <TableRow>
-      {header.map((h, i) =>
+      {columns.map((h, i) =>
         <TableCell
           key={i}
           numeric={h.numeric}
@@ -13,13 +13,15 @@ const TableHeader = ({ header, orderBy, order, handleSort }) => {
           disablePadding={h.disablePadding}
           style={h.style}
         >
-          <TableSortLabel
-            onClick={() => handleSort(h.name)}
-            active={h.name === orderBy}
-            direction={order}
-          >
-            {h.label}
-          </TableSortLabel>
+          {orderBy && fieldArray !== true
+            ? <TableSortLabel
+                onClick={() => handleSort(h.name)}
+                active={h.name === orderBy}
+                direction={order}
+              >
+                {h.label}
+              </TableSortLabel>
+            : h.label}
         </TableCell>
       )}
     </TableRow>

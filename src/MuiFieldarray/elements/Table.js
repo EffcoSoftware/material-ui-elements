@@ -14,7 +14,7 @@ class MuiTable extends Component {
   constructor(props) {
     super(props)
 
-    const { config, fields } = props
+    const { config } = props
 
     if (config) {
       const { title, header, settings } = config
@@ -49,7 +49,7 @@ class MuiTable extends Component {
   render() {
     if (!this.props.config) return null
 
-    const { config: { toolbars, actions }, disabled, fields } = this.props
+    const { config: { toolbars, actions }, disabled, fields, add } = this.props
     let { title, header = [] } = this.state
 
     const tableHeader = header.map((h, i) =>
@@ -101,7 +101,9 @@ class MuiTable extends Component {
           <TableHead>
             <TableRow>
               {tableHeader}
-              {!disabled ? <TableCell compact disablePadding /> : null}
+              {!disabled
+                ? <TableCell style={{ width: 1 }} compact disablePadding />
+                : null}
             </TableRow>
           </TableHead>
           <TableBody>
@@ -116,7 +118,10 @@ class MuiTable extends Component {
           }}
           actions={[
             {
-              action: !disabled ? () => fields.push({}) : null,
+              action:
+                !disabled || add
+                  ? () => fields.push({ quantity: 1, margin: 30 })
+                  : null,
               label: 'Add New Device',
               icon: 'add',
               color: 'primary'

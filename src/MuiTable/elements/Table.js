@@ -7,16 +7,14 @@ import Body from './TableBody'
 class MuiTable extends Component {
   constructor(props) {
     super(props)
-    const { header = [{}] } = props
+    const { orderBy } = props
     this.state = {
-      orderBy: header[0].name,
+      orderBy,
       order: 'asc'
     }
   }
 
   handleSort = column => {
-    console.log(column)
-
     const { orderBy, order } = this.state
 
     if (column === orderBy)
@@ -44,7 +42,7 @@ class MuiTable extends Component {
         </TableHead>
         <Body
           {...this.props}
-          data={this.orderData(data, orderBy, order)}
+          data={orderBy ? this.orderData(data, orderBy, order) : data}
           onRowClick={onRowClick}
         />
       </Table>

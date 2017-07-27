@@ -13,6 +13,7 @@ const MuiTableRow = props => {
     disabled,
     onRowClick
   } = props
+  console.log(row)
 
   return (
     <TableRow hover={hover}>
@@ -22,11 +23,13 @@ const MuiTableRow = props => {
           numeric={h.numeric}
           compact={h.compact}
           disablePadding={h.disablePadding}
-          onClick={() => onRowClick(i)}
+          onClick={() => (onRowClick ? onRowClick(i) : null)}
           style={h.style}
         >
           {h.value
-            ? <Typography>{h.value(data[index])}</Typography>
+            ? <Typography>
+                {h.value(data[index])}
+              </Typography>
             : <FormFieldRedux
                 type={h.type}
                 name={`${row}.${h.name}`}
@@ -34,6 +37,7 @@ const MuiTableRow = props => {
                 options={h.options}
                 numeric={h.numeric}
                 validate={h.validate}
+                normalize={h.normalize}
               />}
         </TableCell>
       )}

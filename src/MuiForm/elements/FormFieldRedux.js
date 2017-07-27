@@ -4,14 +4,7 @@ import FormField from './FormField'
 
 const FormFieldRedux = props => {
   if (props.name)
-    return (
-      <Field
-        name={props.name}
-        component={FormField}
-        {...props}
-        validate={props.validate}
-      />
-    )
+    return <Field name={props.name} component={FormField} {...props} />
   return <FormField {...props} />
 }
 

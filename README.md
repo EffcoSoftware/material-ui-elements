@@ -6,7 +6,6 @@ Meta-component library (components made out of Material-UI components) for commo
 - MuiTextfield
 - MuiSelectfield
 - MuiTable
-- MuiFieldArray
 - MuiForm
 - CrudButtons
 - Fab
