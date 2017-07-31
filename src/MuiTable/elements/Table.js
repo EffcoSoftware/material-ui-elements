@@ -3,14 +3,21 @@ import _ from 'lodash'
 import Table, { TableHead } from 'material-ui/Table'
 import Header from './TableHeader'
 import Body from './TableBody'
+import ButtonAdd from './ButtonAdd'
+import { extractFormFieldsData } from '../../helpers'
 
 class MuiTable extends Component {
   constructor(props) {
     super(props)
-    const { orderBy } = props
+    const { orderBy, fields, fieldArray } = props
     this.state = {
       orderBy,
       order: 'asc'
+    }
+    if (fieldArray) {
+      extractFormFieldsData(this.props.columns, this.props.data).map(x =>
+        fields.push(x)
+      )
     }
   }
 
@@ -29,23 +36,34 @@ class MuiTable extends Component {
 
   render() {
     const { orderBy, order } = this.state
-    const { data, onRowClick } = this.props
+    const { data, fieldArray, disabled, paper } = this.props
 
     return (
-      <Table>
-        <TableHead>
-          <Header
+      <div>
+        <Table>
+          <TableHead>
+            <Header
+              {...this.props}
+              {...this.state}
+              handleSort={this.handleSort.bind(this)}
+            />
+          </TableHead>
+          <Body
             {...this.props}
-            {...this.state}
-            handleSort={this.handleSort.bind(this)}
+            data={
+              !fieldArray && orderBy
+                ? this.orderData(data, orderBy, order)
+                : data
+            }
           />
-        </TableHead>
-        <Body
-          {...this.props}
-          data={orderBy ? this.orderData(data, orderBy, order) : data}
-          onRowClick={onRowClick}
-        />
-      </Table>
+        </Table>
+        {fieldArray && !disabled && !paper
+          ? <div style={{ marginTop: 24 }}>
+              <ButtonAdd {...this.props} />
+              <div style={{ flex: 1 }} />
+            </div>
+          : null}
+      </div>
     )
   }
 }

@@ -3,10 +3,10 @@ import _ from 'lodash'
 import { TableRow, TableCell } from 'material-ui/Table'
 import Typography from 'material-ui/Typography'
 import FormFieldRedux from '../../MuiForm/elements/FormFieldRedux'
+import RowActions from './RowActions'
 
 const MuiTableRow = props => {
   const {
-    selected,
     hover,
     row,
     onRowClick,
@@ -14,12 +14,13 @@ const MuiTableRow = props => {
     fieldArray,
     disabled,
     data,
-    index
+    index,
+    fields
   } = props
+
   return (
     <TableRow
       hover={hover}
-      selected={row.id === selected}
       onClick={onRowClick && !fieldArray ? () => onRowClick(row.id) : null}
       style={{ cursor: onRowClick && !fieldArray ? 'pointer' : null }}
     >
@@ -33,23 +34,23 @@ const MuiTableRow = props => {
               disablePadding={h.disablePadding}
               style={h.style}
             >
-              {h.value
-                ? <Typography>
-                    {h.value(data[i])}
-                  </Typography>
-                : <FormFieldRedux
+              {h.formField
+                ? <FormFieldRedux
                     type={h.type}
-                    name={`${h.name}[${index}]`}
+                    name={`${fields.name}[${index}].${h.name}`}
                     disabled={disabled}
                     options={h.options}
                     numeric={h.numeric}
                     validate={h.validate}
                     normalize={h.normalize}
-                  />}
+                  />
+                : <Typography>
+                    {h.value ? h.value(data[i]) : data[i]}
+                  </Typography>}
             </TableCell>
           )
         } else {
-          const value = _.get(row, h.name)
+          const value = _.get(data[index], h.name)
           return (
             <TableCell
               key={i}
@@ -67,6 +68,16 @@ const MuiTableRow = props => {
           )
         }
       })}
+      {fieldArray && !disabled
+        ? <TableCell
+            compact
+            disablePadding
+            style={{ width: 1 }}
+            key={columns.length + 1}
+          >
+            <RowActions {...props} />
+          </TableCell>
+        : null}
     </TableRow>
   )
 }

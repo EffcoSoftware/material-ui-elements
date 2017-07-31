@@ -4,12 +4,15 @@ import MuiTableRow from './TableRow'
 import NoRows from './NoRows'
 
 const Body = props => {
-  const { data, handleRowClick } = props
+  const { data, fields, handleRowClick, fieldArray } = props
 
   if (!data) return <NoRows />
+
+  const tableData = fieldArray ? fields : data
+
   return (
     <TableBody>
-      {data.map((row, i) =>
+      {tableData.map((row, i) =>
         <MuiTableRow
           key={i}
           index={i}

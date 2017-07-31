@@ -1,7 +1,14 @@
 import React from 'react'
 import { TableRow, TableCell, TableSortLabel } from 'material-ui/Table'
 
-const TableHeader = ({ columns, orderBy, order, handleSort, fieldArray }) => {
+const TableHeader = ({
+  columns,
+  orderBy,
+  order,
+  handleSort,
+  fieldArray,
+  disabled
+}) => {
   if (!columns) return null
   return (
     <TableRow>
@@ -24,6 +31,9 @@ const TableHeader = ({ columns, orderBy, order, handleSort, fieldArray }) => {
             : h.label}
         </TableCell>
       )}
+      {fieldArray && !disabled
+        ? <TableCell style={{ width: 1 }} compact disablePadding />
+        : null}
     </TableRow>
   )
 }

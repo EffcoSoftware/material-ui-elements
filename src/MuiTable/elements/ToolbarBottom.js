@@ -2,18 +2,20 @@ import React from 'react'
 import Toolbar from 'material-ui/Toolbar'
 import Typography from 'material-ui/Typography'
 import Divider from 'material-ui/Divider'
+import ButtonAdd from './ButtonAdd'
 import * as helpers from '../../helpers'
 
 const BottomToolbar = props => {
-  const rows = props.data ? props.data.length : 0
+  const { data, lang, rowCount, fieldArray, fields } = props
+  const rows = fieldArray ? fields.length : data ? data.length : 0
 
   const rowCountText =
-    props.lang === 'pl'
+    lang === 'pl'
       ? `Wyświetlono ${helpers.editingWording(rows, 'rekord', '', 'ów', 'y')} `
       : `Displaying ${helpers.editingWording(rows, 'row', '', 's')}`
 
   const rowCountDisplay =
-    props.rowCount === false
+    rowCount === false
       ? null
       : <Typography>
           {rowCountText}
@@ -22,6 +24,7 @@ const BottomToolbar = props => {
     <div>
       <Divider />
       <Toolbar>
+        <ButtonAdd {...props} />
         <div style={{ flex: 1 }} />
         {rowCountDisplay}
       </Toolbar>
