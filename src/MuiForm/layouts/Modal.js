@@ -17,12 +17,16 @@ const FormModal = props => {
     pristine,
     submitting,
     invalid,
-    config: { title, groups, fields, actions }
+    title,
+    groups,
+    fields,
+    actions,
+    open
   } = props
 
   return (
-    <div>
-      <Dialog open>
+    <Dialog open maxWidth="md">
+      <div style={{ width: 800, overflow: 'auto' }}>
         <AppBar style={{ position: 'relative', boxShadow: 'none' }}>
           <Toolbar>
             {/*<IconButton>
@@ -52,8 +56,8 @@ const FormModal = props => {
               />
             : null}
         </DialogActions>
-      </Dialog>
-    </div>
+      </div>
+    </Dialog>
   )
 }
 

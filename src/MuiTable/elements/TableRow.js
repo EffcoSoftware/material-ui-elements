@@ -15,7 +15,8 @@ const MuiTableRow = props => {
     disabled,
     data,
     index,
-    fields
+    fields,
+    hideEditButtons
   } = props
 
   return (
@@ -68,7 +69,7 @@ const MuiTableRow = props => {
           )
         }
       })}
-      {fieldArray && !disabled
+      {fieldArray && !disabled && !hideEditButtons
         ? <TableCell
             compact
             disablePadding

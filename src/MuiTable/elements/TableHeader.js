@@ -7,7 +7,8 @@ const TableHeader = ({
   order,
   handleSort,
   fieldArray,
-  disabled
+  disabled,
+  hideEditButtons
 }) => {
   if (!columns) return null
   return (
@@ -31,7 +32,7 @@ const TableHeader = ({
             : h.label}
         </TableCell>
       )}
-      {fieldArray && !disabled
+      {fieldArray && !disabled && !hideEditButtons
         ? <TableCell style={{ width: 1 }} compact disablePadding />
         : null}
     </TableRow>

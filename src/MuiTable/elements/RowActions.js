@@ -4,7 +4,6 @@ import IconButton from 'material-ui/IconButton'
 
 const RowActions = props => {
   const { fields, index } = props
-
   return (
     <div>
       <IconButton onClick={() => fields.remove(index)}>

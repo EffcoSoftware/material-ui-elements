@@ -41,9 +41,8 @@
   "dependencies": {
     "dataobject-parser": "^1.1.3",
     "lodash": "^4.17.4",
-    "material-ui-icons": "^1.0.0-alpha.3",
+    "material-ui-superselectfield-effco": "^1.5.4",
     "react-redux": "^5.0.5",
-    "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.7.0",
     "redux-form": "^6.8.0"
   }

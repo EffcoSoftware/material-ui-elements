@@ -12,7 +12,7 @@ class FieldArrayTable extends Component {
 
     return (
       <FieldArray
-        name={title ? title.toLowerCase() : '' || name || 'array'}
+        name={name || (title ? title.toLowerCase() : '') || 'array'}
         component={TableComponent}
         props={{ ...this.props, fieldArray: true }}
       />
@@ -20,8 +20,6 @@ class FieldArrayTable extends Component {
   }
 }
 
-const ConnectedTable = connect(null, { initialize })(
-  FieldArrayTable //TODO: Initialization
-)
+const ConnectedTable = connect(null, { initialize })(FieldArrayTable)
 
 export default reduxForm({ form: 'MuiForm' })(ConnectedTable)

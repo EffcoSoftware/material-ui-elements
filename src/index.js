@@ -1,6 +1,6 @@
 export MuiTextfield from './MuiTextfield'
 export MuiSelectfield from './MuiSelectfield'
-// export MuiAutocomplete from './MuiAutocomplete'
+export MuiAutocomplete from './MuiAutocomplete'
 export MuiTable from './MuiTable'
 export MuiForm from './MuiForm'
 export CrudButtons from './CrudButtons'

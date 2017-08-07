@@ -1,7 +1,7 @@
 import React from 'react'
 import Button from '../../Button'
-const ButtonAdd = ({ fieldArray, disabled, lang, fields }) => {
-  if (!fieldArray || disabled) return null
+const ButtonAdd = ({ fieldArray, disabled, lang, fields, hideEditButtons }) => {
+  if (!fieldArray || disabled || hideEditButtons) return null
   return (
     <Button
       label={lang === 'pl' ? 'Dodaj nowy' : 'Add new'}

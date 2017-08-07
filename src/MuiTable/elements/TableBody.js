@@ -1,12 +1,11 @@
 import React from 'react'
 import { TableBody } from 'material-ui/Table'
 import MuiTableRow from './TableRow'
-import NoRows from './NoRows'
 
 const Body = props => {
   const { data, fields, handleRowClick, fieldArray } = props
 
-  if (!data) return <NoRows />
+  if (!data) return null
 
   const tableData = fieldArray ? fields : data
 

@@ -14,11 +14,12 @@ class MuiTable extends Component {
       orderBy,
       order: 'asc'
     }
-    if (fieldArray) {
-      extractFormFieldsData(this.props.columns, this.props.data).map(x =>
-        fields.push(x)
-      )
-    }
+
+    // if (fieldArray) {
+    //   extractFormFieldsData(this.props.columns, this.props.data).map(x =>
+    //     fields.push(x)
+    //   )
+    // }
   }
 
   handleSort = column => {
