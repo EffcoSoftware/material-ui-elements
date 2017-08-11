@@ -9,6 +9,7 @@ Meta-component library (components made out of Material-UI components) for commo
 - MuiForm
 - CrudButtons
 - Fab
+- Spinner
 
 # Install
 ```

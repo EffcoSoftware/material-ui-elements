@@ -3,7 +3,7 @@ import { Tabs, Tab } from 'material-ui-effco/Tabs'
 import FormFields from './FormFields'
 
 const FormTabs = props => {
-  const { groups } = props.config
+  const { groups } = props
   return (
     <Tabs>
       {groups.map((g, i) =>

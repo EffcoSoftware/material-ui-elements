@@ -13,6 +13,7 @@ const MuiTableRow = props => {
     columns,
     fieldArray,
     disabled,
+    add,
     data,
     index,
     fields,
@@ -39,7 +40,7 @@ const MuiTableRow = props => {
                 ? <FormFieldRedux
                     type={h.type}
                     name={`${fields.name}[${index}].${h.name}`}
-                    disabled={disabled}
+                    disabled={!add && disabled}
                     options={h.options}
                     numeric={h.numeric}
                     validate={h.validate}
@@ -69,7 +70,7 @@ const MuiTableRow = props => {
           )
         }
       })}
-      {fieldArray && !disabled && !hideEditButtons
+      {fieldArray && !(!add && disabled) && !hideEditButtons
         ? <TableCell
             compact
             disablePadding

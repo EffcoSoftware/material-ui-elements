@@ -19,19 +19,21 @@ class TablePaper extends Component {
   }
 
   render = () => {
-    const { data, filterBy } = this.props
+    const { data, filterBy, toolbarBottom, toolbarTop } = this.props
     return (
       <Paper>
-        <ToolbarTop
-          {...this.props}
-          {...this.state}
-          filterChange={this.filterChange.bind(this)}
-        />
+        {toolbarTop !== false
+          ? <ToolbarTop
+              {...this.props}
+              {...this.state}
+              filterChange={this.filterChange.bind(this)}
+            />
+          : null}
         <Table
           {...this.props}
           data={this.filterData(data, filterBy, this.state.filterString)}
         />
-        <ToolbarBottom {...this.props} />
+        {toolbarBottom !== false ? <ToolbarBottom {...this.props} /> : null}
       </Paper>
     )
   }

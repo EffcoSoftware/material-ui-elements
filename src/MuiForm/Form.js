@@ -16,9 +16,9 @@ class Form extends Component {
   }
 
   render() {
-    const { layout, fields } = this.props
+    const { layout, fields, groups } = this.props
     const Layout = layout
-    if (!fields) return null
+    if (!fields && !groups) return null
     return layout
       ? <Layout {...this.props} />
       : <DefaultLayout {...this.props} />

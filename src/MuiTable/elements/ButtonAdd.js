@@ -1,12 +1,22 @@
 import React from 'react'
 import Button from '../../Button'
-const ButtonAdd = ({ fieldArray, disabled, lang, fields, hideEditButtons }) => {
-  if (!fieldArray || disabled || hideEditButtons) return null
+const ButtonAdd = props => {
+  const {
+    fieldArray,
+    disabled,
+    lang,
+    fields,
+    hideEditButtons,
+    add,
+    defaultNew
+  } = props
+
+  if (!fieldArray || (disabled && !add) || hideEditButtons) return null
   return (
     <Button
       label={lang === 'pl' ? 'Dodaj nowy' : 'Add new'}
       icon="add"
-      action={() => fields.push()}
+      action={() => fields.push(defaultNew || {})}
       color="primary"
     />
   )

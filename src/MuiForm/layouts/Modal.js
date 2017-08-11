@@ -25,7 +25,7 @@ const FormModal = props => {
   } = props
 
   return (
-    <Dialog open maxWidth="md">
+    <Dialog open={open} maxWidth="md">
       <div style={{ width: 800, overflow: 'auto' }}>
         <AppBar style={{ position: 'relative', boxShadow: 'none' }}>
           <Toolbar>
