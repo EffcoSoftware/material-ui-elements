@@ -26,37 +26,51 @@ const FormModal = props => {
 
   return (
     <Dialog open={open} maxWidth="md">
-      <div style={{ width: 800, overflow: 'auto' }}>
-        <AppBar style={{ position: 'relative', boxShadow: 'none' }}>
-          <Toolbar>
-            {/*<IconButton>
+      <AppBar
+        style={{
+          margin: 0,
+          paddingRight: 0,
+          position: 'relative',
+          boxShadow: 'none'
+        }}
+      >
+        <Toolbar>
+          {/*<IconButton>
               <ChevronLeft />
             </IconButton>*/}
-            <div style={{ flex: 1 }} />
-            <Typography type="title" color="inherit">
+          <div style={{ flex: 1 }} />
+          <Typography type="title" color="inherit">
+            <div style={{ color: 'white' }}>
               {title || 'Details'}
-            </Typography>
-            <div style={{ flex: 1 }} />
-            {/*<IconButton>
+            </div>
+          </Typography>
+          <div style={{ flex: 1 }} />
+          {/*<IconButton>
               <ChevronRight />
             </IconButton>*/}
-          </Toolbar>
-        </AppBar>
+        </Toolbar>
+      </AppBar>
+      <div
+        style={{
+          width: 800,
+          overflow: 'auto'
+        }}
+      >
         {groups
           ? <FormTabs {...props} />
           : <FormFields fields={fields} {...props} />}
-        <DialogActions>
-          {actions
-            ? <CrudButtons
-                add={add}
-                submittable={!(pristine || submitting || invalid)}
-                disabled={disabled}
-                actions={actions}
-                {...props}
-              />
-            : null}
-        </DialogActions>
       </div>
+      <DialogActions>
+        {actions
+          ? <CrudButtons
+              add={add}
+              submittable={!(pristine || submitting || invalid)}
+              disabled={disabled}
+              actions={actions}
+              {...props}
+            />
+          : null}
+      </DialogActions>
     </Dialog>
   )
 }

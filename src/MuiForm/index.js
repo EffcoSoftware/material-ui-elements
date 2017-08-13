@@ -1,8 +1,8 @@
-import Form from './Form'
+import MuiForm from './MuiForm'
 import layouts from './layouts'
 import fields from './elements/fields'
 
-Form.fields = fields
-Form.layouts = layouts
+MuiForm.fields = fields
+MuiForm.layouts = layouts
 
-export default Form
+export default MuiForm

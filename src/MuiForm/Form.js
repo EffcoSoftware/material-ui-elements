@@ -8,10 +8,7 @@ const formName = 'MuiForm'
 class Form extends Component {
   componentWillMount() {
     if (!this.props.dontInitialize) {
-      const initialValues = this.props.config
-        ? this.props.config.initialValues || {}
-        : {}
-      this.props.initialize(formName, initialValues)
+      this.props.initialize(formName, this.props.initialValues || {})
     }
   }
 
