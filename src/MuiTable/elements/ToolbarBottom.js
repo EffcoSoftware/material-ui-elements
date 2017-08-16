@@ -12,7 +12,7 @@ const BottomToolbar = props => {
   const rowCountText =
     lang === 'pl'
       ? `Wyświetlono ${helpers.editingWording(rows, 'rekord', '', 'ów', 'y')} `
-      : `Displaying ${helpers.editingWording(rows, 'row', '', 's')}`
+      : `Displaying ${helpers.editingWording(rows, 'row', '', 's', 's', 's')}`
 
   const rowCountDisplay =
     rowCount === false
