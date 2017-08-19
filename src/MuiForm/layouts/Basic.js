@@ -11,7 +11,9 @@ const FormBasic = props => {
     pristine,
     submitting,
     invalid,
-    config: { groups, fields, actions }
+    groups,
+    fields,
+    actions
   } = props
   if (!actions) return null
   return (
