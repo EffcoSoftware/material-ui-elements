@@ -25,7 +25,11 @@ const FormModal = props => {
   } = props
 
   return (
-    <Dialog open={open} maxWidth="lg">
+    <Dialog
+      open={open}
+      maxWidth="lg"
+      onRequestClose={actions.cancel.action || actions.cancel}
+    >
       <AppBar
         style={{
           margin: 0,

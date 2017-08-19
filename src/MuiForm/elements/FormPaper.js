@@ -14,7 +14,9 @@ const FormPaper = props => {
     pristine,
     submitting,
     invalid,
-    config: { title, fields, actions }
+    title,
+    fields,
+    actions
   } = props
   const formLabel = label || title || ''
   return (
@@ -33,16 +35,17 @@ const FormPaper = props => {
               marginLeft: 24,
               marginRight: 24,
               marginTop: 24,
-              paddingBottom: 24
+              paddingBottom: 12
             }}
           >
-            <CrudButtons
-              add={add}
-              submittable={!(pristine || submitting || invalid)}
-              disabled={disabled}
-              actions={actions}
-              {...props}
-            />
+            {!actions.drawer &&
+              <CrudButtons
+                add={add}
+                submittable={!(pristine || submitting || invalid)}
+                disabled={disabled}
+                actions={actions}
+                {...props}
+              />}
           </div>
         : null}
     </Paper>
