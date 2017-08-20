@@ -6,7 +6,6 @@ import CrudButtons from '../../CrudButtons'
 
 const FormBasic = props => {
   const {
-    add,
     disabled,
     pristine,
     submitting,

@@ -62,7 +62,7 @@ const MuiTableRow = props => {
               style={h.style}
             >
               {h.component
-                ? h.component(value, data[i])
+                ? h.component(value, data[index])
                 : <Typography>
                     {value}
                   </Typography>}
