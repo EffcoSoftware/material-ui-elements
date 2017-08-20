@@ -1,4 +1,5 @@
 import React from 'react'
+import Typography from 'material-ui/Typography'
 import Button from '../../Button'
 const ButtonAdd = props => {
   const {
@@ -8,17 +9,27 @@ const ButtonAdd = props => {
     fields,
     hideEditButtons,
     add,
-    defaultNew
+    defaultNew,
+    newDeviceId,
+    bottomComponent,
+    customAddAction
   } = props
 
   if (!fieldArray || (disabled && !add) || hideEditButtons) return null
   return (
-    <Button
-      label={lang === 'pl' ? 'Dodaj nowy' : 'Add new'}
-      icon="add"
-      action={() => fields.push(defaultNew || {})}
-      color="primary"
-    />
+    <div style={{ display: 'flex' }}>
+      {bottomComponent && bottomComponent}
+      {newDeviceId !== -1 &&
+        <Button
+          label={lang === 'pl' ? 'Dodaj nowy' : 'Add'}
+          icon="add"
+          action={() => {
+            customAddAction && customAddAction()
+            fields.push(defaultNew || {})
+          }}
+          color="primary"
+        />}
+    </div>
   )
 }
 

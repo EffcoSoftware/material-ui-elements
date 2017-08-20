@@ -27,6 +27,10 @@ const MuiTableRow = props => {
       style={{ cursor: onRowClick && !fieldArray ? 'pointer' : null }}
     >
       {columns.map((h, i) => {
+        const value = _.get(data[index], h.name)
+        if (h.hidden && h.hidden(value, data[index])) return null
+        if (h.contentHidden && h.contentHidden(value, data[index]))
+          return <TableCell key={i} />
         if (fieldArray && h.formField) {
           return (
             <TableCell
@@ -52,7 +56,6 @@ const MuiTableRow = props => {
             </TableCell>
           )
         } else {
-          const value = _.get(data[index], h.name)
           return (
             <TableCell
               key={i}

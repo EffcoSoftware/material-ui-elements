@@ -140,7 +140,7 @@ export default props => {
               disabled || add ? actions.cancel.action || actions.cancel : null
             }
             raised={actions.raised}
-            label={add ? 'Cancel Add' : actions.cancel.label || 'Close'}
+            label={actions.cancel.label || (add ? 'Cancel Add' : 'Close')}
             disabled={false}
             icon={
               add

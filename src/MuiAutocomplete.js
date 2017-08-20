@@ -14,7 +14,8 @@ const MuiAutocomplete = props => {
     required,
     multiple,
     onChange,
-    showAutocompleteThreshold
+    showAutocompleteThreshold,
+    value
   } = props
 
   return (
@@ -22,8 +23,10 @@ const MuiAutocomplete = props => {
       disabled={disabled}
       style={style}
       {...input}
-      value={_.find(options, { value: input.value })}
-      onChange={v => input.onChange(v ? v.value || v : v) || onChange}
+      value={_.find(options, { value: (input && input.value) || value })}
+      onChange={v =>
+        (input && input.onChange(v ? v.value || v : v)) ||
+        (onChange ? onChange(v) : () => null)}
       showAutocompleteThreshold={showAutocompleteThreshold}
       hintText={hintText || ''}
       floatingLabelText={
