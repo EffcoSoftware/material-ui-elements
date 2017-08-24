@@ -44,7 +44,7 @@ const FormField = props => {
         <MuiAutocomplete
           input={input}
           meta={meta}
-          disabled={disabled}
+          disabled={add ? false : disabled}
           floatingLabelText={label}
           hintText={hint}
           required={required}
@@ -73,7 +73,7 @@ const FormField = props => {
           input={input}
           meta={meta}
           type={type}
-          disabled={disabled}
+          disabled={add ? false : disabled}
           floatingLabelText={label}
           hintText={hint}
           required={required}

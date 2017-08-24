@@ -7,13 +7,15 @@ import Search from './Search'
 import Typography from 'material-ui/Typography'
 
 const TopToolbar = props => {
-  const { title } = props
+  const { title, topComponent } = props
   return (
     <Toolbar>
       <Typography type="title">
         {title}
       </Typography>
       <div style={{ flex: 1 }} />
+      {topComponent && topComponent}
+      <div style={{ margin: 12 }} />
       <Search {...props} />
     </Toolbar>
   )

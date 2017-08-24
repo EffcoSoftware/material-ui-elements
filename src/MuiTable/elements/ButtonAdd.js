@@ -34,19 +34,3 @@ const ButtonAdd = props => {
 }
 
 export default ButtonAdd
-
-// {actions
-//   ? actions.map((b, i) =>
-//       <Button
-//         key={i}
-//         action={b.action}
-//         raised={b.raised}
-//         label={b.label}
-//         disabled={b.disabled}
-//         icon={b.icon}
-//         style={{ ...b.style }}
-//         color={b.color}
-//         compact={actions.compact}
-//       />
-//     )
-//   : null}
