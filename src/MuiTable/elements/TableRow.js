@@ -39,20 +39,23 @@ const MuiTableRow = props => {
               compact={h.compact}
               disablePadding={h.disablePadding}
               style={h.style}
+              onClick={
+                h.onClick && !fieldArray ? () => h.onClick(row.id) : null
+              }
             >
-              {h.formField
-                ? <FormFieldRedux
-                    type={h.type}
-                    name={`${fields.name}[${index}].${h.name}`}
-                    disabled={!add && disabled}
-                    options={h.options}
-                    numeric={h.numeric}
-                    validate={h.validate}
-                    normalize={h.normalize}
-                  />
-                : <Typography>
-                    {h.value ? h.value(data[i]) : data[i]}
-                  </Typography>}
+              {h.formField ? (
+                <FormFieldRedux
+                  type={h.type}
+                  name={`${fields.name}[${index}].${h.name}`}
+                  disabled={!add && disabled}
+                  options={h.options}
+                  numeric={h.numeric}
+                  validate={h.validate}
+                  normalize={h.normalize}
+                />
+              ) : (
+                <Typography>{h.value ? h.value(data[i]) : data[i]}</Typography>
+              )}
             </TableCell>
           )
         } else {
@@ -63,26 +66,29 @@ const MuiTableRow = props => {
               compact={h.compact}
               disablePadding={h.disablePadding}
               style={h.style}
+              onClick={
+                h.onClick && !fieldArray ? () => h.onClick(row.id) : null
+              }
             >
-              {h.component
-                ? h.component(value, data[index])
-                : <Typography>
-                    {value}
-                  </Typography>}
+              {h.component ? (
+                h.component(value, data[index])
+              ) : (
+                <Typography>{value}</Typography>
+              )}
             </TableCell>
           )
         }
       })}
-      {fieldArray && !(!add && disabled) && !hideEditButtons
-        ? <TableCell
-            compact
-            disablePadding
-            style={{ width: 1 }}
-            key={columns.length + 1}
-          >
-            <RowActions {...props} />
-          </TableCell>
-        : null}
+      {fieldArray && !(!add && disabled) && !hideEditButtons ? (
+        <TableCell
+          compact
+          disablePadding
+          style={{ width: 1 }}
+          key={columns.length + 1}
+        >
+          <RowActions {...props} />
+        </TableCell>
+      ) : null}
     </TableRow>
   )
 }

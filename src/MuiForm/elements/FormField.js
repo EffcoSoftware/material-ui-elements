@@ -8,6 +8,7 @@ const FormField = props => {
   const {
     add,
     type,
+    text,
     component,
     label,
     hint,
@@ -58,15 +59,15 @@ const FormField = props => {
     case 'subheading':
       return (
         <div style={style || { marginTop: 30, marginBottom: 5 }}>
-          <Typography type="body2">
-            {label}
-          </Typography>
+          <Typography type="body2">{label}</Typography>
         </div>
       )
     case 'spacer':
       return <div style={style || { marginTop: 20 }} />
     case 'component':
       return component
+    case 'typography':
+      return <Typography type={text}>{label}</Typography>
     default:
       return (
         <MuiTextfield

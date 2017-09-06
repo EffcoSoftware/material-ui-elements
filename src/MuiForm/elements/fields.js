@@ -1,5 +1,5 @@
 export default {
-  text: 'text',
+  typography: 'typography',
   select: 'select',
   subheading: 'subheading',
   caption: 'caption',

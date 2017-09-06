@@ -9,7 +9,9 @@ const FormFieldsVertical = props => {
   return (
     <Hidden smUp>
       <div>
-        {fields.map((f, i) => <FormFieldRedux key={i} {...props} {...f} />)}
+        {fields.map(
+          (f, i) => !f.hidden && <FormFieldRedux key={i} {...props} {...f} />
+        )}
       </div>
     </Hidden>
   )

@@ -9,17 +9,20 @@ const FormFieldsHorizontal = props => {
   return (
     <Hidden xsDown>
       <div style={{ display: 'flex' }}>
-        {fields.map((f, i) =>
-          <div
-            key={i}
-            style={{
-              flex: 1,
-              marginLeft: i ? 20 : 0,
-              marginRight: i === fields.length ? 5 : 0
-            }}
-          >
-            <FormFieldRedux {...props} {...f} />
-          </div>
+        {fields.map(
+          (f, i) =>
+            !f.hidden && (
+              <div
+                key={i}
+                style={{
+                  flex: 1,
+                  marginLeft: i ? 20 : 0,
+                  marginRight: i === fields.length ? 5 : 0
+                }}
+              >
+                <FormFieldRedux {...props} {...f} />
+              </div>
+            )
         )}
       </div>
     </Hidden>

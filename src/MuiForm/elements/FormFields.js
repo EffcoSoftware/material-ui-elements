@@ -11,17 +11,18 @@ const FormFields = props => {
 
   return (
     <div style={{ margin: 24 }}>
-      {fields
-        ? fields.map(
-            (f, i) =>
-              _.isArray(f)
-                ? <div key={i}>
-                    <FormFieldsHorizontal {...props} fields={f} />
-                    <FormFieldsVertical {...props} fields={f} />
-                  </div>
-                : <FormFieldRedux key={i} {...props} {...f} />
-          )
-        : null}
+      {fields &&
+        fields.map(
+          (f, i) =>
+            _.isArray(f) ? (
+              <div key={i}>
+                <FormFieldsHorizontal {...props} fields={f} />
+                <FormFieldsVertical {...props} fields={f} />
+              </div>
+            ) : (
+              !f.hidden && <FormFieldRedux key={i} {...props} {...f} />
+            )
+        )}
     </div>
   )
 }

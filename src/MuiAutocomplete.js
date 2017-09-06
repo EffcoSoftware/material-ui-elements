@@ -38,17 +38,17 @@ const MuiAutocomplete = props => {
       floatingLabelFixed
       multiple={multiple}
     >
-      {options
-        ? options.map(o =>
-            <div
-              key={[false, 0].includes(o.value) ? o.value : o.value || o}
-              label={o.label || o}
-              value={[false, 0].includes(o.value) ? o.value : o.value || o}
-            >
-              {o.label || o}
-            </div>
-          )
-        : null}
+      {options ? (
+        options.map(o => (
+          <div
+            key={[false, 0].includes(o.value) ? o.value : o.value || o}
+            label={o.label || o}
+            value={[false, 0].includes(o.value) ? o.value : o.value || o}
+          >
+            {o.label || o}
+          </div>
+        ))
+      ) : null}
     </SuperSelectField>
   )
 }

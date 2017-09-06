@@ -17,30 +17,26 @@ const FormBasic = props => {
   if (!actions) return null
   return (
     <div>
-      {actions.drawer
-        ? <Drawer
-            open
-            docked
-            elevation={32}
-            anchor="bottom"
-            style={{ position: 'static' }}
-          >
-            <div style={{ margin: 24, display: 'flex' }}>
-              <div style={{ flex: 1 }} />
-              <div>
-                <CrudButtons
-                  submittable={!(pristine || submitting || invalid)}
-                  disabled={disabled}
-                  actions={actions}
-                  {...props}
-                />
-              </div>
+      {actions.drawer ? (
+        <Drawer open docked type="persistent">
+          <div style={{ margin: 24, display: 'flex' }}>
+            <div style={{ flex: 1 }} />
+            <div>
+              <CrudButtons
+                submittable={!(pristine || submitting || invalid)}
+                disabled={disabled}
+                actions={actions}
+                {...props}
+              />
             </div>
-          </Drawer>
-        : null}
-      {groups
-        ? <FormPapers {...props} />
-        : <FormPaper fields={fields} {...props} />}
+          </div>
+        </Drawer>
+      ) : null}
+      {groups ? (
+        <FormPapers {...props} />
+      ) : (
+        <FormPaper fields={fields} {...props} />
+      )}
     </div>
   )
 }
