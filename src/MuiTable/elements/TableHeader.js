@@ -14,28 +14,33 @@ const TableHeader = ({
   if (!columns) return null
   return (
     <TableRow>
-      {columns.map((h, i) =>
-        <TableCell
-          key={i}
-          numeric={h.numeric}
-          compact={h.compact}
-          disablePadding={h.disablePadding}
-          style={h.style}
-        >
-          {orderBy && fieldArray !== true
-            ? <TableSortLabel
+      {columns.map((h, i) => {
+        if (h.hidden) return null
+        return (
+          <TableCell
+            key={i}
+            numeric={h.numeric}
+            compact={h.compact}
+            disablePadding={h.disablePadding}
+            style={h.style}
+          >
+            {orderBy && fieldArray !== true ? (
+              <TableSortLabel
                 onClick={() => handleSort(h.name)}
                 active={h.name === orderBy}
                 direction={order}
               >
                 {h.label}
               </TableSortLabel>
-            : h.label}
-        </TableCell>
-      )}
-      {fieldArray && !(!add && disabled) && !hideEditButtons
-        ? <TableCell style={{ width: 1 }} compact disablePadding />
-        : null}
+            ) : (
+              h.label
+            )}
+          </TableCell>
+        )
+      })}
+      {fieldArray && !(!add && disabled) && !hideEditButtons ? (
+        <TableCell style={{ width: 1 }} compact disablePadding />
+      ) : null}
     </TableRow>
   )
 }

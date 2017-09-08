@@ -7,7 +7,7 @@ const MuiAutocomplete = props => {
     options,
     input,
     hintText,
-    floatingLabelText,
+    label,
     meta,
     disabled,
     style,
@@ -29,9 +29,7 @@ const MuiAutocomplete = props => {
         (onChange ? onChange(v) : () => null)}
       showAutocompleteThreshold={showAutocompleteThreshold}
       hintText={hintText || ''}
-      floatingLabelText={
-        floatingLabelText ? `${floatingLabelText}${required ? ' *' : ''}` : ''
-      }
+      floatingLabel={label && `${label}${required ? ' *' : ''}`}
       errorText={meta ? meta.touched && meta.error && meta.error : null}
       underlineDisabledStyle={{ borderColor: '#ccc' }}
       hintStyle={{ color: '#aaa' }}
