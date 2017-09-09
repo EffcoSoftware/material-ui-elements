@@ -21,7 +21,8 @@ const FormField = props => {
     value,
     showAutocompleteThreshold,
     underlineShow,
-    numeric
+    numeric,
+    multiple
   } = props
 
   switch (type) {
@@ -38,6 +39,7 @@ const FormField = props => {
           style={style}
           value={value}
           numeric={numeric}
+          multiple={multiple}
         />
       )
     case 'autocomplete':
