@@ -6,5 +6,5 @@ export default {
   spacer: 'spacer',
   component: 'component',
   autocomplete: 'autocomplete',
-  type: 'password'
+  password: 'password'
 }
