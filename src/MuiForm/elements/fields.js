@@ -5,5 +5,6 @@ export default {
   caption: 'caption',
   spacer: 'spacer',
   component: 'component',
-  autocomplete: 'autocomplete'
+  autocomplete: 'autocomplete',
+  type: 'password'
 }

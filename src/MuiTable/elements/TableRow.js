@@ -46,7 +46,7 @@ const MuiTableRow = props => {
               {h.formField ? (
                 <FormFieldRedux
                   type={h.type}
-                  name={`${fields.name}[${index}]${h.name && '.' + h.name}`}
+                  name={`${fields.name}[${index}]${h.name ? '.' + h.name : ''}`}
                   disabled={!add && disabled}
                   options={h.options}
                   numeric={h.numeric}
