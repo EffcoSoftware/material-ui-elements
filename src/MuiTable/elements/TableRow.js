@@ -29,6 +29,10 @@ const MuiTableRow = props => {
       {columns.map((h, i) => {
         if (h.hidden) return null
         const value = _.get(data[index], h.name)
+        disabled =
+          typeof disabled === 'function'
+            ? disabled(value, data[index])
+            : disabled
         if (h.contentHidden && h.contentHidden(value, data[index]))
           return <TableCell key={i} />
         if (fieldArray && h.formField) {
