@@ -29,7 +29,7 @@ const MuiTableRow = props => {
       {columns.map((h, i) => {
         if (h.hidden) return null
         const value = _.get(data[index], h.name)
-        disabled =
+        const disabledValue =
           typeof disabled === 'function'
             ? disabled(value, data[index])
             : disabled
@@ -51,7 +51,7 @@ const MuiTableRow = props => {
                 <FormFieldRedux
                   type={h.type}
                   name={`${fields.name}[${index}]${h.name ? '.' + h.name : ''}`}
-                  disabled={!add && disabled}
+                  disabled={!add && disabledValue}
                   options={h.options}
                   numeric={h.numeric}
                   validate={h.validate}
