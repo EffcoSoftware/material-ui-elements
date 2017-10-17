@@ -22,7 +22,7 @@ class MuiTable extends Component {
     // }
   }
   shouldComponentUpdate(nextProps, nextState) {
-    return !!this.props.refreshTable
+    return !this.props.disableRefreshTable
   }
 
   handleSort = column => {
@@ -55,11 +55,9 @@ class MuiTable extends Component {
           <Body
             {...this.props}
             data={
-              !fieldArray && orderBy ? (
-                this.orderData(data, orderBy, order)
-              ) : (
-                data
-              )
+              !fieldArray && orderBy
+                ? this.orderData(data, orderBy, order)
+                : data
             }
           />
         </Table>

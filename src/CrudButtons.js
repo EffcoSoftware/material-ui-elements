@@ -11,7 +11,7 @@ export default props => {
     color,
     reset,
     handleSubmit,
-    lang
+    lang = 'en'
   } = props
   if (!actions) return null
 
@@ -64,9 +64,9 @@ export default props => {
           label={actions.delete.label || defaultLabels[lang].delete}
           disabled={false}
           icon={
-            actions.delete.icon === false || !icons ? null : (
-              actions.delete.icon || 'delete'
-            )
+            actions.delete.icon === false || !icons
+              ? null
+              : actions.delete.icon || 'delete'
           }
           style={{ ...actions.style, ...stackedStyle }}
           color="accent"
@@ -76,17 +76,17 @@ export default props => {
       {actions.save ? (
         <CrudButton
           action={
-            disabled || add ? null : (
-              handleSubmit(actions.save.action || actions.save)
-            )
+            disabled || add
+              ? null
+              : handleSubmit(actions.save.action || actions.save)
           }
           raised={actions.raised}
           label={actions.save.label || defaultLabels[lang].save}
           disabled={!submittable}
           icon={
-            actions.save.icon === false || !icons ? null : (
-              actions.save.icon || 'save'
-            )
+            actions.save.icon === false || !icons
+              ? null
+              : actions.save.icon || 'save'
           }
           style={{ ...actions.style, ...stackedStyle }}
           color={actions.save.color || color}
@@ -96,20 +96,20 @@ export default props => {
       {actions.undo ? (
         <CrudButton
           action={
-            disabled || add ? null : (
-              () => {
-                reset('MuiForm')
-                actions.undo.action ? actions.undo.action() : actions.undo()
-              }
-            )
+            disabled || add
+              ? null
+              : () => {
+                  reset('MuiForm')
+                  actions.undo.action ? actions.undo.action() : actions.undo()
+                }
           }
           raised={actions.raised}
           label={actions.undo.label || defaultLabels[lang].undo}
           disabled={false}
           icon={
-            actions.undo.icon === false || !icons ? null : (
-              actions.undo.icon || (submittable ? 'history' : 'close')
-            )
+            actions.undo.icon === false || !icons
+              ? null
+              : actions.undo.icon || (submittable ? 'history' : 'close')
           }
           style={{ ...actions.style, ...stackedStyle }}
           color={actions.undo.color || color}
@@ -123,9 +123,9 @@ export default props => {
           label={actions.edit.label || defaultLabels[lang].edit}
           disabled={false}
           icon={
-            actions.edit.icon === false || !icons ? null : (
-              actions.edit.icon || 'edit'
-            )
+            actions.edit.icon === false || !icons
+              ? null
+              : actions.edit.icon || 'edit'
           }
           style={{ ...actions.style, ...stackedStyle }}
           color={actions.edit.color || color}
@@ -139,9 +139,9 @@ export default props => {
           label={actions.add.label || defaultLabels[lang].add}
           disabled={!submittable}
           icon={
-            actions.add.icon === false || !icons ? null : (
-              actions.add.icon || 'add'
-            )
+            actions.add.icon === false || !icons
+              ? null
+              : actions.add.icon || 'add'
           }
           style={{ ...actions.style, ...stackedStyle }}
           color={actions.add.color || color}
@@ -157,11 +157,11 @@ export default props => {
           label={actions.cancel.label || defaultLabels[lang].cancel}
           disabled={false}
           icon={
-            add ? (
-              'close'
-            ) : actions.cancel.icon === false || !icons ? null : (
-              actions.cancel.icon || 'close'
-            )
+            add
+              ? 'close'
+              : actions.cancel.icon === false || !icons
+                ? null
+                : actions.cancel.icon || 'close'
           }
           style={{ ...actions.style, ...stackedStyle }}
           color={actions.cancel.color || color}

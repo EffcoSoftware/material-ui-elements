@@ -25,13 +25,15 @@ const FormField = props => {
     multiple
   } = props
 
+  const disabledField = add && !disabled ? false : disabled
+
   switch (type) {
     case 'select':
       return (
         <MuiSelectfield
           input={input}
           meta={meta}
-          disabled={add ? false : disabled}
+          disabled={disabledField}
           floatingLabelText={label}
           hintText={hint}
           required={required}
@@ -47,7 +49,7 @@ const FormField = props => {
         <MuiAutocomplete
           input={input}
           meta={meta}
-          disabled={add ? false : disabled}
+          disabled={disabledField}
           floatingLabelText={label}
           hintText={hint}
           required={required}
@@ -76,7 +78,7 @@ const FormField = props => {
           input={input}
           meta={meta}
           type={type}
-          disabled={add ? false : disabled}
+          disabled={disabledField}
           floatingLabelText={label}
           hintText={hint}
           required={required}
