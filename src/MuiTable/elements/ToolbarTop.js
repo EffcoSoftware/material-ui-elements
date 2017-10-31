@@ -1,22 +1,20 @@
 import React from 'react'
 import Toolbar from 'material-ui/Toolbar'
-import Menu, { MenuItem } from 'material-ui/Menu'
-import IconButton from 'material-ui/IconButton'
-import Icon from 'material-ui/Icon'
 import Search from './Search'
 import Typography from 'material-ui/Typography'
+import OptionsMenu from './OptionsMenu'
 
 const TopToolbar = props => {
   const { title, topComponent } = props
+  console.log(props)
   return (
     <Toolbar>
-      <Typography type="title">
-        {title}
-      </Typography>
+      <Typography type="title">{title}</Typography>
       <div style={{ flex: 1 }} />
       {topComponent && topComponent}
       <div style={{ margin: 12 }} />
       <Search {...props} />
+      <OptionsMenu {...props} />
     </Toolbar>
   )
 }

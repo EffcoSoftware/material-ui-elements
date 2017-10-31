@@ -35,7 +35,6 @@ class MuiTable extends Component {
       })
     else this.setState({ ...this.state, orderBy: column, order: 'asc' })
   }
-
   orderData = (data, orderBy, order) => _.orderBy(data, orderBy, order)
 
   render() {
