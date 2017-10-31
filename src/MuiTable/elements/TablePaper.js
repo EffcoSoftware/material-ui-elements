@@ -8,6 +8,7 @@ import ToolbarBottom from './ToolbarBottom'
 class TablePaper extends Component {
   state = {
     filterString: '',
+    filters: [],
     optionsOpen: false,
     optionsAnchorEl: undefined
   }
@@ -24,13 +25,35 @@ class TablePaper extends Component {
       : data
   }
 
-  handleOptionsClick = event => {
+  handleOptionsOpen = event => {
     console.log(event)
     this.setState({
       ...this.state,
       optionsOpen: true,
       optionsAnchorEl: event.currentTarget
     })
+  }
+
+  handleOptionsClick = (value, event) => {
+    if (event === 'filter') {
+      var filtersAdjusted = this.state.filters
+      const filterIndex = _.findIndex(filtersAdjusted, value)
+
+      if (filterIndex >= 0) {
+        filtersAdjusted = filtersAdjusted.filter(
+          f => !(f.name === value.name && f.id === value.id)
+        )
+      } else {
+        filtersAdjusted.push(value)
+      }
+
+      this.setState({
+        ...this.state,
+        filters: filtersAdjusted
+      })
+    } else {
+      this.setState({ ...this.state })
+    }
   }
 
   handleOptionsRequestClose = () => {
@@ -45,7 +68,9 @@ class TablePaper extends Component {
           <ToolbarTop
             {...this.props}
             {...this.state}
+            filters={this.state.filters}
             filterChange={this.filterChange.bind(this)}
+            handleOptionsOpen={this.handleOptionsOpen.bind(this)}
             handleOptionsClick={this.handleOptionsClick.bind(this)}
             handleOptionsRequestClose={this.handleOptionsRequestClose.bind(
               this
