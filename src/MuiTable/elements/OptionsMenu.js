@@ -23,20 +23,19 @@ const OptionsMenu = props => {
     filters
   } = props
   if (!menuOptionsConfig) return null
-  // console.log(menuOptionsConfig)
+
   const { style, filters: filterBy } = menuOptionsConfig
-  console.log(filters)
 
   const maxHeight =
     style && style.rowHeight && style.rows
       ? style.rowHeight * style.rows
       : undefined
-
+  // console.log(menuOptionsConfig)
   return (
     <div>
       <IconButton
         aria-label="More"
-        aria-owns="vertmenu" //aria-owns={optionsOpen ? 'long-menu' : null}
+        aria-owns="vertmenu"
         aria-haspopup="true"
         onClick={handleOptionsOpen}
       >
@@ -59,41 +58,79 @@ const OptionsMenu = props => {
       >
         {filterBy.map((filter, index) => {
           const options = filter.options
+          const selectedAll =
+            _.findIndex(filters, {
+              value: 0,
+              name: filter.name
+            }) >= 0
           return (
             <div>
               <Divider style={{ display: index === 0 ? 'none' : '' }} />
-
-              <MenuItem
-                key={0}
-                //selected={_.includes(options.selected, 0)}
-                style={{ width: '100%' }}
-                onClick={() =>
-                  handleOptionsClick(
-                    {
-                      name: filter.name,
-                      id: 0
-                    },
-                    'filter'
-                  )}
-              >
-                {'All'}
-              </MenuItem>
-
-              {options.map(option => {
-                return (
-                  <div>
-                    <MenuItem
-                      key={option.id}
-                      //selected={_.findIndex(filters, option) >= 0}
-                      style={{ width: '100%' }}
-                      onClick={() =>
-                        handleOptionsClick(
+              <div style={{ display: 'flex' }}>
+                <SelectedIcon
+                  style={{
+                    marginTop: 10,
+                    marginRight: 5,
+                    marginLeft: 8,
+                    //display: selectedAll ? '' : 'none'
+                    visibility: selectedAll ? 'visible' : 'hidden'
+                  }}
+                />
+                <MenuItem
+                  key={0}
+                  //selected={selectedAll}
+                  style={{ width: '100%' }}
+                  onClick={() =>
+                    menuOptionsConfig && menuOptionsConfig.handleClick
+                      ? menuOptionsConfig.handleClick({
+                          name: filter.name,
+                          value: 0
+                        })
+                      : handleOptionsClick(
                           {
                             name: filter.name,
-                            id: option.id
+                            value: 0
                           },
                           'filter'
                         )}
+                >
+                  {'All'}
+                </MenuItem>
+              </div>
+              {options.map(option => {
+                const selectedOption =
+                  _.findIndex(filters, {
+                    value: option.id,
+                    name: filter.name
+                  }) >= 0
+                return (
+                  <div style={{ display: 'flex' }}>
+                    <SelectedIcon
+                      style={{
+                        marginTop: 10,
+                        marginRight: 5,
+                        marginLeft: 8,
+                        //display: selectedOption ? '' : 'none'
+                        visibility: selectedOption ? 'visible' : 'hidden'
+                      }}
+                    />
+                    <MenuItem
+                      key={option.id}
+                      //selected={selectedOption}
+                      style={{ width: '100%' }}
+                      onClick={() =>
+                        menuOptionsConfig && menuOptionsConfig.handleClick
+                          ? menuOptionsConfig.handleClick({
+                              name: filter.name,
+                              value: option.id
+                            })
+                          : handleOptionsClick(
+                              {
+                                name: filter.name,
+                                value: option.id
+                              },
+                              'filter'
+                            )}
                     >
                       {option.label}
                     </MenuItem>

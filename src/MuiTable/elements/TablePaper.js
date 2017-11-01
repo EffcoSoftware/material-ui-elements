@@ -13,20 +13,59 @@ class TablePaper extends Component {
     optionsAnchorEl: undefined
   }
 
+  setFilters(props) {
+    const { menuOptionsConfig } = props
+    if (menuOptionsConfig && menuOptionsConfig.filters)
+      this.setState({
+        ...this.state,
+        filters: menuOptionsConfig.filters.map(f => {
+          const filterAdjusted = { name: f.name, value: f.value ? f.value : 0 }
+          return filterAdjusted
+        })
+      })
+  }
+
+  componentWillMount() {
+    this.setFilters(this.props)
+  }
+
+  componentWillReceiveProps() {
+    this.setFilters(this.props)
+  }
+
   filterChange = v => this.setState({ ...this.state, filterString: v })
 
-  filterData = (data, filterBy, filterString) => {
+  filterData = (data, filterBy, filterString, filters) => {
     return filterBy && filterString
       ? data.filter(d =>
           _.get(d, filterBy)
             .toLowerCase()
             .includes(filterString.toLowerCase())
         )
-      : data
+      : // .filter(
+        //   d =>
+        //     filters && filters.length && filters.length > 0
+        //       ? filters.every((v, i, a) => {
+        //           return v.value === 0 || !!v.value
+        //             ? true //_.get(d, `${v.name}`) >= v.id
+        //             : _.get(d, `${v.name}`) === v.value
+        //         })
+        //       : true
+        // )
+        data
+    // .filter(
+    //     d =>
+    //       filters && filters.length && filters.length > 0
+    //         ? filters.every((v, i, a) => {
+    //             return v.value === 0 || !!v.value
+    //               ? true //_.get(d, `${v.name}`) >= v.value
+    //               : _.get(d, `${v.name}`) === v.value
+    //           })
+    //         : true
+    //   )
   }
 
   handleOptionsOpen = event => {
-    console.log(event)
     this.setState({
       ...this.state,
       optionsOpen: true,
@@ -37,15 +76,9 @@ class TablePaper extends Component {
   handleOptionsClick = (value, event) => {
     if (event === 'filter') {
       var filtersAdjusted = this.state.filters
-      const filterIndex = _.findIndex(filtersAdjusted, value)
 
-      if (filterIndex >= 0) {
-        filtersAdjusted = filtersAdjusted.filter(
-          f => !(f.name === value.name && f.id === value.id)
-        )
-      } else {
-        filtersAdjusted.push(value)
-      }
+      filtersAdjusted = filtersAdjusted.filter(f => !(f.name === value.name))
+      filtersAdjusted.push(value)
 
       this.setState({
         ...this.state,
@@ -61,14 +94,27 @@ class TablePaper extends Component {
   }
 
   render = () => {
-    const { data, filterBy, toolbarBottom, toolbarTop } = this.props
+    const {
+      data,
+      filterBy,
+      toolbarBottom,
+      toolbarTop,
+      menuOptionsConfig
+    } = this.props
+    const externalFilters = true
+    // console.log(this.props)
+    // console.log(this.state)
     return (
       <Paper>
         {toolbarTop !== false ? (
           <ToolbarTop
             {...this.props}
             {...this.state}
-            filters={this.state.filters}
+            filters={
+              externalFilters && menuOptionsConfig
+                ? menuOptionsConfig.filters
+                : this.state.filters
+            }
             filterChange={this.filterChange.bind(this)}
             handleOptionsOpen={this.handleOptionsOpen.bind(this)}
             handleOptionsClick={this.handleOptionsClick.bind(this)}
@@ -79,7 +125,12 @@ class TablePaper extends Component {
         ) : null}
         <Table
           {...this.props}
-          data={this.filterData(data, filterBy, this.state.filterString)}
+          data={this.filterData(
+            data,
+            filterBy,
+            this.state.filterString,
+            this.state.filters
+          )}
         />
         {toolbarBottom !== false ? <ToolbarBottom {...this.props} /> : null}
       </Paper>
