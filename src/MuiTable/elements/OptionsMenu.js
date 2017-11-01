@@ -64,7 +64,7 @@ const OptionsMenu = props => {
               name: filter.name
             }) >= 0
           return (
-            <div>
+            <div key={index}>
               <Divider style={{ display: index === 0 ? 'none' : '' }} />
               <div style={{ display: 'flex' }}>
                 <SelectedIcon
@@ -97,14 +97,14 @@ const OptionsMenu = props => {
                   {'All'}
                 </MenuItem>
               </div>
-              {options.map(option => {
+              {options.map((option, index) => {
                 const selectedOption =
                   _.findIndex(filters, {
                     value: option.id,
                     name: filter.name
                   }) >= 0
                 return (
-                  <div style={{ display: 'flex' }}>
+                  <div key={index} style={{ display: 'flex' }}>
                     <SelectedIcon
                       style={{
                         marginTop: 10,
