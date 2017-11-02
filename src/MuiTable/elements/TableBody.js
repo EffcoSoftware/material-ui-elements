@@ -3,24 +3,25 @@ import { TableBody } from 'material-ui/Table'
 import MuiTableRow from './TableRow'
 
 const Body = props => {
-  const { data, fields, handleRowClick, fieldArray } = props
+  const { data, ...rest } = props
 
-  if (!data) return null
-
-  const tableData = fieldArray ? fields : data
+  const tableData = props.fieldArray ? props.fields : data
 
   return (
     <TableBody>
-      {tableData.map((row, i) =>
+      {tableData.map((row, i) => (
         <MuiTableRow
           key={i}
           index={i}
           row={row}
           hover
-          onRowClick={handleRowClick ? () => handleRowClick(row.id) : null}
-          {...props}
+          onRowClick={
+            props.handleRowClick ? () => props.handleRowClick(row.id) : null
+          }
+          {...rest}
+          data={tableData}
         />
-      )}
+      ))}
     </TableBody>
   )
 }

@@ -28,7 +28,7 @@ const MuiAutocomplete = props => {
         (input && input.onChange(v ? v.value || v : v)) ||
         (onChange ? onChange(v) : () => null)}
       showAutocompleteThreshold={showAutocompleteThreshold}
-      hintText={hintText || ''}
+      hintTextAutocomplete={hintText}
       floatingLabel={label && `${label}${required ? ' *' : ''}`}
       errorText={meta ? meta.touched && meta.error && meta.error : null}
       underlineDisabledStyle={{ borderColor: '#ccc' }}
@@ -36,17 +36,17 @@ const MuiAutocomplete = props => {
       floatingLabelFixed
       multiple={multiple}
     >
-      {options ? (
-        options.map(o => (
-          <div
-            key={[false, 0].includes(o.value) ? o.value : o.value || o}
-            label={o.label || o}
-            value={[false, 0].includes(o.value) ? o.value : o.value || o}
-          >
-            {o.label || o}
-          </div>
-        ))
-      ) : null}
+      {options
+        ? options.map(o => (
+            <div
+              key={[false, 0].includes(o.value) ? o.value : o.value || o}
+              label={o.label || o}
+              value={[false, 0].includes(o.value) ? o.value : o.value || o}
+            >
+              {o.label || o}
+            </div>
+          ))
+        : null}
     </SuperSelectField>
   )
 }
