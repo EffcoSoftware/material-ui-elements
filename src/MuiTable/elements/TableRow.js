@@ -21,12 +21,6 @@ const MuiTableRow = props => {
     forceShowEditButtons
   } = props
 
-  console.log(forceShowEditButtons)
-  console.log(hideEditButtons)
-  console.log(!(!add && disabled))
-  console.log(add)
-  console.log(disabled)
-  console.log(fieldArray && !(!add && disabled) && !hideEditButtons)
   return (
     <TableRow
       hover={hover}
