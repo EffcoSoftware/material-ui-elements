@@ -35,6 +35,7 @@ export default props => {
   }
 
   let stackedStyle = { margin: 5 }
+
   if (actions.stacked) stackedStyle = { width: '100%', marginBottom: 10 }
   return (
     <span>
@@ -121,7 +122,7 @@ export default props => {
           action={disabled && !add ? actions.edit.action || actions.edit : null}
           raised={actions.raised}
           label={actions.edit.label || defaultLabels[lang].edit}
-          disabled={false}
+          disabled={actions.edit.disabled || false}
           icon={
             actions.edit.icon === false || !icons
               ? null

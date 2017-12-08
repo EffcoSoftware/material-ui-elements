@@ -17,9 +17,16 @@ const MuiTableRow = props => {
     data,
     index,
     fields,
-    hideEditButtons
+    hideEditButtons,
+    forceShowEditButtons
   } = props
 
+  console.log(forceShowEditButtons)
+  console.log(hideEditButtons)
+  console.log(!(!add && disabled))
+  console.log(add)
+  console.log(disabled)
+  console.log(fieldArray && !(!add && disabled) && !hideEditButtons)
   return (
     <TableRow
       hover={hover}
@@ -86,7 +93,9 @@ const MuiTableRow = props => {
           )
         }
       })}
-      {fieldArray && !(!add && disabled) && !hideEditButtons ? (
+      {fieldArray &&
+      (!(!add && disabled) || forceShowEditButtons) &&
+      !hideEditButtons ? (
         <TableCell
           compact
           disablePadding
