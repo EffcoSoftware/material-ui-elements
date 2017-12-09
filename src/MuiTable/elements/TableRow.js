@@ -18,14 +18,18 @@ const MuiTableRow = props => {
     index,
     fields,
     hideEditButtons,
-    forceShowEditButtons
+    forceShowEditButtons,
+    narrow
   } = props
 
   return (
     <TableRow
       hover={hover}
       onClick={onRowClick && !fieldArray ? () => onRowClick(row.id) : null}
-      style={{ cursor: onRowClick && !fieldArray ? 'pointer' : null }}
+      style={{
+        cursor: onRowClick && !fieldArray ? 'pointer' : null,
+        height: narrow ? 36 : 48
+      }}
     >
       {columns.map((h, i) => {
         if (h.hidden) return null
@@ -53,13 +57,9 @@ const MuiTableRow = props => {
             >
               {h.formField ? (
                 <FormFieldRedux
-                  type={h.type}
+                  {...h}
                   name={`${fields.name}[${index}]${h.name ? '.' + h.name : ''}`}
                   disabled={!add && disabledValue}
-                  options={h.options}
-                  numeric={h.numeric}
-                  validate={h.validate}
-                  normalize={h.normalize}
                 />
               ) : (
                 <Typography>{h.value ? h.value(data[i]) : data[i]}</Typography>

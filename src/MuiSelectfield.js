@@ -1,27 +1,28 @@
 import React from 'react'
 import { SelectField, MenuItem } from 'material-ui-effco'
 
-export default ({
-  disabled,
-  style,
-  hintText,
-  floatingLabelText,
-  options,
-  onChange,
-  multiple,
-  required,
-  input,
-  meta,
-  value
-}) => {
+export default props => {
+  const {
+    disabled,
+    style,
+    hint,
+    label,
+    options,
+    multiple,
+    required,
+    input,
+    meta,
+    value,
+    hideLabel
+  } = props
   return (
     <SelectField
       value={value}
       {...input}
       onChange={(e, i, v) => input.onChange(v)}
-      hintText={hintText}
+      hintText={hint}
       floatingLabelText={
-        floatingLabelText ? `${floatingLabelText}${required ? ' *' : ''}` : ''
+        !hideLabel && label ? `${label}${required ? ' *' : ''}` : ''
       }
       fullWidth
       errorText={meta ? meta.touched && meta.error && meta.error : null}
@@ -33,7 +34,7 @@ export default ({
       multiple={multiple}
     >
       {options
-        ? options.map(o =>
+        ? options.map(o => (
             <MenuItem
               key={
                 o.key
@@ -43,7 +44,7 @@ export default ({
               value={[false, 0].indexOf(o.value) > -1 ? o.value : o.value || o}
               primaryText={o.label || o}
             />
-          )
+          ))
         : null}
     </SelectField>
   )

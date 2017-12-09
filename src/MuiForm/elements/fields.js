@@ -6,5 +6,7 @@ export default {
   spacer: 'spacer',
   component: 'component',
   autocomplete: 'autocomplete',
-  password: 'password'
+  password: 'password',
+  datepicker: 'datepicker',
+  timepicker: 'timepicker'
 }

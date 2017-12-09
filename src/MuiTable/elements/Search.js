@@ -7,7 +7,7 @@ const Search = ({ lang, filterString, filterChange, filterBy, fieldArray }) => {
     <div style={{ display: 'flex', marginRight: 24 }}>
       <MuiTextField
         value={filterString}
-        hintText={lang === 'pl' ? 'Wyszukaj' : 'Search'}
+        hint={lang === 'pl' ? 'Wyszukaj' : 'Search'}
         style={{ padding: 0 }}
         onChange={(e, v) => filterChange(v)}
       />
