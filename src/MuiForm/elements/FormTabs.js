@@ -6,11 +6,11 @@ const FormTabs = props => {
   const { groups } = props
   return (
     <Tabs>
-      {groups.map((g, i) => (
+      {groups.map((g, i) =>
         <Tab key={i} label={g.label}>
           <FormFields fields={g.fields} {...props} />
         </Tab>
-      ))}
+      )}
     </Tabs>
   )
 }

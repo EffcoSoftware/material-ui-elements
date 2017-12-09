@@ -3,19 +3,63 @@ import Typography from 'material-ui/Typography'
 import MuiTextfield from '../../MuiTextfield'
 import MuiSelectfield from '../../MuiSelectfield'
 import MuiAutocomplete from '../../MuiAutocomplete'
-import MuiDatePicker from '../../MuiDatePicker'
-import MuiTimePicker from '../../MuiTimePicker'
 
-const FormField = ({ name, formField, ...props }) => {
-  const { add, type, text, component, label, disabled, style } = props
+const FormField = props => {
+  const {
+    add,
+    type,
+    text,
+    component,
+    label,
+    hint,
+    required,
+    options,
+    disabled,
+    style,
+    input,
+    meta,
+    value,
+    showAutocompleteThreshold,
+    underlineShow,
+    numeric,
+    multiple
+  } = props
 
   const disabledField = add && !disabled ? false : disabled
 
   switch (type) {
     case 'select':
-      return <MuiSelectfield {...props} disabled={disabledField} />
+      return (
+        <MuiSelectfield
+          input={input}
+          meta={meta}
+          disabled={disabledField}
+          floatingLabelText={label}
+          hintText={hint}
+          required={required}
+          options={options}
+          style={style}
+          value={value}
+          numeric={numeric}
+          multiple={multiple}
+        />
+      )
     case 'autocomplete':
-      return <MuiAutocomplete {...props} disabled={disabledField} />
+      return (
+        <MuiAutocomplete
+          input={input}
+          meta={meta}
+          disabled={disabledField}
+          floatingLabelText={label}
+          hintText={hint}
+          required={required}
+          options={options}
+          style={style}
+          value={value}
+          numeric={numeric}
+          showAutocompleteThreshold={showAutocompleteThreshold}
+        />
+      )
     case 'subheading':
       return (
         <div style={style || { marginTop: 30, marginBottom: 5 }}>
@@ -28,12 +72,22 @@ const FormField = ({ name, formField, ...props }) => {
       return component
     case 'typography':
       return <Typography type={text}>{label}</Typography>
-    case 'datepicker':
-      return <MuiDatePicker {...props} id={Math.random().toString()} />
-    case 'timepicker':
-      return <MuiTimePicker {...props} />
     default:
-      return <MuiTextfield {...props} disabled={disabledField} />
+      return (
+        <MuiTextfield
+          input={input}
+          meta={meta}
+          type={type}
+          disabled={disabledField}
+          floatingLabelText={label}
+          hintText={hint}
+          required={required}
+          style={style}
+          value={value}
+          numeric={numeric}
+          underlineShow={underlineShow}
+        />
+      )
   }
 }
 

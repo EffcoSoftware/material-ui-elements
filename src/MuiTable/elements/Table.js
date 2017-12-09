@@ -4,15 +4,23 @@ import Table, { TableHead } from 'material-ui/Table'
 import Header from './TableHeader'
 import Body from './TableBody'
 import ButtonAdd from './ButtonAdd'
+//import { extractFormFieldsData } from '../../helpers'
 
 class MuiTable extends Component {
   constructor(props) {
     super(props)
+    //const { orderBy, fields, fieldArray } = props
     const { orderBy } = props
     this.state = {
       orderBy,
       order: 'asc'
     }
+
+    // if (fieldArray) {
+    //   extractFormFieldsData(this.props.columns, this.props.data).map(x =>
+    //     fields.push(x)
+    //   )
+    // }
   }
   shouldComponentUpdate(nextProps, nextState) {
     return !this.props.disableRefreshTable

@@ -5,8 +5,8 @@ export default props => {
   const {
     disabled,
     style,
-    hint,
-    label,
+    hintText,
+    floatingLabelText,
     rows,
     type,
     underlineShow,
@@ -17,19 +17,17 @@ export default props => {
     meta,
     value,
     numeric,
-    inputStyle,
-    hideLabel
+    inputStyle
   } = props
-
   return (
     <div>
       <TextField
         value={value}
         {...input}
-        hintText={hint}
+        hintText={hintText}
         onChange={input ? input.onChange : onChange}
         floatingLabelText={
-          !hideLabel && label ? `${label}${required ? ' *' : ''}` : ''
+          floatingLabelText ? `${floatingLabelText}${required ? ' *' : ''}` : ''
         }
         disabled={disabled}
         fullWidth
