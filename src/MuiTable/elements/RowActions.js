@@ -11,7 +11,7 @@ const RowActions = props => {
             <IconButton
               key={a.icon}
               onClick={() => a.action(index)}
-              style={{ display: !!a.forceShow ? '' : 'none' }}
+              style={{ display: !!a.forceShow ? '' : disabled ? 'none' : '' }}
             >
               <Icon>{a.icon}</Icon>
             </IconButton>
