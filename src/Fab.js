@@ -15,7 +15,7 @@ const styles = {
 const Fab = ({ onClick, color, style }) => (
   <Button
     fab
-    style={style ? Object.assign(styles, style) : styles}
+    style={style ? Object.assign({}, styles, style) : styles}
     color={color || 'accent'}
     onTouchTap={onClick}
   >
