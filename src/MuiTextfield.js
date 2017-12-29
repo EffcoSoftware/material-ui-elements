@@ -25,6 +25,10 @@ export default props => {
         value={value}
         {...input}
         hintText={hintText}
+        // onChange={v =>
+        //   (input && input.onChange(v ? v.value || v : v)) ||
+        //   (onChange ? onChange(v) : () => null)
+        // }
         onChange={input ? input.onChange : onChange}
         floatingLabelText={
           floatingLabelText ? `${floatingLabelText}${required ? ' *' : ''}` : ''

@@ -12,9 +12,15 @@ const styles = {
   position: 'fixed'
 }
 
-const Fab = ({ onClick, color }) =>
-  <Button fab style={styles} color={color || 'accent'} onTouchTap={onClick}>
+const Fab = ({ onClick, color, style }) => (
+  <Button
+    fab
+    style={style ? Object.assign(styles, style) : styles}
+    color={color || 'accent'}
+    onTouchTap={onClick}
+  >
     <Icon>add</Icon>
   </Button>
+)
 
 export default Fab
