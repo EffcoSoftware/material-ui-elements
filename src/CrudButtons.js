@@ -100,7 +100,7 @@ export default props => {
             disabled || add
               ? null
               : () => {
-                  reset('MuiForm')
+                  if (reset) reset('MuiForm')
                   actions.undo.action ? actions.undo.action() : actions.undo()
                 }
           }
