@@ -60,6 +60,7 @@ const MuiTableRow = props => {
                   numeric={h.numeric}
                   validate={h.validate}
                   normalize={h.normalize}
+                  onChange={h.input && h.input.onChange}
                 />
               ) : (
                 <Typography>{h.value ? h.value(data[i]) : data[i]}</Typography>
