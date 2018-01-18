@@ -2,14 +2,15 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { reduxForm, initialize, reset } from 'redux-form'
 import DefaultLayout from './layouts/Default'
-
-const formName = 'MuiForm'
+import { compose } from 'recompose'
+// let formName = 'MuiForm'
 
 class Form extends Component {
   componentWillMount() {
-    if (!this.props.dontInitialize) {
-      this.props.initialize(formName, this.props.initialValues || {})
-    }
+    // console.log(this.props)
+    // if (!this.props.dontInitialize) {
+    //   this.props.initialize(this.props.form || 'MuiForm', this.props.initialValues || {})
+    // }
   }
 
   render() {
@@ -22,6 +23,5 @@ class Form extends Component {
   }
 }
 
-const connectedForm = connect(null, { initialize, reset })(Form)
-
-export default reduxForm({ form: formName })(connectedForm)
+export default compose(
+  connect((state, props) => ({ form: props.form }), { initialize, reset }), reduxForm({}))(Form)

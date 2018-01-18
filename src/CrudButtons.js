@@ -3,6 +3,7 @@ import CrudButton from './Button'
 
 export default props => {
   const {
+    form,
     add,
     disabled,
     submittable,
@@ -100,9 +101,9 @@ export default props => {
             disabled || add
               ? null
               : () => {
-                  if (reset) reset('MuiForm')
-                  actions.undo.action ? actions.undo.action() : actions.undo()
-                }
+                if (reset) reset(form)
+                actions.undo.action ? actions.undo.action() : actions.undo()
+              }
           }
           raised={actions.raised}
           label={actions.undo.label || defaultLabels[lang].undo}

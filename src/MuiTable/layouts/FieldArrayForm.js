@@ -3,14 +3,14 @@ import { connect } from 'react-redux'
 import { reduxForm, FieldArray, initialize } from 'redux-form'
 import Table from '../elements/Table'
 import TablePaper from '../elements/TablePaper'
-
-const formName = 'MuiForm'
+import { compose } from 'recompose'
+// const formName = 'MuiForm'
 
 class FieldArrayTable extends Component {
   componentWillMount() {
-    if (!this.props.dontInitialize) {
-      this.props.initialize(formName, this.props.initialValues || {})
-    }
+    // if (!this.props.dontInitialize) {
+    //   this.props.initialize(this.props.formName || 'MuiForm', this.props.initialValues || {})
+    // }
   }
 
   render() {
@@ -28,6 +28,9 @@ class FieldArrayTable extends Component {
   }
 }
 
-const ConnectedTable = connect(null, { initialize })(FieldArrayTable)
+export default compose(
+  connect((state, props) => ({ form: props.form }), { initialize, reset }), reduxForm({}))(FieldArrayTable)
 
-export default reduxForm({ form: formName })(ConnectedTable)
+// const ConnectedTable = connect(null, { initialize })(FieldArrayTable)
+
+// export default reduxForm((state, ownProps) => ({ form: ownProps.formName || 'MuiForm' }))(ConnectedTable)

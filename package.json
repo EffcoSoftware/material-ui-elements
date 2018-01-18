@@ -44,6 +44,7 @@
     "material-ui-icons": "^1.0.0-beta.17",
     "material-ui-superselectfield-effco": "^1.5.9",
     "react-redux": "^5.0.5",
+    "recompose": "^0.26.0",
     "redux": "^3.7.0",
     "redux-form": "^6.8.0"
   }
