@@ -29,7 +29,7 @@ class FieldArrayTable extends Component {
 }
 
 export default compose(
-  connect((state, props) => ({ form: props.form }), { initialize, reset }), reduxForm({}))(FieldArrayTable)
+  connect((state, props) => ({ form: props.form || 'MuiForm' }), { initialize }), reduxForm({}))(FieldArrayTable)
 
 // const ConnectedTable = connect(null, { initialize })(FieldArrayTable)
 

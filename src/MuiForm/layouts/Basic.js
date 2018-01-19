@@ -35,8 +35,8 @@ const FormBasic = props => {
       {groups ? (
         <FormPapers {...props} />
       ) : (
-        <FormPaper fields={fields} {...props} />
-      )}
+          <FormPaper fields={fields} {...props} />
+        )}
     </div>
   )
 }

@@ -6,11 +6,10 @@ import FormFieldsHorizontal from './FormFieldsHorizontal'
 import FormFieldsVertical from './FormFieldsVertical'
 
 const FormFields = props => {
-  const { fields } = props
+  const { fields, formFieldsStyle } = props
   // const formField = !props.noRedux ? FormFieldRedux : FormField
-
   return (
-    <div style={{ margin: 24 }}>
+    <div style={{ margin: 24, ...formFieldsStyle }}>
       {fields &&
         fields.map(
           (f, i) =>
@@ -20,8 +19,8 @@ const FormFields = props => {
                 <FormFieldsVertical {...props} fields={f} />
               </div>
             ) : (
-              !f.hidden && <FormFieldRedux key={i} {...props} {...f} />
-            )
+                !f.hidden && <FormFieldRedux key={i} {...props} {...f} />
+              )
         )}
     </div>
   )

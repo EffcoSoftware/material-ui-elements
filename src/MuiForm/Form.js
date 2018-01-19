@@ -24,4 +24,4 @@ class Form extends Component {
 }
 
 export default compose(
-  connect((state, props) => ({ form: props.form }), { initialize, reset }), reduxForm({}))(Form)
+  connect((state, props) => ({ form: props.form || 'MuiForm' }), { initialize, reset }), reduxForm({}))(Form)
