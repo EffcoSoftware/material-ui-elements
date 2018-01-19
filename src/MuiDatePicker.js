@@ -4,15 +4,15 @@ const MuiDatePicker = props => {
   const { input, meta, label, required, hideLabel, ...rest } = props
 
   return (
-    <DatePicker
+    < DatePicker
       onChange={(e, date) => input.onChange(date)}
       autoOk
-      {...rest}
+      {...rest }
       floatingLabelText={
         !hideLabel && label ? `${label}${required ? ' *' : ''}` : ''
       }
       floatingLabelFixed
-      value={new Date(input.value)}
+      value={input.value ? new Date(input.value) : null}
       underlineDisabledStyle={
         rest.underlineDisabledStyle || { borderColor: '#ccc' }
       }
