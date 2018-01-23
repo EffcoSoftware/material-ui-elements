@@ -32,10 +32,10 @@ class MuiTable extends Component {
 
   render() {
     const { orderBy, order } = this.state
-    const { data, fieldArray, disabled, paper } = this.props
+    const { data, fieldArray, disabled, paper, style } = this.props
 
     return (
-      <div>
+      <div style={style}>
         <Table>
           <TableHead>
             <Header

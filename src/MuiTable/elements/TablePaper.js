@@ -38,21 +38,21 @@ class TablePaper extends Component {
   filterData = (data, filterBy, filterString, filters) => {
     return filterBy && filterString
       ? data.filter(d =>
-          _.get(d, filterBy)
-            .toLowerCase()
-            .includes(filterString.toLowerCase())
-        )
+        _.get(d, filterBy)
+          .toLowerCase()
+          .includes(filterString.toLowerCase())
+      )
       : // .filter(
-        //   d =>
-        //     filters && filters.length && filters.length > 0
-        //       ? filters.every((v, i, a) => {
-        //           return v.value === 0 || !!v.value
-        //             ? true //_.get(d, `${v.name}`) >= v.id
-        //             : _.get(d, `${v.name}`) === v.value
-        //         })
-        //       : true
-        // )
-        data
+      //   d =>
+      //     filters && filters.length && filters.length > 0
+      //       ? filters.every((v, i, a) => {
+      //           return v.value === 0 || !!v.value
+      //             ? true //_.get(d, `${v.name}`) >= v.id
+      //             : _.get(d, `${v.name}`) === v.value
+      //         })
+      //       : true
+      // )
+      data
     // .filter(
     //     d =>
     //       filters && filters.length && filters.length > 0

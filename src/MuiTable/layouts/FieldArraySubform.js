@@ -11,7 +11,7 @@ class FieldArrayTable extends Component {
 
     return (
       <FieldArray
-        name={name || (title ? title.toLowerCase() : '') || 'array'}
+        name={name || (title ? title : '') || 'array'}
         component={TableComponent}
         props={{ ...this.props, fieldArray: true }}
       />
