@@ -4,11 +4,13 @@ import Confirmation from './Confirmation'
 
 class CrudButtons extends Component {
   state = {
-    action: false
+    action: false,
+    title: '',
+    content: ''
   }
 
-  setConfirmation(action = false) {
-    this.setState({ action })
+  setConfirmation(action = false, title = '', content = '') {
+    this.setState({ action, title, content })
   }
 
   render() {
@@ -22,7 +24,8 @@ class CrudButtons extends Component {
       color,
       reset,
       handleSubmit,
-      lang = 'en'
+      lang = 'en',
+      title
     } = this.props
     if (!actions) return null
 
@@ -42,6 +45,45 @@ class CrudButtons extends Component {
         edit: 'Edytuj',
         add: 'Dodaj',
         cancel: add ? 'Anuluj dodawanie' : 'Zamknij'
+      }
+    }
+
+    const defaultConfirmations = {
+      en: {
+        add: {
+          title: 'Please confirm adding record',
+          content: 'Are you sure you wish to ADD this record?'
+        },
+        delete: {
+          title: 'Please confirm deleting record',
+          content: 'Are you sure you wish to DELETE this record?'
+        },
+        save: {
+          title: 'Please confirm saving record',
+          content: `Are you sure you wish to SAVE changes made to ${title}?`
+        },
+        undo: {
+          title: 'Please confirm discarding changes',
+          content: `Are you sure you wish to DISCARD changes made to ${title}?`
+        }
+      },
+      pl: {
+        add: {
+          title: 'Proszę potwierdzić dodanie rekordu',
+          content: 'Czy na pewno chcesz DODAĆ ten rekord?'
+        },
+        delete: {
+          title: 'Proszę potwierdzić usunięcie rekordu',
+          content: 'Czy na pewno chcesz USUNĄĆ ten rekord?'
+        },
+        save: {
+          title: 'Proszę potwierdzić zapisanie rekordu',
+          content: `Czy na pewno chcesz ZAPISAĆ dokonane w formularzu ${title} zmiany?`
+        },
+        undo: {
+          title: 'Proszę potwierdzić porzucenie zmian',
+          content: `Czy na pewno chcesz PORZUCIĆ ZAPISYWANIE dokonanych w formularzu ${title} zmian?`
+        }
       }
     }
 
@@ -81,16 +123,49 @@ class CrudButtons extends Component {
 
     crudActions = {
       ...crudActions,
-      add: this.setConfirmation.bind(this, crudActions.add),
-      delete: this.setConfirmation.bind(this, crudActions.delete),
-      save: this.setConfirmation.bind(this, crudActions.save)
+      add: this.setConfirmation.bind(
+        this,
+        crudActions.add,
+        (actions.add && actions.add.title) ||
+          defaultConfirmations[lang].add.title,
+        (actions.add && actions.add.content) ||
+          defaultConfirmations[lang].add.content
+      ),
+      delete: this.setConfirmation.bind(
+        this,
+        crudActions.delete,
+        (actions.delete && actions.delete.title) ||
+          defaultConfirmations[lang].delete.title,
+        (actions.delete && actions.delete.content) ||
+          defaultConfirmations[lang].delete.content
+      ),
+      save: this.setConfirmation.bind(
+        this,
+        crudActions.save,
+        (actions.save && actions.save.title) ||
+          defaultConfirmations[lang].save.title,
+        (actions.save && actions.save.content) ||
+          defaultConfirmations[lang].save.content
+      ),
+      undo: submittable
+        ? this.setConfirmation.bind(
+            this,
+            crudActions.undo,
+            (actions.undo && actions.undo.title) ||
+              defaultConfirmations[lang].undo.title,
+            (actions.undo && actions.undo.content) ||
+              defaultConfirmations[lang].undo.content
+          )
+        : crudActions.undo
     }
 
     return (
       <span>
         <Confirmation
-          action={this.state.action}
-          actionCancel={this.setConfirmation.bind(this, false)}
+          // action={this.state.action}
+          {...this.props}
+          {...this.state}
+          actionCancel={this.setConfirmation.bind(this, false, '', '')}
         />
         {actions.customButtons ? (
           <span style={disabled ? null : actions.customButtons.style}>

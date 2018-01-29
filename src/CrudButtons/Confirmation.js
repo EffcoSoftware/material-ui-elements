@@ -13,7 +13,7 @@ function Transition(props) {
 }
 
 const AlertDialogSlide = props => {
-  const { action, actionCancel } = props
+  const { action, actionCancel, lang } = props
   return (
     <Dialog open={!!action} transition={Transition} onClose={actionCancel}>
       <DialogTitle id="alert-dialog-slide-title">
@@ -35,7 +35,7 @@ const AlertDialogSlide = props => {
           {(action && action.label) || 'OK'}
         </Button>
         <Button onClick={actionCancel} color="primary">
-          {actionCancel.label || 'Cancel'}
+          {actionCancel.label || (lang === 'en' ? 'Cancel' : 'Anuluj')}
         </Button>
       </DialogActions>
     </Dialog>
