@@ -8,12 +8,12 @@ import Dialog, {
 } from 'material-ui/Dialog'
 import Slide from 'material-ui/transitions/Slide'
 
-function Transition(props) {
+const Transition = props => {
   return <Slide direction="up" {...props} />
 }
 
 const AlertDialogSlide = props => {
-  const { action, actionCancel, lang } = props
+  const { action, actionCancel, lang = 'en' } = props
   return (
     <Dialog open={!!action} transition={Transition} onClose={actionCancel}>
       <DialogTitle id="alert-dialog-slide-title">

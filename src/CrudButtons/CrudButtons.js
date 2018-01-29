@@ -18,6 +18,7 @@ class CrudButtons extends Component {
       form,
       add,
       disabled,
+      pristine,
       submittable,
       actions,
       icons = true,
@@ -210,7 +211,7 @@ class CrudButtons extends Component {
             action={crudActions.save}
             raised={actions.raised}
             label={actions.save.label || defaultLabels[lang].save}
-            disabled={!submittable}
+            disabled={pristine}
             icon={
               actions.save.icon === false || !icons
                 ? null
