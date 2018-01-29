@@ -1,15 +1,13 @@
 import React from 'react'
 import _ from 'lodash'
-// import FormField from './FormField'
 import FormFieldRedux from './FormFieldRedux'
 import FormFieldsHorizontal from './FormFieldsHorizontal'
 import FormFieldsVertical from './FormFieldsVertical'
 
 const FormFields = props => {
-  const { fields, formFieldsStyle } = props
-  // const formField = !props.noRedux ? FormFieldRedux : FormField
+  const { fields, formFieldsStyle, margin = 24 } = props
   return (
-    <div style={{ margin: 24, ...formFieldsStyle }}>
+    <div style={{ margin, width: '100%', ...formFieldsStyle }}>
       {fields &&
         fields.map(
           (f, i) =>
@@ -19,8 +17,8 @@ const FormFields = props => {
                 <FormFieldsVertical {...props} fields={f} />
               </div>
             ) : (
-                !f.hidden && <FormFieldRedux key={i} {...props} {...f} />
-              )
+              !f.hidden && <FormFieldRedux key={i} {...props} {...f} />
+            )
         )}
     </div>
   )

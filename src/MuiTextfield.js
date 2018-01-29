@@ -18,7 +18,7 @@ export default props => {
     value,
     numeric,
     inputStyle,
-    hideLabel
+    hideLabel = false
   } = props
 
   return (
@@ -27,7 +27,7 @@ export default props => {
         value={value}
         {...input}
         hintText={hint}
-        onChange={input ? input.onChange : onChange}
+        // onChange={input ? input.onChange : onChange}
         floatingLabelText={
           !hideLabel && label ? `${label}${required ? ' *' : ''}` : ''
         }

@@ -14,7 +14,6 @@ const FormBasic = props => {
     fields,
     actions
   } = props
-  if (!actions) return null
   return (
     <div>
       {actions.drawer ? (
@@ -35,8 +34,8 @@ const FormBasic = props => {
       {groups ? (
         <FormPapers {...props} />
       ) : (
-          <FormPaper fields={fields} {...props} />
-        )}
+        <FormPaper fields={fields} {...props} />
+      )}
     </div>
   )
 }

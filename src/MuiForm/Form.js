@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { reduxForm, initialize, reset } from 'redux-form'
 import DefaultLayout from './layouts/Default'
 import { compose } from 'recompose'
-// let formName = 'MuiForm'
 
 class Form extends Component {
   componentWillMount() {
@@ -14,14 +13,34 @@ class Form extends Component {
   }
 
   render() {
-    const { layout, fields, groups } = this.props
-    const Layout = layout
-    if (!fields && !groups) return null
-    return layout
-      ? <Layout {...this.props} />
-      : <DefaultLayout {...this.props} />
+    const { layout: Layout, fields, groups, actions } = this.props
+    if (!fields && !groups) {
+      console.log(
+        '[MuiForm] Please pass either "fields" or "groups" prop to render the form'
+      )
+      return null
+    }
+    if (!actions) {
+      console.log('[MuiForm] Please pass "actions" prop to render the form')
+      return null
+    }
+    return Layout ? (
+      <Layout {...this.props} />
+    ) : (
+      <DefaultLayout {...this.props} />
+    )
   }
 }
 
 export default compose(
-  connect((state, props) => ({ form: props.form || 'MuiForm' }), { initialize, reset }), reduxForm({}))(Form)
+  connect(
+    (state, props) => ({
+      form: props.title || 'MuiForm'
+    }),
+    {
+      initialize,
+      reset
+    }
+  ),
+  reduxForm({})
+)(Form)
