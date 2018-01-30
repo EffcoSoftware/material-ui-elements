@@ -27,15 +27,15 @@ class Form extends Component {
     return Layout ? (
       <Layout {...this.props} />
     ) : (
-      <DefaultLayout {...this.props} />
-    )
+        <DefaultLayout {...this.props} />
+      )
   }
 }
 
 export default compose(
   connect(
     (state, props) => ({
-      form: props.title || 'MuiForm'
+      form: props.name || props.title || 'MuiForm'
     }),
     {
       initialize,
