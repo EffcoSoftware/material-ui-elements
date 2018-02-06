@@ -32,7 +32,8 @@ class MuiExpansionPanel extends Component {
       pristine,
       submitting,
       invalid,
-      actions
+      actions,
+      styles
     } = this.props
 
     if (!actions) return null
@@ -82,7 +83,14 @@ class MuiExpansionPanel extends Component {
         <div style={{ flex: 1, textAlign: 'left' }}>
           <Typography
             style={{
-              fontSize: expanded && 18,
+              fontSize: expanded
+                ? styles &&
+                  styles.titleStyles &&
+                  styles.titleStyles.fontSize &&
+                  styles.titleStyles.fontSize
+                  ? styles.titleStyles.fontSize
+                  : 18
+                : undefined,
               fontWeight: expanded && 500,
               marginTop: expanded && 9,
               marginBottom: expanded && 5,

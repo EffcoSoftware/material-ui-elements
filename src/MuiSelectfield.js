@@ -13,8 +13,10 @@ export default props => {
     input,
     meta,
     value,
-    hideLabel
+    hideLabel,
+    ...rest
   } = props
+
   return (
     <SelectField
       value={value}
@@ -23,6 +25,13 @@ export default props => {
       hintText={hint}
       floatingLabelText={
         !hideLabel && label ? `${label}${required ? ' *' : ''}` : ''
+      }
+      floatingLabelStyle={
+        input && input.floatingLabelStyle
+          ? input.floatingLabelStyle
+          : rest && rest.floatingLabelStyle
+            ? rest.floatingLabelStyle
+            : undefined
       }
       fullWidth
       errorText={meta ? meta.touched && meta.error && meta.error : null}

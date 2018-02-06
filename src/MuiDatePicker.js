@@ -4,12 +4,19 @@ const MuiDatePicker = props => {
   const { input, meta, label, required, hideLabel, ...rest } = props
 
   return (
-    < DatePicker
+    <DatePicker
       onChange={(e, date) => input.onChange(date)}
       autoOk
-      {...rest }
+      {...rest}
       floatingLabelText={
         !hideLabel && label ? `${label}${required ? ' *' : ''}` : ''
+      }
+      floatingLabelStyle={
+        input && input.floatingLabelStyle
+          ? input.floatingLabelStyle
+          : rest && rest.floatingLabelStyle
+            ? rest.floatingLabelStyle
+            : undefined
       }
       floatingLabelFixed
       value={input.value ? new Date(input.value) : null}

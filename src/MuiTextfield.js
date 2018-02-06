@@ -18,7 +18,8 @@ export default props => {
     value,
     numeric,
     inputStyle,
-    hideLabel = false
+    hideLabel = false,
+    ...rest
   } = props
 
   return (
@@ -30,6 +31,13 @@ export default props => {
         // onChange={input ? input.onChange : onChange}
         floatingLabelText={
           !hideLabel && label ? `${label}${required ? ' *' : ''}` : ''
+        }
+        floatingLabelStyle={
+          input && input.floatingLabelStyle
+            ? input.floatingLabelStyle
+            : rest && rest.floatingLabelStyle
+              ? rest.floatingLabelStyle
+              : undefined
         }
         disabled={disabled}
         fullWidth
