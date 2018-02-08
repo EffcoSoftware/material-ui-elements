@@ -5,10 +5,10 @@ import Typography from 'material-ui/Typography'
 import OptionsMenu from './OptionsMenu'
 
 const TopToolbar = props => {
-  const { title, topComponent, style } = props
+  const { title, topComponent, style, toolbarStyle } = props
 
   return (
-    <Toolbar>
+    <Toolbar style={{ ...toolbarStyle }}>
       <Typography type="title" style={{ ...style }}>
         {title}
       </Typography>
