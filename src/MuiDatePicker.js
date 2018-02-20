@@ -1,5 +1,7 @@
 import React from 'react'
 import DatePicker from 'material-ui-effco/DatePicker'
+import moment from 'moment'
+
 const MuiDatePicker = props => {
   const { input, meta, label, required, hideLabel, ...rest } = props
 
@@ -26,6 +28,11 @@ const MuiDatePicker = props => {
       hintStyle={{ color: '#aaa' }}
       errorText={meta ? meta.touched && meta.error && meta.error : ''}
       DateTimeFormat={Intl.DateTimeFormat}
+      formatDate={
+        rest && rest.dateFormat
+          ? date => moment(date).format(rest.dateFormat)
+          : null
+      }
       container="inline"
     />
   )

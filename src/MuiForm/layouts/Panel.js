@@ -5,7 +5,7 @@ import ExpansionPanel, {
   ExpansionPanelActions
 } from 'material-ui/ExpansionPanel'
 import Typography from 'material-ui/Typography'
-import Divider from 'material-ui/Divider'
+// import Divider from 'material-ui/Divider'
 import Icon from 'material-ui/Icon'
 import FormFields from '../elements/FormFields'
 import CrudButtons from '../../CrudButtons'
@@ -33,7 +33,9 @@ class MuiExpansionPanel extends Component {
       submitting,
       invalid,
       actions,
-      styles
+      styles,
+      active,
+      add
     } = this.props
 
     if (!actions) return null
@@ -49,16 +51,26 @@ class MuiExpansionPanel extends Component {
           style: { color: '#666' },
           buttons: [{ ...info, action: this.expandInfo.bind(this) }]
         },
-      delete: actions.delete,
-      edit: actions.edit,
-      add: actions.add,
+      delete:
+        info && info.historyActions
+          ? info.historyActions.delete
+          : actions.delete,
+      edit:
+        active || active >= 0
+          ? info && info.historyActions
+            ? info.historyActions.edit
+            : actions.edit
+          : null,
+      add: info && info.historyActions ? info.historyActions.add : null, //actions.add,
       compact: true,
       style: { color: '#004a6a' }
     }
     const bottomActions = {
+      customButtons: add ? actions.customButtons : null,
+      add: add ? actions.add : null,
       cancel: actions.cancel,
-      undo: actions.undo,
-      save: actions.save,
+      undo: !add ? actions.undo : null,
+      save: !add ? actions.save : null,
       compact: true
     }
 
@@ -123,9 +135,9 @@ class MuiExpansionPanel extends Component {
       <div>
         {this.state.info && info && info.component ? (
           <info.component {...rest} expandInfo={this.expandInfo.bind(this)} />
-        ) : (
-          <Divider />
-        )}
+        ) : null
+        // (<Divider />)
+        }
         <ExpansionPanelDetails>
           <FormFields margin={0} {...this.props} />
         </ExpansionPanelDetails>
@@ -134,7 +146,7 @@ class MuiExpansionPanel extends Component {
 
     const panelActions = (
       <div>
-        <Divider />
+        {/* <Divider /> */}
         {!disabled && (
           <ExpansionPanelActions>
             <CrudButtons
@@ -142,6 +154,7 @@ class MuiExpansionPanel extends Component {
               submittable={!(pristine || submitting || invalid)}
               disabled={disabled}
               actions={bottomActions}
+              reset={false}
             />
           </ExpansionPanelActions>
         )}

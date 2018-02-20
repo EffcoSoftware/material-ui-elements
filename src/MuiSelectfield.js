@@ -45,6 +45,7 @@ export default props => {
       {options
         ? options.map(o => (
             <MenuItem
+              style={input && input.menuItemStyle}
               key={
                 o.key
                   ? o.key

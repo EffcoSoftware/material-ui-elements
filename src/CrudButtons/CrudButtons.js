@@ -29,7 +29,7 @@ class CrudButtons extends Component {
       title
     } = this.props
     if (!actions) return null
-
+    // console.log(this.props)
     const defaultLabels = {
       en: {
         delete: 'Delete',
