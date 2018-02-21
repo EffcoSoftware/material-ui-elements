@@ -26,7 +26,9 @@ class CrudButtons extends Component {
       reset,
       handleSubmit,
       lang = 'en',
-      title
+      title,
+      stacked,
+      raised
     } = this.props
     if (!actions) return null
     // console.log(this.props)
@@ -87,10 +89,6 @@ class CrudButtons extends Component {
         }
       }
     }
-
-    let stackedStyle = {}
-
-    if (actions.stacked) stackedStyle = { width: '100%', marginBottom: 10 }
 
     let crudActions = {
       delete:
@@ -174,14 +172,14 @@ class CrudButtons extends Component {
               <CrudButton
                 key={i}
                 action={b.action}
-                raised={b.raised}
+                raised={raised || b.raised}
                 label={b.label}
                 disabled={b.disabled}
                 icon={b.icon}
                 style={{
                   ...actions.customButtons.style,
                   ...actions.style,
-                  ...stackedStyle,
+                  ...(stacked && { width: '100%', marginBottom: 8 }),
                   ...b.style
                 }}
                 color={b.color}
@@ -193,7 +191,7 @@ class CrudButtons extends Component {
         {actions.delete ? (
           <CrudButton
             action={crudActions.delete}
-            raised={actions.raised}
+            raised={raised || (actions.delete && actions.delete.raised)}
             label={actions.delete.label || defaultLabels[lang].delete}
             disabled={false}
             icon={
@@ -201,7 +199,10 @@ class CrudButtons extends Component {
                 ? null
                 : actions.delete.icon || 'delete'
             }
-            style={{ ...actions.style, ...stackedStyle }}
+            style={{
+              ...actions.style,
+              ...(stacked && { width: '100%', marginBottom: 8 })
+            }}
             color="accent"
             dense={actions.compact}
           />
@@ -209,7 +210,7 @@ class CrudButtons extends Component {
         {actions.save ? (
           <CrudButton
             action={crudActions.save}
-            raised={actions.raised}
+            raised={raised || (actions.save && actions.save.raised)}
             label={actions.save.label || defaultLabels[lang].save}
             disabled={pristine}
             icon={
@@ -217,7 +218,10 @@ class CrudButtons extends Component {
                 ? null
                 : actions.save.icon || 'save'
             }
-            style={{ ...actions.style, ...stackedStyle }}
+            style={{
+              ...actions.style,
+              ...(stacked && { width: '100%', marginBottom: 8 })
+            }}
             color={actions.save.color || color}
             dense={actions.compact}
           />
@@ -225,7 +229,7 @@ class CrudButtons extends Component {
         {actions.undo ? (
           <CrudButton
             action={crudActions.undo}
-            raised={actions.raised}
+            raised={raised || (actions.undo && actions.undo.raised)}
             label={actions.undo.label || defaultLabels[lang].undo}
             disabled={false}
             icon={
@@ -233,7 +237,10 @@ class CrudButtons extends Component {
                 ? null
                 : actions.undo.icon || (submittable ? 'history' : 'close')
             }
-            style={{ ...actions.style, ...stackedStyle }}
+            style={{
+              ...actions.style,
+              ...(stacked && { width: '100%', marginBottom: 8 })
+            }}
             color={actions.undo.color || color}
             dense={actions.compact}
           />
@@ -241,7 +248,7 @@ class CrudButtons extends Component {
         {actions.edit ? (
           <CrudButton
             action={crudActions.edit}
-            raised={actions.raised}
+            raised={raised || (actions.edit && actions.edit.raised)}
             label={actions.edit.label || defaultLabels[lang].edit}
             disabled={actions.edit.disabled || false}
             icon={
@@ -249,7 +256,10 @@ class CrudButtons extends Component {
                 ? null
                 : actions.edit.icon || 'edit'
             }
-            style={{ ...actions.style, ...stackedStyle }}
+            style={{
+              ...actions.style,
+              ...(stacked && { width: '100%', marginBottom: 8 })
+            }}
             color={actions.edit.color || color}
             dense={actions.compact}
           />
@@ -257,7 +267,7 @@ class CrudButtons extends Component {
         {actions.add ? (
           <CrudButton
             action={crudActions.add}
-            raised={actions.raised}
+            raised={raised || (actions.add && actions.add.raised)}
             label={actions.add.label || defaultLabels[lang].add}
             disabled={!submittable}
             icon={
@@ -265,7 +275,10 @@ class CrudButtons extends Component {
                 ? null
                 : actions.add.icon || 'add'
             }
-            style={{ ...actions.style, ...stackedStyle }}
+            style={{
+              ...actions.style,
+              ...(stacked && { width: '100%', marginBottom: 8 })
+            }}
             color={actions.add.color || color}
             dense={actions.compact}
           />
@@ -273,7 +286,7 @@ class CrudButtons extends Component {
         {actions.cancel ? (
           <CrudButton
             action={crudActions.cancel}
-            raised={actions.raised}
+            raised={raised || (actions.cancel && actions.cancel.raised)}
             label={actions.cancel.label || defaultLabels[lang].cancel}
             disabled={false}
             icon={
@@ -283,7 +296,10 @@ class CrudButtons extends Component {
                   ? null
                   : actions.cancel.icon || 'close'
             }
-            style={{ ...actions.style, ...stackedStyle }}
+            style={{
+              ...actions.style,
+              ...(stacked && { width: '100%', marginBottom: 8 })
+            }}
             color={actions.cancel.color || color}
             dense={actions.compact}
           />
