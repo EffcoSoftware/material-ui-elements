@@ -20,20 +20,27 @@ const Body = props => {
 
   if (detailsRow) {
     const { detailsArray, titleText, reducedProp } = detailsRow
-    tableDataWithDetails = data.reduce((r, e, i) => {
-      const dataRow = _.get(data, `[${i}]`)
-      return (
-        (!_.isEmpty(dataRow[detailsArray])
-          ? r.push(dataRow, {
+
+    tableDataWithDetails = data.reduce((result, dataRow) => {
+      const newOffsetIndex =
+        result.length - _.filter(result, ['detailRow', true]).length
+      if (!_.isEmpty(dataRow[detailsArray])) {
+        return (
+          result.push(
+            { ...dataRow, newOffsetIndex },
+            {
               detailRow: true,
               value: dataRow[detailsArray].reduce((r, e, i) => {
                 return i === 0
                   ? `${titleText}${e[reducedProp]}`
                   : `${r}, ${e[reducedProp]}`
               }, '')
-            })
-          : r.push(dataRow)) && r
-      )
+            }
+          ) && result
+        )
+      } else {
+        return result.push({ ...dataRow, newOffsetIndex }) && result
+      }
     }, [])
   }
 
@@ -54,8 +61,8 @@ const Body = props => {
             return !row.detailRow ? (
               <MuiTableRow
                 key={i}
-                index={i}
-                row={`${detailsRow.dataRowPath}[${i}]`}
+                index={row.newOffsetIndex}
+                row={row} //`${detailsRow}[${i}]`}
                 hover
                 onRowClick={
                   handleRowClick ? () => handleRowClick(row.id) : null
@@ -63,7 +70,13 @@ const Body = props => {
                 {...props}
               />
             ) : (
-              <TableRow style={{ background: '#eee' }}>
+              <TableRow
+                style={
+                  detailsRow.rowStyles
+                    ? { ...detailsRow.rowStyles }
+                    : { background: '#eee' }
+                }
+              >
                 <TableCell key={i} colSpan={columns.length + 1}>
                   {row.value}
                 </TableCell>
