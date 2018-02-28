@@ -17,6 +17,8 @@ export default props => {
     ...rest
   } = props
 
+  console.log(input.onChange)
+
   return (
     <SelectField
       value={value}

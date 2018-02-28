@@ -1,5 +1,6 @@
 export MuiTextfield from './MuiTextfield'
 export MuiSelectfield from './MuiSelectfield'
+export MuiSelectfield2 from './MuiSelectfield2'
 export MuiAutocomplete from './MuiAutocomplete'
 export MuiDatePicker from './MuiDatePicker'
 export MuiTimePicker from './MuiTimePicker'

@@ -1,6 +1,7 @@
 export default {
   typography: 'typography',
   select: 'select',
+  select2: 'select2',
   subheading: 'subheading',
   caption: 'caption',
   spacer: 'spacer',

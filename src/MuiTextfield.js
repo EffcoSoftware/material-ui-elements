@@ -1,62 +1,48 @@
 import React from 'react'
-import { TextField } from 'material-ui-effco'
+import Input, { InputLabel } from 'material-ui/Input'
+import { FormControl, FormHelperText } from 'material-ui/Form'
+import { InputAdornment } from 'material-ui/Input'
 
-export default props => {
+const MuiTextfield = props => {
   const {
-    disabled,
-    style,
-    hint,
-    label,
-    rows,
-    type,
-    underlineShow,
-    underlineDisabledStyle,
-    required,
-    onChange,
     input,
     meta,
-    value,
-    numeric,
-    inputStyle,
-    hideLabel = false,
-    ...rest
+    disabled,
+    label,
+    rows,
+    startAdo,
+    endAdo,
+    floatingLabelStyle
   } = props
-
   return (
-    <div>
-      <TextField
-        value={value}
+    <FormControl
+      margin="normal"
+      error={!!(meta && meta.error)}
+      multiLine={!!rows}
+      rows={rows}
+      fullWidth
+      disabled={disabled}
+    >
+      <InputLabel style={floatingLabelStyle} shrink>
+        {label}
+      </InputLabel>
+      <Input
         {...input}
-        hintText={hint}
-        // onChange={input ? input.onChange : onChange}
-        floatingLabelText={
-          !hideLabel && label ? `${label}${required ? ' *' : ''}` : ''
+        style={{ fontSize: '0.8rem', color: '#666', borderColor: '#ccc' }}
+        startAdornment={
+          startAdo && (
+            <InputAdornment position="start">{startAdo}</InputAdornment>
+          )
         }
-        floatingLabelStyle={
-          input && input.floatingLabelStyle
-            ? input.floatingLabelStyle
-            : rest && rest.floatingLabelStyle
-              ? rest.floatingLabelStyle
-              : undefined
+        endAdornment={
+          endAdo && <InputAdornment position="end">{endAdo}</InputAdornment>
         }
-        disabled={disabled}
-        fullWidth
-        multiLine={!!rows}
-        rows={rows}
-        errorText={meta ? meta.touched && meta.error && meta.error : ''}
-        underlineShow={underlineShow}
-        underlineDisabledStyle={
-          underlineDisabledStyle || { borderColor: '#ccc' }
-        }
-        hintStyle={{ color: '#aaa' }}
-        floatingLabelFixed
-        type={type}
-        style={style}
-        inputStyle={{
-          ...inputStyle,
-          ...(numeric ? { textAlign: 'right' } : {})
-        }}
       />
-    </div>
+      <FormHelperText>
+        {meta && meta.touched && meta.error && meta.error}
+      </FormHelperText>
+    </FormControl>
   )
 }
+
+export default MuiTextfield

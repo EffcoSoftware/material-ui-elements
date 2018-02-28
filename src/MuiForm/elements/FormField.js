@@ -1,6 +1,7 @@
 import React from 'react'
 import Typography from 'material-ui/Typography'
 import MuiTextfield from '../../MuiTextfield'
+import MuiSelectfield2 from '../../MuiSelectfield2'
 import MuiSelectfield from '../../MuiSelectfield'
 import MuiAutocomplete from '../../MuiAutocomplete'
 import MuiDatePicker from '../../MuiDatePicker'
@@ -14,6 +15,8 @@ const FormField = ({ name, formField, ...props }) => {
   switch (type) {
     case 'select':
       return <MuiSelectfield {...props} disabled={disabledField} />
+    case 'select2':
+      return <MuiSelectfield2 {...props} disabled={disabledField} />
     case 'autocomplete':
       return <MuiAutocomplete {...props} disabled={disabledField} />
     case 'subheading':
