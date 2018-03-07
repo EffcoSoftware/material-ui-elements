@@ -9,7 +9,7 @@ const TopToolbar = props => {
 
   return (
     <Toolbar style={{ ...toolbarStyle }}>
-      <Typography type="title" style={{ ...style }}>
+      <Typography variant="title" style={{ ...style }}>
         {title}
       </Typography>
       <div style={{ flex: 1 }} />

@@ -27,13 +27,13 @@ const FormModal = props => {
   return (
     <Dialog
       open={open}
-      maxWidth="lg"
+      // maxWidth="lg"
       onRequestClose={actions.cancel.action || actions.cancel}
     >
       <AppBar
         style={{
-          margin: 0,
-          paddingRight: 0,
+          // margin: 0,
+          // paddingRight: 0,
           position: 'relative',
           boxShadow: 'none'
         }}
@@ -43,10 +43,8 @@ const FormModal = props => {
               <ChevronLeft />
             </IconButton>*/}
           <div style={{ flex: 1 }} />
-          <Typography type="title" color="inherit">
-            <div style={{ color: 'white' }}>
-              {title || 'Details'}
-            </div>
+          <Typography variant="title" color="inherit">
+            <div style={{ color: 'white' }}>{title || 'Details'}</div>
           </Typography>
           <div style={{ flex: 1 }} />
           {/*<IconButton>
@@ -60,20 +58,22 @@ const FormModal = props => {
           overflow: 'auto'
         }}
       >
-        {groups
-          ? <FormTabs {...props} />
-          : <FormFields fields={fields} {...props} />}
+        {groups ? (
+          <FormTabs {...props} />
+        ) : (
+          <FormFields fields={fields} {...props} />
+        )}
       </div>
       <DialogActions>
-        {actions
-          ? <CrudButtons
-              add={add}
-              submittable={!(pristine || submitting || invalid)}
-              disabled={disabled}
-              actions={actions}
-              {...props}
-            />
-          : null}
+        {actions ? (
+          <CrudButtons
+            add={add}
+            submittable={!(pristine || submitting || invalid)}
+            disabled={disabled}
+            actions={actions}
+            {...props}
+          />
+        ) : null}
       </DialogActions>
     </Dialog>
   )
