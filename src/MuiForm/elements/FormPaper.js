@@ -21,33 +21,32 @@ const FormPaper = props => {
   const formLabel = label || title || ''
   return (
     <Paper>
-      {formLabel
-        ? <Toolbar>
-            <Typography type="title">
-              {formLabel}
-            </Typography>
-          </Toolbar>
-        : null}
+      {formLabel ? (
+        <Toolbar>
+          <Typography variant="title">{formLabel}</Typography>
+        </Toolbar>
+      ) : null}
       <FormFields fields={fieldsGroup || fields} {...props} />
-      {!fieldsGroup
-        ? <div
-            style={{
-              marginLeft: 24,
-              marginRight: 24,
-              marginTop: 24,
-              paddingBottom: 12
-            }}
-          >
-            {!actions.drawer &&
-              <CrudButtons
-                add={add}
-                submittable={!(pristine || submitting || invalid)}
-                disabled={disabled}
-                actions={actions}
-                {...props}
-              />}
-          </div>
-        : null}
+      {!fieldsGroup ? (
+        <div
+          style={{
+            marginLeft: 24,
+            marginRight: 24,
+            marginTop: 24,
+            paddingBottom: 12
+          }}
+        >
+          {!actions.drawer && (
+            <CrudButtons
+              add={add}
+              submittable={!(pristine || submitting || invalid)}
+              disabled={disabled}
+              actions={actions}
+              {...props}
+            />
+          )}
+        </div>
+      ) : null}
     </Paper>
   )
 }

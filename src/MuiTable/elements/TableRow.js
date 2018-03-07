@@ -44,11 +44,9 @@ const MuiTableRow = props => {
             <TableCell
               key={i}
               numeric={h.numeric}
-              compact={h.compact}
-              disablePadding={h.disablePadding}
               style={h.style}
               onClick={
-                h.onClick && !fieldArray ? () => h.onClick(row.id) : null
+                h.onClick && !fieldArray ? () => h.onClick(row.id, value) : null
               }
             >
               {h.formField ? (
@@ -71,18 +69,17 @@ const MuiTableRow = props => {
           return (
             <TableCell
               key={i}
+              padding={h.padding}
               numeric={h.numeric}
-              compact={h.compact}
-              disablePadding={h.disablePadding}
               style={h.style}
               onClick={
-                h.onClick && !fieldArray ? () => h.onClick(row.id) : null
+                h.onClick && !fieldArray ? () => h.onClick(row.id, value) : null
               }
             >
               {h.component ? (
                 h.component(value, data[index])
               ) : (
-                <Typography>{value}</Typography>
+                <Typography nowrap={h.nowrap}>{value}</Typography>
               )}
             </TableCell>
           )
@@ -91,12 +88,7 @@ const MuiTableRow = props => {
       {fieldArray &&
       (!(!add && disabled) || forceShowEditButtons) &&
       !hideEditButtons ? (
-        <TableCell
-          compact
-          disablePadding
-          style={{ width: 1 }}
-          key={columns.length + 1}
-        >
+        <TableCell padding="none" style={{ width: 1 }} key={columns.length + 1}>
           <RowActions {...props} />
         </TableCell>
       ) : null}

@@ -7,7 +7,7 @@ import FormFieldsVertical from './FormFieldsVertical'
 const FormFields = props => {
   const { fields, formFieldsStyle, margin = 24 } = props
   return (
-    <div style={{ margin, width: '100%', ...formFieldsStyle }}>
+    <div style={{ ...margin, width: '100%', ...formFieldsStyle }}>
       {fields &&
         fields.map(
           (f, i) =>

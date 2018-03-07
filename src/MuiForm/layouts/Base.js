@@ -22,7 +22,7 @@ const FormBasic = props => {
     <div>
       {formLabel && (
         <Toolbar>
-          <Typography type="title">{formLabel}</Typography>
+          <Typography variant="title">{formLabel}</Typography>
         </Toolbar>
       )}
       <FormFields fields={fields} {...props} />
