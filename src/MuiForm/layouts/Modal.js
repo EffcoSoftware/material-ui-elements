@@ -29,7 +29,7 @@ class FormModal extends Component {
         open={open}
         maxWidth="md"
         fullWidth
-        onRequestClose={actions.cancel.action || actions.cancel}
+        onClose={actions.cancel.action || actions.cancel}
       >
         <AppBar
           position="static"

@@ -31,7 +31,7 @@ class CrudButtons extends Component {
       raised
     } = this.props
     if (!actions) return null
-    // console.log(this.props)
+
     const defaultLabels = {
       en: {
         delete: 'Delete',
@@ -114,7 +114,7 @@ class CrudButtons extends Component {
         actions.add && add
           ? handleSubmit((actions.add && actions.add.action) || actions.add)
           : null,
-      cancel: () =>
+      cancel:
         actions.cancel && (disabled || add)
           ? (actions.cancel && actions.cancel.action) || actions.cancel
           : null
@@ -122,30 +122,38 @@ class CrudButtons extends Component {
 
     crudActions = {
       ...crudActions,
-      add: this.setConfirmation.bind(
-        this,
-        crudActions.add,
-        (actions.add && actions.add.title) ||
-          defaultConfirmations[lang].add.title,
-        (actions.add && actions.add.content) ||
-          defaultConfirmations[lang].add.content
-      ),
-      delete: this.setConfirmation.bind(
-        this,
-        crudActions.delete,
-        (actions.delete && actions.delete.title) ||
-          defaultConfirmations[lang].delete.title,
-        (actions.delete && actions.delete.content) ||
-          defaultConfirmations[lang].delete.content
-      ),
-      save: this.setConfirmation.bind(
-        this,
-        crudActions.save,
-        (actions.save && actions.save.title) ||
-          defaultConfirmations[lang].save.title,
-        (actions.save && actions.save.content) ||
-          defaultConfirmations[lang].save.content
-      ),
+      add: add
+        ? this.setConfirmation.bind(
+            this,
+            crudActions.add,
+            (actions.add && actions.add.title) ||
+              defaultConfirmations[lang].add.title,
+            (actions.add && actions.add.content) ||
+              defaultConfirmations[lang].add.content
+          )
+        : null,
+      delete:
+        !disabled && !add
+          ? this.setConfirmation.bind(
+              this,
+              crudActions.delete,
+              (actions.delete && actions.delete.title) ||
+                defaultConfirmations[lang].delete.title,
+              (actions.delete && actions.delete.content) ||
+                defaultConfirmations[lang].delete.content
+            )
+          : null,
+      save:
+        !disabled && !add
+          ? this.setConfirmation.bind(
+              this,
+              crudActions.save,
+              (actions.save && actions.save.title) ||
+                defaultConfirmations[lang].save.title,
+              (actions.save && actions.save.content) ||
+                defaultConfirmations[lang].save.content
+            )
+          : null,
       undo: submittable
         ? this.setConfirmation.bind(
             this,
