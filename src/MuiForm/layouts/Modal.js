@@ -3,6 +3,7 @@ import Dialog, { DialogActions, DialogContent } from 'material-ui/Dialog'
 import AppBar from 'material-ui/AppBar'
 import Toolbar from 'material-ui/Toolbar'
 import Typography from 'material-ui/Typography'
+import Divider from 'material-ui/Divider'
 import Tabs, { Tab } from 'material-ui/Tabs'
 import FormFields from '../elements/FormFields'
 import CrudButtons from '../../CrudButtons'
@@ -72,7 +73,8 @@ class FormModal extends Component {
             <FormFields fields={fields} {...this.props} />
           )}
         </DialogContent>
-        <DialogActions>
+        {actions && <Divider />}
+        <DialogActions style={{ margin: 12 }}>
           {actions ? (
             <CrudButtons
               add={add}

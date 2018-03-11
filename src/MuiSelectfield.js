@@ -1,61 +1,66 @@
 import React from 'react'
-import { SelectField, MenuItem } from 'material-ui-effco'
+import Select from 'material-ui/Select'
+import { InputLabel } from 'material-ui/Input'
+import { FormControl, FormHelperText } from 'material-ui/Form'
+import { MenuItem } from 'material-ui/Menu'
+import { controlStyle } from './constants'
 
-export default props => {
+const MuiSelectfield = props => {
   const {
-    disabled,
-    style,
-    hint,
-    label,
     options,
-    multiple,
-    required,
     input,
+    disabled,
+    label,
     meta,
-    value,
-    hideLabel,
-    ...rest
+    floatingLabelStyle,
+    multiple,
+    onChange: onChangeFromField,
+    style
   } = props
 
   return (
-    <SelectField
-      value={value}
-      {...input}
-      onChange={(e, i, v) => input.onChange(v)}
-      hintText={hint}
-      floatingLabelText={
-        !hideLabel && label ? `${label}${required ? ' *' : ''}` : ''
-      }
-      floatingLabelStyle={
-        input && input.floatingLabelStyle
-          ? input.floatingLabelStyle
-          : rest && rest.floatingLabelStyle
-            ? rest.floatingLabelStyle
-            : undefined
-      }
+    <FormControl
+      margin="normal"
       fullWidth
-      errorText={meta ? meta.touched && meta.error && meta.error : null}
-      disabled={disabled}
-      style={style}
-      underlineDisabledStyle={{ borderColor: '#ccc' }}
-      hintStyle={{ color: '#aaa' }}
-      floatingLabelFixed
       multiple={multiple}
+      error={!!(meta && meta.error)}
+      disabled={disabled}
     >
-      {options
-        ? options.map(o => (
-            <MenuItem
-              style={input && input.menuItemStyle}
-              key={
-                o.key
-                  ? o.key
-                  : [false, 0].indexOf(o.value) > -1 ? o.value : o.value || o
-              }
-              value={[false, 0].indexOf(o.value) > -1 ? o.value : o.value || o}
-              primaryText={o.label || o}
-            />
-          ))
-        : null}
-    </SelectField>
+      <InputLabel style={floatingLabelStyle} shrink>
+        {label}
+      </InputLabel>
+      <Select
+        value={input && input.value}
+        onChange={e => {
+          input && input.onChange(e.target.value)
+          if (onChangeFromField) {
+            onChangeFromField(e.target.value)
+          }
+        }}
+        style={{ ...controlStyle, ...style }}
+      >
+        {options
+          ? options.map(o => (
+              <MenuItem
+                key={
+                  o.key
+                    ? o.key
+                    : [false, 0].indexOf(o.value) > -1 ? o.value : o.value || o
+                }
+                value={
+                  [false, 0].indexOf(o.value) > -1 ? o.value : o.value || o
+                }
+              >
+                {o.label || o}
+              </MenuItem>
+            ))
+          : null}
+      </Select>
+      <FormHelperText>
+        {meta && meta.touched && meta.error && meta.error}
+      </FormHelperText>
+    </FormControl>
   )
 }
+
+export default MuiSelectfield

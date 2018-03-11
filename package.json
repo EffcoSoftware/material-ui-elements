@@ -40,12 +40,14 @@
   },
   "dependencies": {
     "dataobject-parser": "^1.1.3",
+    "downshift": "^1.30.0",
     "lodash": "^4.17.4",
     "material-ui-icons": "^1.0.0-beta.17",
     "material-ui-superselectfield-effco": "^1.5.9",
     "react-redux": "^5.0.5",
     "recompose": "^0.26.0",
     "redux": "^3.7.0",
-    "redux-form": "^6.8.0"
+    "redux-form": "^6.8.0",
+    "redux-form-material-ui": "^5.0.0-beta.2"
   }
 }
