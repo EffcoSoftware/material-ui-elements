@@ -1,6 +1,8 @@
 import React from 'react'
 import Select from 'material-ui/Select'
+import _c from 'lodash-checkit'
 import { InputLabel } from 'material-ui/Input'
+import Checkbox from 'material-ui/Checkbox'
 import { FormControl, FormHelperText } from 'material-ui/Form'
 import { MenuItem } from 'material-ui/Menu'
 import { controlStyle } from './constants'
@@ -12,48 +14,79 @@ const MuiSelectfield = props => {
     disabled,
     label,
     meta,
+    hint,
     floatingLabelStyle,
     multiple,
     onChange: onChangeFromField,
-    style
+    style,
+    value,
+    required
   } = props
+
+  const inputValue = input && input.value !== undefined ? input.value : value
+  const renderValue = (v = multiple ? [] : '') => (multiple ? v.join(', ') : v)
+
+  const handleMultipleChange = (existingValues, newValue) => {
+    const values = existingValues.slice()
+    if (values.includes(newValue)) {
+      values.splice(values.indexOf(newValue), 1)
+      return values
+    }
+    values.push(newValue)
+    return values
+  }
 
   return (
     <FormControl
       margin="normal"
       fullWidth
       multiple={multiple}
-      error={!!(meta && meta.error)}
+      required={required}
+      error={!!(meta && meta.touched && meta.error)}
       disabled={disabled}
     >
       <InputLabel style={floatingLabelStyle} shrink>
         {label}
       </InputLabel>
       <Select
-        value={input && input.value}
+        value={inputValue}
+        renderValue={multiple && renderValue}
+        inputProps={{ placeholder: hint }}
         onChange={e => {
-          input && input.onChange(e.target.value)
+          input &&
+            input.onChange(
+              multiple
+                ? handleMultipleChange(inputValue, e.target.value)
+                : e.target.value
+            )
           if (onChangeFromField) {
-            onChangeFromField(e.target.value)
+            onChangeFromField(
+              multiple
+                ? handleMultipleChange(inputValue, e.target.value)
+                : e.target.value
+            )
           }
         }}
         style={{ ...controlStyle, ...style }}
       >
         {options
-          ? options.map(o => (
-              <MenuItem
-                key={
-                  o.key
-                    ? o.key
-                    : [false, 0].indexOf(o.value) > -1 ? o.value : o.value || o
-                }
-                value={
-                  [false, 0].indexOf(o.value) > -1 ? o.value : o.value || o
-                }
-              >
-                {o.label || o}
-              </MenuItem>
-            ))
+          ? options.map(o => {
+              const key = o.key || o.value || o
+              const value = _c.isExists(o.value) ? o.value : o
+              const label = o.label || o
+              const isSelected = multiple
+                ? inputValue.includes(value)
+                : inputValue === value
+              const style = isSelected ? { fontWeight: '600' } : {}
+              return (
+                <MenuItem style={style} key={key} value={value}>
+                  {multiple && (
+                    <Checkbox color="primary" checked={isSelected} />
+                  )}
+                  {label}
+                </MenuItem>
+              )
+            })
           : null}
       </Select>
       <FormHelperText>

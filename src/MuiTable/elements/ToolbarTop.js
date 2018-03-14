@@ -6,7 +6,6 @@ import OptionsMenu from './OptionsMenu'
 
 const TopToolbar = props => {
   const { title, topComponent, style, toolbarStyle } = props
-
   return (
     <Toolbar style={{ ...toolbarStyle }}>
       <Typography variant="title" style={{ ...style }}>

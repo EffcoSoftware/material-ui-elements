@@ -34,6 +34,7 @@ const MuiDatePicker = props => {
           : null
       }
       container="inline"
+      underlineStyle={{ borderColor: '#999' }}
     />
   )
 }

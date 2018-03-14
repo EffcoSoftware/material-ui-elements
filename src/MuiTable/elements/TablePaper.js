@@ -38,31 +38,11 @@ class TablePaper extends Component {
   filterData = (data, filterBy, filterString, filters) => {
     return filterBy && filterString
       ? data.filter(d =>
-        _.get(d, filterBy)
-          .toLowerCase()
-          .includes(filterString.toLowerCase())
-      )
-      : // .filter(
-      //   d =>
-      //     filters && filters.length && filters.length > 0
-      //       ? filters.every((v, i, a) => {
-      //           return v.value === 0 || !!v.value
-      //             ? true //_.get(d, `${v.name}`) >= v.id
-      //             : _.get(d, `${v.name}`) === v.value
-      //         })
-      //       : true
-      // )
-      data
-    // .filter(
-    //     d =>
-    //       filters && filters.length && filters.length > 0
-    //         ? filters.every((v, i, a) => {
-    //             return v.value === 0 || !!v.value
-    //               ? true //_.get(d, `${v.name}`) >= v.value
-    //               : _.get(d, `${v.name}`) === v.value
-    //           })
-    //         : true
-    //   )
+          _.get(d, filterBy)
+            .toLowerCase()
+            .includes(filterString.toLowerCase())
+        )
+      : data
   }
 
   handleOptionsOpen = event => {
@@ -102,8 +82,6 @@ class TablePaper extends Component {
       menuOptionsConfig
     } = this.props
     const externalFilters = true
-    // console.log(this.props)
-    // console.log(this.state)
     return (
       <Paper>
         {toolbarTop !== false ? (

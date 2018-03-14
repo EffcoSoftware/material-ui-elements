@@ -20,7 +20,7 @@ const MuiTimePicker = props => {
     <TimePicker
       onChange={(e, time) => {
         input.onChange(time)
-        onChange ? onChange(time) : () => null
+        if (onChange) onChange(time)
       }}
       autoOk
       {...rest}
@@ -36,6 +36,7 @@ const MuiTimePicker = props => {
       hintText={hint}
       hintStyle={{ color: '#bbb' }}
       minutesStep={minutesStep || 5}
+      underlineStyle={{ borderColor: '#999' }}
     />
   )
 }

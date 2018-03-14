@@ -19,6 +19,7 @@ class CrudButtons extends Component {
       add,
       disabled,
       pristine,
+      invalid,
       submittable,
       actions,
       icons = true,
@@ -154,22 +155,22 @@ class CrudButtons extends Component {
                 defaultConfirmations[lang].save.content
             )
           : null,
-      undo: submittable
-        ? this.setConfirmation.bind(
-            this,
-            crudActions.undo,
-            (actions.undo && actions.undo.title) ||
-              defaultConfirmations[lang].undo.title,
-            (actions.undo && actions.undo.content) ||
-              defaultConfirmations[lang].undo.content
-          )
-        : crudActions.undo
+      undo:
+        submittable && !add
+          ? this.setConfirmation.bind(
+              this,
+              crudActions.undo,
+              (actions.undo && actions.undo.title) ||
+                defaultConfirmations[lang].undo.title,
+              (actions.undo && actions.undo.content) ||
+                defaultConfirmations[lang].undo.content
+            )
+          : crudActions.undo
     }
 
     return (
       <span>
         <Confirmation
-          // action={this.state.action}
           {...this.props}
           {...this.state}
           actionCancel={this.setConfirmation.bind(this, false, '', '')}
@@ -220,7 +221,7 @@ class CrudButtons extends Component {
             action={crudActions.save}
             raised={raised || (actions.save && actions.save.raised)}
             label={actions.save.label || defaultLabels[lang].save}
-            disabled={pristine}
+            disabled={pristine || invalid || !submittable}
             icon={
               actions.save.icon === false || !icons
                 ? null
