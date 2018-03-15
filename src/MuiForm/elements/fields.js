@@ -8,5 +8,6 @@ export default {
   autocomplete: 'autocomplete',
   password: 'password',
   datepicker: 'datepicker',
-  timepicker: 'timepicker'
+  timepicker: 'timepicker',
+  table: 'table'
 }

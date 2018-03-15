@@ -62,13 +62,10 @@ class FormModal extends Component {
         </AppBar>
         <DialogContent>
           {groups ? (
-            <div>
-              <FormFields
-                margin={12}
-                fields={groups[this.state.tabIndex].fields}
-                {...this.props}
-              />
-            </div>
+            <FormFields
+              fields={groups[this.state.tabIndex].fields}
+              {...this.props}
+            />
           ) : (
             <FormFields fields={fields} {...this.props} />
           )}

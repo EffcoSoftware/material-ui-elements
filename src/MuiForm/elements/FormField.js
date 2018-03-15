@@ -6,9 +6,12 @@ import MuiSelectfield from '../../MuiSelectfield'
 import MuiAutocomplete from '../../MuiAutocomplete'
 import MuiDatePicker from '../../MuiDatePicker'
 import MuiTimePicker from '../../MuiTimePicker'
+import MuiTable from '../../MuiTable'
 
-const FormField = ({ name, formField, ...props }) => {
-  const propsAdjusted = _.omit(props, [
+const FormField = props => {
+  const { name, formField, ...rest } = props
+
+  const propsAdjusted = _.omit(rest, [
     'clearAsyncError',
     'clearSubmitErrors',
     'clearSubmit',
@@ -63,6 +66,8 @@ const FormField = ({ name, formField, ...props }) => {
       return <MuiDatePicker {...propsAdjusted} id={Math.random().toString()} />
     case 'timepicker':
       return <MuiTimePicker {...propsAdjusted} />
+    case 'table':
+      return <MuiTable {...propsAdjusted} />
     default:
       return <MuiTextfield {...propsAdjusted} disabled={disabledField} />
   }

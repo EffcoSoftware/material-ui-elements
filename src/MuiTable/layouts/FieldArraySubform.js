@@ -6,6 +6,7 @@ import TablePaper from '../elements/TablePaper'
 class FieldArrayTable extends Component {
   render() {
     const { title, name, paper } = this.props
+    const { groups, fields, ...rest } = this.props
 
     const TableComponent = paper ? TablePaper : Table
 
@@ -13,7 +14,7 @@ class FieldArrayTable extends Component {
       <FieldArray
         name={name || (title ? title : '') || 'array'}
         component={TableComponent}
-        props={{ ...this.props, fieldArray: true }}
+        props={{ ...rest, fieldArray: true }}
       />
     )
   }

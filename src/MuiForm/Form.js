@@ -5,13 +5,6 @@ import DefaultLayout from './layouts/Default'
 import { compose } from 'recompose'
 
 class Form extends Component {
-  componentWillMount() {
-    // console.log(this.props)
-    // if (!this.props.dontInitialize) {
-    //   this.props.initialize(this.props.form || 'MuiForm', this.props.initialValues || {})
-    // }
-  }
-
   render() {
     const { layout: Layout, fields, groups, actions } = this.props
     if (!fields && !groups) {
@@ -27,8 +20,8 @@ class Form extends Component {
     return Layout ? (
       <Layout {...this.props} />
     ) : (
-        <DefaultLayout {...this.props} />
-      )
+      <DefaultLayout {...this.props} />
+    )
   }
 }
 

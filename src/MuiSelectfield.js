@@ -20,7 +20,8 @@ const MuiSelectfield = props => {
     onChange: onChangeFromField,
     style,
     value,
-    required
+    required,
+    margin
   } = props
 
   const inputValue = input && input.value !== undefined ? input.value : value
@@ -38,7 +39,7 @@ const MuiSelectfield = props => {
 
   return (
     <FormControl
-      margin="normal"
+      margin={margin || 'normal'}
       fullWidth
       multiple={multiple}
       required={required}

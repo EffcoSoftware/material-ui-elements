@@ -1,52 +1,12 @@
 import React from 'react'
+import _ from 'lodash'
 import { withStyles } from 'material-ui/styles'
 import MuiTextfield from './MuiTextfield'
 import Paper from 'material-ui/Paper'
 import { MenuItem } from 'material-ui/Menu'
 import Downshift from 'downshift'
 
-const suggestions = [
-  { label: 'Afghanistan' },
-  { label: 'Aland Islands' },
-  { label: 'Albania' },
-  { label: 'Algeria' },
-  { label: 'American Samoa' },
-  { label: 'Andorra' },
-  { label: 'Angola' },
-  { label: 'Anguilla' },
-  { label: 'Antarctica' },
-  { label: 'Antigua and Barbuda' },
-  { label: 'Argentina' },
-  { label: 'Armenia' },
-  { label: 'Aruba' },
-  { label: 'Australia' },
-  { label: 'Austria' },
-  { label: 'Azerbaijan' },
-  { label: 'Bahamas' },
-  { label: 'Bahrain' },
-  { label: 'Bangladesh' },
-  { label: 'Barbados' },
-  { label: 'Belarus' },
-  { label: 'Belgium' },
-  { label: 'Belize' },
-  { label: 'Benin' },
-  { label: 'Bermuda' },
-  { label: 'Bhutan' },
-  { label: 'Bolivia, Plurinational State of' },
-  { label: 'Bonaire, Sint Eustatius and Saba' },
-  { label: 'Bosnia and Herzegovina' },
-  { label: 'Botswana' },
-  { label: 'Bouvet Island' },
-  { label: 'Brazil' },
-  { label: 'British Indian Ocean Territory' },
-  { label: 'Brunei Darussalam' }
-]
-
-const renderInput = props => {
-  console.log(props)
-
-  return <MuiTextfield {...props} />
-}
+const renderInput = props => <MuiTextfield {...props} />
 
 const renderSuggestion = params => {
   const {
@@ -57,12 +17,12 @@ const renderSuggestion = params => {
     selectedItem
   } = params
   const isHighlighted = highlightedIndex === index
-  const isSelected = selectedItem === suggestion.label
+  const isSelected = selectedItem === suggestion.value
 
   return (
     <MenuItem
       {...itemProps}
-      key={suggestion.label}
+      key={suggestion.value}
       selected={isHighlighted}
       component="div"
       style={{
@@ -74,19 +34,18 @@ const renderSuggestion = params => {
   )
 }
 
-const getSuggestions = inputValue => {
+const getSuggestions = (inputValue, options = []) => {
   let count = 0
-
-  return suggestions.filter(suggestion => {
+  console.log(options)
+  return options.filter(o => {
     const keep =
       (!inputValue ||
-        suggestion.label.toLowerCase().includes(inputValue.toLowerCase())) &&
+        o.label.toLowerCase().includes(inputValue.toLowerCase())) &&
       count < 5
 
     if (keep) {
       count += 1
     }
-
     return keep
   })
 }
@@ -99,17 +58,18 @@ const styles = theme => ({
     width: 200
   },
   paper: {
-    position: 'absolute',
+    position: 'fixed',
     zIndex: 2,
-    marginTop: theme.spacing.unit,
-    left: 0,
-    right: 0
+    marginTop: -20,
+    width: 'inherit'
+    // left: 0,
+    // right: 0
   }
 })
 
 const IntegrationDownshift = props => {
-  const { classes } = props
-
+  const { classes, options } = props
+  console.log(props)
   return (
     <Downshift>
       {({
@@ -124,16 +84,19 @@ const IntegrationDownshift = props => {
           {renderInput({
             ...props,
             InputProps: getInputProps({
-              id: 'integration-downshift'
+              id: 'integration-downshift',
+              value:
+                _.find(options, { value: selectedItem }) &&
+                _.find(options, { value: selectedItem }).label
             })
           })}
           {isOpen ? (
-            <Paper className={classes.paper} square>
-              {getSuggestions(inputValue).map((suggestion, index) =>
+            <Paper className={classes.paper}>
+              {getSuggestions(inputValue, options).map((suggestion, index) =>
                 renderSuggestion({
                   suggestion,
                   index,
-                  itemProps: getItemProps({ item: suggestion.label }),
+                  itemProps: getItemProps({ item: suggestion.value }),
                   highlightedIndex,
                   selectedItem
                 })

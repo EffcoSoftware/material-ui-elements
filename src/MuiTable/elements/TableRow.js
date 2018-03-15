@@ -43,6 +43,7 @@ const MuiTableRow = props => {
           return (
             <TableCell
               key={i}
+              padding={h.padding || 'dense'}
               numeric={h.numeric}
               style={h.style}
               onClick={
@@ -52,12 +53,15 @@ const MuiTableRow = props => {
               {h.formField ? (
                 <FormFieldRedux
                   type={h.type}
+                  margin={h.margin || 'none'}
                   name={`${fields.name}[${index}]${h.name ? '.' + h.name : ''}`}
                   disabled={!add && disabledValue}
                   options={h.options}
                   numeric={h.numeric}
                   validate={h.validate}
                   normalize={h.normalize}
+                  locale={h.locale}
+                  cancelLabel={h.cancelLabel}
                   onChange={h.input && h.input.onChange}
                 />
               ) : (
@@ -69,7 +73,7 @@ const MuiTableRow = props => {
           return (
             <TableCell
               key={i}
-              padding={h.padding}
+              padding={h.padding || 'dense'}
               numeric={h.numeric}
               style={h.style}
               onClick={

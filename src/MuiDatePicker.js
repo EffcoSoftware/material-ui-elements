@@ -3,7 +3,16 @@ import DatePicker from 'material-ui-effco/DatePicker'
 import moment from 'moment'
 
 const MuiDatePicker = props => {
-  const { input, meta, label, required, hideLabel, ...rest } = props
+  const {
+    locale,
+    cancelLabel,
+    input,
+    meta,
+    label,
+    required,
+    hideLabel,
+    ...rest
+  } = props
 
   return (
     <DatePicker
@@ -13,6 +22,8 @@ const MuiDatePicker = props => {
       floatingLabelText={
         !hideLabel && label ? `${label}${required ? ' *' : ''}` : ''
       }
+      locale={locale}
+      cancelLabel={cancelLabel}
       floatingLabelStyle={
         input && input.floatingLabelStyle
           ? input.floatingLabelStyle

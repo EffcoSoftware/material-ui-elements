@@ -212,7 +212,7 @@ class CrudButtons extends Component {
               ...actions.style,
               ...(stacked && { width: '100%', marginBottom: 8 })
             }}
-            color="accent"
+            color="secondary"
             dense={actions.compact}
           />
         ) : null}

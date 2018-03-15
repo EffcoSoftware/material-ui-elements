@@ -18,12 +18,14 @@ const MuiTextfield = props => {
     style,
     InputProps,
     required,
-    onChange: onChangeFromField
+    onChange: onChangeFromField,
+    value,
+    margin
   } = props
 
   return (
     <FormControl
-      margin="normal"
+      margin={margin || 'normal'}
       error={!!(meta && meta.touched && meta.error)}
       rows={rows}
       fullWidth
@@ -35,6 +37,7 @@ const MuiTextfield = props => {
       </InputLabel>
       <Input
         {...input}
+        value={input ? input.value : value}
         onChange={e => {
           input && input.onChange(e.target.value)
           if (onChangeFromField) {
