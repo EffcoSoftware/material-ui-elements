@@ -1,6 +1,6 @@
 {
   "name": "material-ui-elements",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "description": "",
   "repository": {
     "type": "git",
@@ -11,14 +11,16 @@
   },
   "main": "lib/index.js",
   "scripts": {
-    "prepublish":
-      "rmdir /S /Q lib && node ./node_modules/babel-cli/bin/babel.js src --out-dir lib",
-    "watch":
-      "node ./node_modules/babel-cli/bin/babel.js --watch src --out-dir lib",
+    "prepublish": "rmdir /S /Q lib && node ./node_modules/babel-cli/bin/babel.js src --out-dir lib",
+    "watch": "node ./node_modules/babel-cli/bin/babel.js --watch src --out-dir lib",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "babel": {
-    "presets": ["react", "es2015", "stage-1"]
+    "presets": [
+      "react",
+      "es2015",
+      "stage-1"
+    ]
   },
   "author": "",
   "license": "ISC",
