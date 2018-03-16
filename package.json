@@ -11,16 +11,14 @@
   },
   "main": "lib/index.js",
   "scripts": {
-    "prepublish": "rmdir /S /Q lib && node ./node_modules/babel-cli/bin/babel.js src --out-dir lib",
-    "watch": "node ./node_modules/babel-cli/bin/babel.js --watch src --out-dir lib",
+    "prepublish":
+      "rmdir /S /Q lib && node ./node_modules/babel-cli/bin/babel.js src --out-dir lib",
+    "watch":
+      "node ./node_modules/babel-cli/bin/babel.js --watch src --out-dir lib",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "babel": {
-    "presets": [
-      "react",
-      "es2015",
-      "stage-1"
-    ]
+    "presets": ["react", "es2015", "stage-1"]
   },
   "author": "",
   "license": "ISC",
@@ -45,7 +43,7 @@
     "lodash-checkit": "^2.1.0",
     "material-ui-icons": "^1.0.0-beta.17",
     "material-ui-superselectfield-effco": "^1.5.9",
-    "mui-downshift": "^1.0.0",
+    "mui-downshift": "^1.0.0-9",
     "react-redux": "^5.0.5",
     "recompose": "^0.26.0",
     "redux": "^3.7.0",
