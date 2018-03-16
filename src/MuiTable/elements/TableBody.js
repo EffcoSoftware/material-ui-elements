@@ -4,9 +4,7 @@ import MuiTableRow from './TableRow'
 
 const Body = props => {
   const { data, ...rest } = props
-
-  const tableData = props.fieldArray ? props.fields : data
-
+  const tableData = props.fieldArray ? props.fields.getAll() : data
   return (
     <TableBody>
       {tableData.map((row, i) => (
