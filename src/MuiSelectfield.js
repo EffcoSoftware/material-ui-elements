@@ -28,7 +28,7 @@ const MuiSelectfield = props => {
   const renderValue = (v = multiple ? [] : '') => (multiple ? v.join(', ') : v)
 
   const handleMultipleChange = (existingValues, newValue) => {
-    const values = existingValues.slice()
+    const values = existingValues.slice() || []
     if (values.includes(newValue)) {
       values.splice(values.indexOf(newValue), 1)
       return values

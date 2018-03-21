@@ -41,8 +41,6 @@ const MuiTextfield = props => {
         onChange={e => {
           input && input.onChange(e.target.value)
           if (onChangeFromField) {
-            console.log(e.target.value)
-
             onChangeFromField(e.target.value)
           }
         }}

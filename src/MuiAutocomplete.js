@@ -8,14 +8,13 @@ export default class MuiAutocomplete extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      items: props.options.map(o => ({ ...o, text: o.label })),
       filteredItems: props.options.map(o => ({ ...o, text: o.label }))
     }
   }
 
   handleStateChange = changes => {
     if (typeof changes.inputValue === 'string') {
-      const filteredItems = this.state.items.filter(item =>
+      const filteredItems = this.props.options.filter(item =>
         item.text.toLowerCase().includes(changes.inputValue.toLowerCase())
       )
       this.setState({ filteredItems })
@@ -33,11 +32,8 @@ export default class MuiAutocomplete extends Component {
       label,
       floatingLabelStyle,
       onChange: onChangeFromField,
-      options,
       style
     } = this.props
-    console.log(this.props)
-    console.log(_.find(options, { value: input.value }))
 
     return (
       <FormControl
