@@ -19,7 +19,7 @@ const Body = props => {
   let tableDataWithDetails = []
 
   if (detailsRow) {
-    const { detailsArray, titleText, reducedProp } = detailsRow
+    const { detailsArray } = detailsRow
 
     tableDataWithDetails = data.reduce((result, dataRow) => {
       const newOffsetIndex =
@@ -30,11 +30,10 @@ const Body = props => {
             { ...dataRow, newOffsetIndex },
             {
               detailRow: true,
-              value: dataRow[detailsArray].reduce((r, e, i) => {
-                return i === 0
-                  ? `${titleText}${e[reducedProp]}`
-                  : `${r}, ${e[reducedProp]}`
-              }, '')
+              component:
+                detailsRow &&
+                detailsRow.component &&
+                detailsRow.component(data, dataRow)
             }
           ) && result
         )
@@ -43,7 +42,7 @@ const Body = props => {
       }
     }, [])
   }
-
+  console.log('a')
   return (
     <TableBody>
       {!detailsRow
@@ -71,14 +70,10 @@ const Body = props => {
               />
             ) : (
               <TableRow
-                style={
-                  detailsRow.rowStyles
-                    ? { ...detailsRow.rowStyles }
-                    : { background: '#eee' }
-                }
+                style={detailsRow.rowStyles && { ...detailsRow.rowStyles }}
               >
                 <TableCell key={i} colSpan={columns.length + 1}>
-                  {row.value}
+                  {row.component}
                 </TableCell>
               </TableRow>
             )
