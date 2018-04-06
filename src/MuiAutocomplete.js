@@ -22,7 +22,7 @@ export default class MuiAutocomplete extends Component {
   }
 
   render() {
-    const { filteredItems, items } = this.state
+    const { filteredItems } = this.state
     const {
       input,
       meta,
@@ -66,7 +66,7 @@ export default class MuiAutocomplete extends Component {
             }
           }}
           onStateChange={this.handleStateChange}
-          selectedItem={_.find(items, { value: input.value })}
+          selectedItem={_.find(this.props.options, { value: input.value })}
           {...this.props}
         />
         <FormHelperText>{meta && meta.error && meta.error}</FormHelperText>
