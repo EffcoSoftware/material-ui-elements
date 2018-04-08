@@ -1,7 +1,8 @@
 import React from 'react'
-import _ from 'lodash'
 import { TableBody, TableRow, TableCell } from 'material-ui/Table'
 import MuiTableRow from './TableRow'
+
+import { getDetails } from '../helpers'
 
 const Body = props => {
   const {
@@ -16,33 +17,7 @@ const Body = props => {
   if (!data) return null
 
   const tableData = fieldArray ? fields : data
-  let tableDataWithDetails = []
 
-  if (detailsRow) {
-    const { detailsArray } = detailsRow
-
-    tableDataWithDetails = data.reduce((result, dataRow) => {
-      const newOffsetIndex =
-        result.length - _.filter(result, ['detailRow', true]).length
-      if (!_.isEmpty(dataRow[detailsArray])) {
-        return (
-          result.push(
-            { ...dataRow, newOffsetIndex },
-            {
-              detailRow: true,
-              component:
-                detailsRow &&
-                detailsRow.component &&
-                detailsRow.component(data, dataRow)
-            }
-          ) && result
-        )
-      } else {
-        return result.push({ ...dataRow, newOffsetIndex }) && result
-      }
-    }, [])
-  }
-  console.log('a')
   return (
     <TableBody>
       {!detailsRow
@@ -56,12 +31,12 @@ const Body = props => {
               {...props}
             />
           ))
-        : tableDataWithDetails.map((row, i) => {
+        : getDetails(data, detailsRow).map((row, i) => {
             return !row.detailRow ? (
               <MuiTableRow
                 key={i}
                 index={row.newOffsetIndex}
-                row={row} //`${detailsRow}[${i}]`}
+                row={row}
                 hover
                 onRowClick={
                   handleRowClick ? () => handleRowClick(row.id) : null
