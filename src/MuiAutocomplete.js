@@ -15,7 +15,9 @@ export default class MuiAutocomplete extends Component {
   handleStateChange = changes => {
     if (typeof changes.inputValue === 'string') {
       const filteredItems = this.props.options.filter(item =>
-        item.text.toLowerCase().includes(changes.inputValue.toLowerCase())
+        (item.text || item.label || '')
+          .toLowerCase()
+          .includes(changes.inputValue.toLowerCase())
       )
       this.setState({ filteredItems })
     }
