@@ -35,7 +35,9 @@ class MuiExpansionPanel extends Component {
       actions,
       styles,
       active,
-      add
+      add,
+      elevation,
+      alwaysExpanded
     } = this.props
 
     if (!actions) return null
@@ -162,7 +164,10 @@ class MuiExpansionPanel extends Component {
     )
 
     return (
-      <ExpansionPanel expanded={this.state.expanded}>
+      <ExpansionPanel
+        expanded={alwaysExpanded || this.state.expanded}
+        elevation={elevation}
+      >
         {panelSummary}
         {panelDetails}
         {panelActions}
