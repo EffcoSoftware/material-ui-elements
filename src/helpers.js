@@ -1,5 +1,6 @@
 import objectParser from 'dataobject-parser'
 import _ from 'lodash'
+import width from 'text-width'
 
 export const editingWording = (
   count,
@@ -40,4 +41,25 @@ export const extractFormFieldsData = (columns, data) => {
     objectParser.transpose(x)
     return x
   })
+}
+
+export const calculateTextWidth = (
+  title = null,
+  maxChars = null,
+  defaultWidth = 100,
+  config
+) => {
+  const widthTitle = width(title || '', config)
+  const widthChars = maxChars
+    ? width(
+        Array(maxChars)
+          .fill('w')
+          .join(''),
+        config
+      )
+    : 0
+
+  return widthTitle >= widthChars
+    ? widthTitle + config.extraWidth
+    : widthChars > 0 ? widthChars + config.extraWidth : defaultWidth
 }

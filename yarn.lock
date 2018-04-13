@@ -2079,9 +2079,9 @@ ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
 
-mui-downshift@^1.0.0:
-  version "1.0.0-9"
-  resolved "https://registry.yarnpkg.com/mui-downshift/-/mui-downshift-1.0.0-9.tgz#0dc639204f67d9ef214f3a194b51978076d32efd"
+mui-downshift@^1.0.0-9:
+  version "1.0.0-11"
+  resolved "https://registry.yarnpkg.com/mui-downshift/-/mui-downshift-1.0.0-11.tgz#0a58950b8ce5a8e8e9ad38ebe2531e781f772b52"
   dependencies:
     classnames "^2.2.5"
     downshift "^1.28.0"
@@ -2801,6 +2801,12 @@ text-table@~0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
 
+text-width@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/text-width/-/text-width-1.2.0.tgz#7421680c48bf862765ce2480f7de61e3f02da102"
+  dependencies:
+    xtend "~4.0.0"
+
 through@^2.3.6:
   version "2.3.8"
   resolved "https://registry.yarnpkg.com/through/-/through-2.3.8.tgz#0dd4c9ffaabc357960b1b724115d7e0e86a2e1f5"
@@ -2910,6 +2916,6 @@ write@^0.2.1:
   dependencies:
     mkdirp "^0.5.1"
 
-xtend@^4.0.0:
+xtend@^4.0.0, xtend@~4.0.0:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/xtend/-/xtend-4.0.1.tgz#a5c6d532be656e23db820efb943a1f04998d63af"
