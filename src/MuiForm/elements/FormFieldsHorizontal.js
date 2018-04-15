@@ -8,7 +8,7 @@ import { calculateTextWidth } from '../../helpers'
 const FormFieldsHorizontal = props => {
   const { fields, fieldWidths } = props
   // const formField = !props.noRedux ? FormFieldRedux : FormField
-
+  // console.log(props)
   return (
     <Hidden xsDown>
       <div style={{ display: 'flex' }}>
@@ -18,17 +18,18 @@ const FormFieldsHorizontal = props => {
               <div
                 key={i}
                 style={{
-                  flex: fieldWidths ? undefined : 1,
+                  flex: fieldWidths && f.maxChars ? undefined : 1,
                   marginLeft: i ? 20 : 0,
                   marginRight: i === fields.length ? 5 : 0,
-                  width: fieldWidths
-                    ? calculateTextWidth(
-                        f.label,
-                        f.maxChars,
-                        100,
-                        fieldWidths.config
-                      )
-                    : undefined
+                  width:
+                    fieldWidths && f.maxChars
+                      ? calculateTextWidth(
+                          f.label,
+                          f.maxChars,
+                          100,
+                          fieldWidths.config
+                        )
+                      : undefined
                 }}
               >
                 <FormFieldRedux {...props} {...f} />
