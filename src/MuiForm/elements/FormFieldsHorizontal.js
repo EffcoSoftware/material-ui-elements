@@ -8,7 +8,6 @@ import { calculateTextWidth } from '../../helpers'
 const FormFieldsHorizontal = props => {
   const { fields, fieldWidths } = props
   // const formField = !props.noRedux ? FormFieldRedux : FormField
-  // console.log(props)
   return (
     <Hidden xsDown>
       <div style={{ display: 'flex' }}>

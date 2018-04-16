@@ -68,7 +68,7 @@ class MuiFormDrawer extends Component {
       invalid,
       actions,
       // styles,
-      active,
+      // active,
       add,
       groups,
       classes,
@@ -76,9 +76,6 @@ class MuiFormDrawer extends Component {
     } = this.props
 
     if (!actions) return null
-    // console.log(info)
-    // console.log(active)
-    // console.log(this.props)
     const { disabled, ...rest } = this.props
 
     const topActions = index => {
@@ -128,12 +125,7 @@ class MuiFormDrawer extends Component {
       </div>
     )
 
-    const drawerDetails = (
-      <drawer.component {...drawer.drawerProps} />
-      // <div>
-      //   <Typography style={{ color: '#004a6a' }}>Details</Typography>
-      // </div>
-    )
+    const drawerDetails = <drawer.component {...drawer.drawerProps} />
 
     const drawerActions = (
       <div
@@ -154,7 +146,7 @@ class MuiFormDrawer extends Component {
           <CrudButtons
             {...this.props}
             submittable={!(pristine || submitting || invalid)}
-            disabled={false} //disabled}
+            disabled={disabled}
             actions={bottomActions}
             reset={false}
             raised={true}
@@ -176,8 +168,6 @@ class MuiFormDrawer extends Component {
           }}
         >
           {groups.map((g, i) => {
-            // console.log(g)
-            // console.log(this.state.info)
             const currInfo = info && info[i]
             return (
               <div id={g.name}>
@@ -249,7 +239,7 @@ class MuiFormDrawer extends Component {
           }}
         >
           <Grid item lg={12}>
-            <Paper>{contentDetails}</Paper>
+            {contentDetails}
           </Grid>
         </Grid>
       </div>
