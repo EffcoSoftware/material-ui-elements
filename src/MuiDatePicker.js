@@ -11,6 +11,7 @@ const MuiDatePicker = props => {
     label,
     required,
     hideLabel,
+    dateFormat,
     ...rest
   } = props
 
@@ -39,11 +40,7 @@ const MuiDatePicker = props => {
       hintStyle={{ color: '#aaa' }}
       errorText={meta ? meta.touched && meta.error && meta.error : ''}
       DateTimeFormat={Intl.DateTimeFormat}
-      formatDate={
-        rest && rest.dateFormat
-          ? date => moment(date).format(rest.dateFormat)
-          : null
-      }
+      formatDate={dateFormat ? date => moment(date).format(dateFormat) : null}
       container="inline"
       underlineStyle={{ borderColor: '#999' }}
     />

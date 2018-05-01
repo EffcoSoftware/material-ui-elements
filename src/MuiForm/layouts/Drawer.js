@@ -170,7 +170,7 @@ class MuiFormDrawer extends Component {
           {groups.map((g, i) => {
             const currInfo = info && info[i]
             return (
-              <div id={g.name}>
+              <div key={g.name} id={g.name}>
                 <ToolbarTop
                   style={toolbarTopStyles && { ...toolbarTopStyles }}
                   title={(g.label && g.label.toUpperCase()) || 'Details'}
@@ -200,7 +200,7 @@ class MuiFormDrawer extends Component {
                     padding: 25
                   }}
                 >
-                  <FormFields margin={5} fields={g.fields} {...this.props} />
+                  <FormFields fields={g.fields} {...this.props} />
                 </div>
               </div>
             )
@@ -222,9 +222,9 @@ class MuiFormDrawer extends Component {
             disableBackdropClick: false
             // disableEnforceFocus: true
           }}
-          BackdropProps={{
-            style: { backgroundColor: 'rgba(0,0,0,0)' }
-          }}
+          // BackdropProps={{
+          //   style: { backgroundColor: 'rgba(0,0,0,0)' }
+          // }}
         >
           {drawerSummary}
           {drawerDetails}
@@ -235,7 +235,7 @@ class MuiFormDrawer extends Component {
           style={{
             // marginLeft: 302,
             // marginTop: 52, //143,
-            width: 'calc(100%)'
+            width: 'calc(100% + 17px)'
           }}
         >
           <Grid item lg={12}>

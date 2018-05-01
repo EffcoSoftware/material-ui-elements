@@ -38,7 +38,10 @@ const FormField = props => {
     'expanded',
     'valid',
     'invalid',
-    'initialized'
+    'initialized',
+    'fieldWidths',
+    'toolbarTopStyles',
+    'maxChars'
   ])
 
   const { add, type, text, component, label, disabled, style } = props
@@ -63,7 +66,13 @@ const FormField = props => {
     case 'typography':
       return <Typography variant={text}>{label}</Typography>
     case 'datepicker':
-      return <MuiDatePicker {...propsAdjusted} id={Math.random().toString()} />
+      return (
+        <MuiDatePicker
+          {...propsAdjusted}
+          id={Math.random().toString()}
+          dateFormat={rest && rest.dateFormat}
+        />
+      )
     case 'timepicker':
       return <MuiTimePicker {...propsAdjusted} />
     case 'table':
