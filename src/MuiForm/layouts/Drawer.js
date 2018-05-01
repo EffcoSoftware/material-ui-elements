@@ -45,6 +45,21 @@ class MuiFormDrawer extends Component {
   // }
   expandInfo(index) {
     const { info } = this.state
+    const {
+      drawer: { drawerProps }
+    } = this.props
+
+    const {
+      history: { push },
+      match: {
+        params: { id }
+      },
+      path,
+      forms
+    } = drawerProps
+
+    const formName = _.get(forms, `[${index}].name`)
+    push(`${path}${id}/${formName}?viewHistory=history`)
 
     this.setState({
       info: _.set(info, `[${index}]`, !_.get(info, `[${index}]`))
@@ -114,16 +129,19 @@ class MuiFormDrawer extends Component {
       compact: true
     }
 
-    const drawerSummary = (
-      <div style={{ width: 300, marginTop: 'calc(162px - 147px)' }}>
-        <Toolbar>
-          <Typography classes={{ root: classes.typographyRoot }} type="title">
-            {title.toUpperCase()}
-          </Typography>
-        </Toolbar>
-        {/* <Divider /> */}
-      </div>
-    )
+    const drawerSummary =
+      drawer && drawer.drawerToolbarComponent ? (
+        <drawer.drawerToolbarComponent {...drawer.drawerProps} />
+      ) : (
+        <div style={{ width: 300, marginTop: 'calc(162px - 147px)' }}>
+          <Toolbar>
+            <Typography classes={{ root: classes.typographyRoot }} type="title">
+              {title.toUpperCase()}
+            </Typography>
+          </Toolbar>
+          {/* <Divider /> */}
+        </div>
+      )
 
     const drawerDetails = <drawer.component {...drawer.drawerProps} />
 
@@ -175,16 +193,17 @@ class MuiFormDrawer extends Component {
                   style={toolbarTopStyles && { ...toolbarTopStyles }}
                   title={(g.label && g.label.toUpperCase()) || 'Details'}
                   topComponent={
-                    <CrudButtons
-                      {...this.props}
-                      submittable={!(pristine || submitting || invalid)}
-                      disabled={disabled}
-                      compact
-                      actions={topActions(i)}
-                    />
+                    _.isEmpty(_.compact(this.state.info)) && (
+                      <CrudButtons
+                        {...this.props}
+                        submittable={!(pristine || submitting || invalid)}
+                        disabled={disabled}
+                        compact
+                        actions={topActions(i)}
+                      />
+                    )
                   }
                 />
-                {/* {this.state.info && info && info.component ? ( */}
                 {currInfo &&
                 currInfo.component &&
                 g.name === currInfo.activeForm.name &&
@@ -236,9 +255,10 @@ class MuiFormDrawer extends Component {
             // marginLeft: 302,
             // marginTop: 52, //143,
             width: 'calc(100% + 17px)'
+            // height: 'calc(100% - 156px)',
           }}
         >
-          <Grid item lg={12}>
+          <Grid item xs={12}>
             {contentDetails}
           </Grid>
         </Grid>
