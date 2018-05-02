@@ -193,7 +193,8 @@ class MuiFormDrawer extends Component {
                   style={toolbarTopStyles && { ...toolbarTopStyles }}
                   title={(g.label && g.label.toUpperCase()) || 'Details'}
                   topComponent={
-                    _.isEmpty(_.compact(this.state.info)) && (
+                    _.isEmpty(_.compact(this.state.info)) &&
+                    g.name !== 'reg' && (
                       <CrudButtons
                         {...this.props}
                         submittable={!(pristine || submitting || invalid)}
