@@ -32,7 +32,12 @@ class MuiTable extends Component {
 
   render() {
     const { orderBy, order } = this.state
-    const { data, fieldArray, disabled, paper, style } = this.props
+    const { data, fieldArray, disabled, paper, style, columns } = this.props
+    const orderByColumn = _.find(columns, { name: orderBy })
+    const orderByFunction =
+      orderByColumn && orderByColumn.orderByFunction
+        ? orderByColumn.orderByFunction
+        : this.orderData
 
     return (
       <div style={style}>
@@ -48,7 +53,7 @@ class MuiTable extends Component {
             {...this.props}
             data={
               !fieldArray && orderBy
-                ? this.orderData(data, orderBy, order)
+                ? orderByFunction(data, orderBy, order)
                 : data
             }
           />
