@@ -30,7 +30,7 @@ const MuiSelectfield = props => {
     multiple ? customRenderValue || v.join(', ') : v
 
   const handleMultipleChange = (existingValues, newValue) => {
-    const values = existingValues.slice() || []
+    const values = (existingValues || []).slice() // || []
     if (values.includes(newValue)) {
       values.splice(values.indexOf(newValue), 1)
       return values
@@ -52,7 +52,7 @@ const MuiSelectfield = props => {
         {label}
       </InputLabel>
       <Select
-        value={inputValue}
+        value={inputValue || []}
         renderValue={multiple && renderValue}
         inputProps={{ placeholder: hint }}
         onChange={e => {
@@ -70,6 +70,13 @@ const MuiSelectfield = props => {
             )
           }
         }}
+        MenuProps={{
+          PaperProps: {
+            style: {
+              transform: 'translate3d(0, 0, 0)'
+            }
+          }
+        }}
         style={{ ...controlStyle, ...style }}
       >
         {options
@@ -78,7 +85,7 @@ const MuiSelectfield = props => {
               const value = _c.isExists(o.value) ? o.value : o
               const label = o.label || o
               const isSelected = multiple
-                ? inputValue.includes(value)
+                ? (inputValue || []).includes(value)
                 : inputValue === value
               const style = isSelected ? { fontWeight: '600' } : {}
               return (
