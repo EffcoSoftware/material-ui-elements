@@ -19,16 +19,17 @@ const ButtonAdd = props => {
   return (
     <div style={{ display: 'flex' }}>
       {bottomComponent && bottomComponent}
-      {newDeviceId !== -1 &&
+      {newDeviceId !== -1 && (
         <Button
           label={lang === 'pl' ? 'Dodaj nowy' : 'Add'}
           icon="add"
           action={() => {
             customAddAction && customAddAction()
-            fields.push(defaultNew || {})
+            fields.push(defaultNew === undefined ? {} : defaultNew)
           }}
           color="primary"
-        />}
+        />
+      )}
     </div>
   )
 }

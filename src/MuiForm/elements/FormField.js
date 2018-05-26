@@ -6,6 +6,7 @@ import MuiSelectfield from '../../MuiSelectfield'
 import MuiAutocomplete from '../../MuiAutocomplete'
 import MuiDatePicker from '../../MuiDatePicker'
 import MuiTimePicker from '../../MuiTimePicker'
+import MuiRadioGroup from '../../MuiRadioGroup'
 import MuiTable from '../../MuiTable'
 
 const FormField = props => {
@@ -77,6 +78,8 @@ const FormField = props => {
       return <MuiTimePicker {...propsAdjusted} />
     case 'table':
       return <MuiTable {...propsAdjusted} />
+    case 'radio':
+      return <MuiRadioGroup {...propsAdjusted} />
     default:
       return <MuiTextfield {...propsAdjusted} disabled={disabledField} />
   }

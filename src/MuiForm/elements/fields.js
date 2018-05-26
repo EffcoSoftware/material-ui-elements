@@ -9,5 +9,6 @@ export default {
   password: 'password',
   datepicker: 'datepicker',
   timepicker: 'timepicker',
-  table: 'table'
+  table: 'table',
+  radio: 'radio'
 }
