@@ -31,7 +31,7 @@ const MuiTimePicker = props => {
       }
       floatingLabelFixed
       fullWidth
-      errorText={meta && meta.touched && meta.error && meta.error}
+      errorText={meta && meta.error && meta.error} //meta.touched && meta.error && meta.error}
       underlineDisabledStyle={underlineDisabledStyle || { borderColor: '#ccc' }}
       hintText={hint}
       hintStyle={{ color: '#bbb' }}
