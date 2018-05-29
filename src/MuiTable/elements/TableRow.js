@@ -47,7 +47,7 @@ const MuiTableRow = props => {
               numeric={h.numeric}
               style={{
                 ...h.style,
-                ...(h && h.style && h.style.tableCellStyle)
+                ...h.tableCellStyle
               }}
               onClick={
                 h.onClick && !fieldArray ? () => h.onClick(row.id, value) : null
@@ -68,8 +68,10 @@ const MuiTableRow = props => {
                   onChange={h.input && h.input.onChange}
                   style={{
                     ...h.style,
-                    ...(h && h.style && h.style.formControlStyle)
+                    ...h.formControlStyle
                   }}
+                  helperTextStyle={h.helperTextStyle}
+                  floatingLabelStyle={h.floatingLabelStyle}
                 />
               ) : (
                 <Typography>{h.value ? h.value(data[i]) : data[i]}</Typography>
