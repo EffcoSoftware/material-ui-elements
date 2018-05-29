@@ -48,7 +48,13 @@ const MuiSelectfield = props => {
       error={!!(meta && meta.touched && meta.error)}
       disabled={disabled}
     >
-      <InputLabel style={floatingLabelStyle} shrink>
+      <InputLabel
+        style={{
+          ...floatingLabelStyle,
+          ...(style && style.floatingLabelStyle)
+        }}
+        shrink
+      >
         {label}
       </InputLabel>
       <Select
@@ -99,7 +105,9 @@ const MuiSelectfield = props => {
             })
           : null}
       </Select>
-      <FormHelperText>
+      <FormHelperText
+        style={style && style.helperTextStyle && { ...style.helperTextStyle }}
+      >
         {meta && meta.touched && meta.error && meta.error}
       </FormHelperText>
     </FormControl>
