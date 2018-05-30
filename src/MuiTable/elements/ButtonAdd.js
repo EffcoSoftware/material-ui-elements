@@ -1,5 +1,5 @@
 import React from 'react'
-import Typography from 'material-ui/Typography'
+// import Typography from 'material-ui/Typography'
 import Button from '../../Button'
 const ButtonAdd = props => {
   const {
@@ -19,7 +19,7 @@ const ButtonAdd = props => {
   return (
     <div style={{ display: 'flex' }}>
       {bottomComponent && bottomComponent}
-      {newDeviceId !== -1 &&
+      {newDeviceId !== -1 && (
         <Button
           label={lang === 'pl' ? 'Dodaj nowy' : 'Add'}
           icon="add"
@@ -28,7 +28,8 @@ const ButtonAdd = props => {
             fields.push(defaultNew || {})
           }}
           color="primary"
-        />}
+        />
+      )}
     </div>
   )
 }
