@@ -76,11 +76,13 @@ const MuiTableRow = props => {
               disablePadding={h.disablePadding}
               style={h.style}
               onClick={
-                h.onClick && !fieldArray ? () => h.onClick(row.id) : null
+                h.onClick && !fieldArray
+                  ? () => h.onClick(row.id, data[index])
+                  : null
               }
             >
               {h.component ? (
-                h.component(value, data[index])
+                h.component(value, data[index], index)
               ) : (
                 <Typography>{value}</Typography>
               )}
