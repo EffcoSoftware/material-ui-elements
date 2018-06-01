@@ -17,6 +17,7 @@ const MuiSelectfield = props => {
     hint,
     floatingLabelStyle,
     multiple,
+    customRenderValue,
     onChange: onChangeFromField,
     style,
     value,
@@ -25,10 +26,11 @@ const MuiSelectfield = props => {
   } = props
 
   const inputValue = input && input.value !== undefined ? input.value : value
-  const renderValue = (v = multiple ? [] : '') => (multiple ? v.join(', ') : v)
+  const renderValue = (v = multiple ? [] : '') =>
+    multiple ? customRenderValue || v.join(', ') : v
 
   const handleMultipleChange = (existingValues, newValue) => {
-    const values = existingValues.slice() || []
+    const values = existingValues.slice()
     if (values.includes(newValue)) {
       values.splice(values.indexOf(newValue), 1)
       return values
