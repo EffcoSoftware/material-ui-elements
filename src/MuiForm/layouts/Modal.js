@@ -74,6 +74,7 @@ class FormModal extends Component {
         <DialogActions style={{ margin: 12 }}>
           {actions ? (
             <CrudButtons
+              tabIndex={this.state.tabIndex}
               add={add}
               submittable={!(pristine || submitting || invalid)}
               disabled={disabled}

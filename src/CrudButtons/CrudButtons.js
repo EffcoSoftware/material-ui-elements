@@ -29,7 +29,8 @@ class CrudButtons extends Component {
       lang = 'en',
       title,
       stacked,
-      raised
+      raised,
+      tabIndex
     } = this.props
     if (!actions) return null
 
@@ -180,7 +181,7 @@ class CrudButtons extends Component {
             {actions.customButtons.buttons.map((b, i) => (
               <CrudButton
                 key={i}
-                action={b.action}
+                action={(b.onTabs || []).includes(tabIndex) && b.action}
                 raised={raised || b.raised}
                 label={b.label}
                 disabled={b.disabled}

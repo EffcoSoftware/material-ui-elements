@@ -16,7 +16,6 @@ const MuiRadioGroup = props => {
     options = [],
     margin
   } = props
-  console.log(props)
 
   return (
     <FormControl
@@ -29,23 +28,36 @@ const MuiRadioGroup = props => {
     >
       <InputLabel shrink>{label}</InputLabel>
       <div style={{ marginBottom: 15 }} />
-      <RadioGroup
-        value={input ? input.value : value}
-        onChange={e => {
-          input && input.onChange(e.target.value)
-          if (onChangeFromField) {
-            onChangeFromField(e.target.value)
-          }
-        }}
-      >
-        {options.map(o => (
-          <FormControlLabel
-            key={o.value}
-            value={o.value}
-            control={<Radio />}
-            label={o.label}
-          />
-        ))}
+      <RadioGroup value={input ? input.value : value}>
+        <div style={{ display: 'flex' }}>
+          {options.map((o, i) => (
+            <div
+              key={o.value}
+              style={{
+                flex: 1,
+                marginLeft: i ? 20 : 0,
+                marginRight: i === options.length ? 5 : 0
+              }}
+            >
+              <FormControlLabel
+                control={
+                  <Radio
+                    onChange={e => {
+                      input && input.onChange(e.target.value)
+                      if (onChangeFromField) {
+                        onChangeFromField(e.target.value)
+                      }
+                    }}
+                    value={o.value}
+                    checked={(input ? input.value : value) === o.value}
+                    color="primary"
+                  />
+                }
+                label={o.label}
+              />
+            </div>
+          ))}
+        </div>
       </RadioGroup>
       <FormHelperText>
         {meta && meta.touched && meta.error && meta.error}

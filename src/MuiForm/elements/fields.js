@@ -10,5 +10,5 @@ export default {
   datepicker: 'datepicker',
   timepicker: 'timepicker',
   table: 'table',
-  radio: 'radio'
+  radiogroup: 'radiogroup'
 }

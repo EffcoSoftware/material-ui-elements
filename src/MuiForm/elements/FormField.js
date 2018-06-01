@@ -76,10 +76,10 @@ const FormField = props => {
       )
     case 'timepicker':
       return <MuiTimePicker {...propsAdjusted} />
+    case 'radiogroup':
+      return <MuiRadioGroup {...propsAdjusted} />
     case 'table':
       return <MuiTable {...propsAdjusted} />
-    case 'radio':
-      return <MuiRadioGroup {...propsAdjusted} />
     default:
       return <MuiTextfield {...propsAdjusted} disabled={disabledField} />
   }

@@ -63,6 +63,7 @@ const MuiTableRow = props => {
                   locale={h.locale}
                   cancelLabel={h.cancelLabel}
                   onChange={h.input && h.input.onChange}
+                  customItem={h.customItem}
                 />
               ) : (
                 <Typography>{h.value ? h.value(data[i]) : data[i]}</Typography>
