@@ -1,7 +1,8 @@
 import React from 'react'
 import _ from 'lodash'
-import { TableRow, TableCell } from 'material-ui/Table'
-import Typography from 'material-ui/Typography'
+import TableRow from '@material-ui/core/TableRow'
+import TableCell from '@material-ui/core/TableCell'
+import Typography from '@material-ui/core/Typography'
 import FormFieldRedux from '../../MuiForm/elements/FormFieldRedux'
 import RowActions from './RowActions'
 
@@ -25,48 +26,53 @@ const MuiTableRow = props => {
     <TableRow
       hover={hover}
       onClick={onRowClick && !fieldArray ? () => onRowClick(row.id) : null}
-      style={{ cursor: onRowClick && !fieldArray ? 'pointer' : null }}
+      style={{
+        cursor: onRowClick && !fieldArray ? 'pointer' : null,
+        borderStyle: fieldArray && 'hidden'
+      }}
     >
-      {columns.map((h, i) => {
-        if (h.hidden) return null
-        const value = _.get(data[index], h.name)
+      {columns.map((c, i) => {
+        if (c.hidden) return null
+        const hideLabel = c.hideLabel !== undefined ? c.hideLabel : true
+        const value = _.get(data[index], c.name)
         const disabledValue =
-          h.disabled !== undefined
-            ? typeof h.disabled === 'function'
-              ? h.disabled(value, data[index])
-              : h.disabled
+          c.disabled !== undefined
+            ? typeof c.disabled === 'function'
+              ? c.disabled(value, data[index])
+              : c.disabled
             : disabled
 
-        if (h.contentHidden && h.contentHidden(value, data[index]))
+        if (c.contentHidden && c.contentHidden(value, data[index]))
           return <TableCell key={i} />
-        if (fieldArray && h.formField) {
+        if (fieldArray && c.formField) {
           return (
             <TableCell
               key={i}
-              padding={h.padding || 'dense'}
-              numeric={h.numeric}
-              style={h.style}
+              padding={c.padding || 'dense'}
+              numeric={c.numeric}
+              style={c.style}
               onClick={
-                h.onClick && !fieldArray ? () => h.onClick(row.id, value) : null
+                c.onClick && !fieldArray ? () => c.onClick(row.id, value) : null
               }
             >
-              {h.formField ? (
+              {c.formField ? (
                 <FormFieldRedux
-                  type={h.type}
-                  margin={h.margin || 'none'}
-                  name={`${fields.name}[${index}]${h.name ? '.' + h.name : ''}`}
+                  type={c.type}
+                  margin={c.margin || 'none'}
+                  name={`${fields.name}[${index}]${c.name ? '.' + c.name : ''}`}
                   disabled={!add && disabledValue}
-                  options={h.options}
-                  numeric={h.numeric}
-                  validate={h.validate}
-                  normalize={h.normalize}
-                  locale={h.locale}
-                  cancelLabel={h.cancelLabel}
-                  onChange={h.input && h.input.onChange}
-                  customItem={h.customItem}
+                  options={c.options}
+                  numeric={c.numeric}
+                  validate={c.validate}
+                  normalize={c.normalize}
+                  locale={c.locale}
+                  cancelLabel={c.cancelLabel}
+                  onChange={c.input && c.input.onChange}
+                  customItem={c.customItem}
+                  hideLabel={hideLabel}
                 />
               ) : (
-                <Typography>{h.value ? h.value(data[i]) : data[i]}</Typography>
+                <Typography>{c.value ? c.value(data[i]) : data[i]}</Typography>
               )}
             </TableCell>
           )
@@ -74,17 +80,17 @@ const MuiTableRow = props => {
           return (
             <TableCell
               key={i}
-              padding={h.padding || 'dense'}
-              numeric={h.numeric}
-              style={h.style}
+              margin={c.margin || 'none'}
+              numeric={c.numeric}
+              style={c.style}
               onClick={
-                h.onClick && !fieldArray ? () => h.onClick(row.id, value) : null
+                c.onClick && !fieldArray ? () => c.onClick(row.id, value) : null
               }
             >
-              {h.component ? (
-                h.component(value, data[index])
+              {c.component ? (
+                c.component(value, data[index])
               ) : (
-                <Typography nowrap={h.nowrap}>{value}</Typography>
+                <Typography nowrap={c.nowrap}>{value}</Typography>
               )}
             </TableCell>
           )
@@ -93,7 +99,7 @@ const MuiTableRow = props => {
       {fieldArray &&
       (!(!add && disabled) || forceShowEditButtons) &&
       !hideEditButtons ? (
-        <TableCell padding="none" style={{ width: 1 }} key={columns.length + 1}>
+        <TableCell margin="none" style={{ width: 1 }} key={columns.length + 1}>
           <RowActions {...props} />
         </TableCell>
       ) : null}

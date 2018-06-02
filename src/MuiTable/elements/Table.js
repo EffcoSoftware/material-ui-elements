@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import _ from 'lodash'
-import Table, { TableHead } from 'material-ui/Table'
+import Table from '@material-ui/core/Table'
+import TableHead from '@material-ui/core/TableHead'
 import Header from './TableHeader'
 import Body from './TableBody'
 import ButtonAdd from './ButtonAdd'

@@ -1,10 +1,11 @@
 import React from 'react'
-import Select from 'material-ui/Select'
+import Select from '@material-ui/core/Select'
 import _c from 'lodash-checkit'
-import { InputLabel } from 'material-ui/Input'
-import Checkbox from 'material-ui/Checkbox'
-import { FormControl, FormHelperText } from 'material-ui/Form'
-import { MenuItem } from 'material-ui/Menu'
+import InputLabel from '@material-ui/core/InputLabel'
+import Checkbox from '@material-ui/core/Checkbox'
+import FormControl from '@material-ui/core/FormControl'
+import FormHelperText from '@material-ui/core/FormHelperText'
+import MenuItem from '@material-ui/core/MenuItem'
 import { controlStyle } from './constants'
 
 const MuiSelectfield = props => {
@@ -22,7 +23,8 @@ const MuiSelectfield = props => {
     style,
     value,
     required,
-    margin
+    margin,
+    hideLabel
   } = props
 
   const inputValue = input && input.value !== undefined ? input.value : value
@@ -48,9 +50,11 @@ const MuiSelectfield = props => {
       error={!!(meta && meta.touched && meta.error)}
       disabled={disabled}
     >
-      <InputLabel style={floatingLabelStyle} shrink>
-        {label}
-      </InputLabel>
+      {!hideLabel && (
+        <InputLabel style={floatingLabelStyle} shrink>
+          {label}
+        </InputLabel>
+      )}
       <Select
         value={inputValue}
         renderValue={multiple && renderValue}

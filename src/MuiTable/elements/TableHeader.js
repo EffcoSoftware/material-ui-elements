@@ -1,5 +1,7 @@
 import React from 'react'
-import { TableRow, TableCell, TableSortLabel } from 'material-ui/Table'
+import TableRow from '@material-ui/core/TableRow'
+import TableCell from '@material-ui/core/TableCell'
+import TableSortLabel from '@material-ui/core/TableSortLabel'
 
 const TableHeader = ({
   columns,

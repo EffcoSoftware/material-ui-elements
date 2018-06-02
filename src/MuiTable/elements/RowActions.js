@@ -1,6 +1,6 @@
 import React from 'react'
-import Icon from 'material-ui/Icon'
-import IconButton from 'material-ui/IconButton'
+import Icon from '@material-ui/core/Icon'
+import IconButton from '@material-ui/core/IconButton'
 
 const RowActions = props => {
   const { fields, index, rowActions, disabled } = props

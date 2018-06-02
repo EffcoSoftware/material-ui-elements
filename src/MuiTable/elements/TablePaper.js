@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import _ from 'lodash'
-import Paper from 'material-ui/Paper'
+import Paper from '@material-ui/core/Paper'
 import Table from './Table'
 import ToolbarTop from './ToolbarTop'
 import ToolbarBottom from './ToolbarBottom'

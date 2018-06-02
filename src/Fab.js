@@ -1,6 +1,6 @@
 import React from 'react'
-import Button from 'material-ui/Button'
-import Icon from 'material-ui/Icon'
+import Button from '@material-ui/core/Button'
+import Icon from '@material-ui/core/Icon'
 
 const styles = {
   zIndex: 1,
@@ -17,7 +17,7 @@ const Fab = ({ onClick, color, style }) => (
     variant="fab"
     color={color || 'primary'}
     style={style ? Object.assign({}, styles, style) : styles}
-    onTouchTap={onClick}
+    onClick={onClick}
   >
     <Icon>add</Icon>
   </Button>

@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
-import Dialog, { DialogActions, DialogContent } from 'material-ui/Dialog'
-import AppBar from 'material-ui/AppBar'
-import Toolbar from 'material-ui/Toolbar'
-import Typography from 'material-ui/Typography'
-import Divider from 'material-ui/Divider'
-import Tabs, { Tab } from 'material-ui/Tabs'
+import Dialog from '@material-ui/core/Dialog'
+import DialogActions from '@material-ui/core/DialogActions'
+import DialogContent from '@material-ui/core/DialogContent'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import Typography from '@material-ui/core/Typography'
+import Divider from '@material-ui/core/Divider'
+import Tabs from '@material-ui/core/Tabs'
+import Tab from '@material-ui/core/Tab'
 import FormFields from '../elements/FormFields'
 import CrudButtons from '../../CrudButtons'
 
@@ -30,7 +33,7 @@ class FormModal extends Component {
         open={open}
         maxWidth="md"
         fullWidth
-        onClose={actions.cancel.action || actions.cancel}
+        onClose={actions.cancel && (actions.cancel.action || actions.cancel)}
       >
         <AppBar
           position="static"

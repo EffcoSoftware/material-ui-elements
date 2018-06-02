@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import MuiDownshift from 'mui-downshift'
 import _ from 'lodash'
-import { FormControl, FormHelperText } from 'material-ui/Form'
-import { ListItem } from 'material-ui/List'
+import InputLabel from '@material-ui/core/InputLabel'
+import FormControl from '@material-ui/core/FormControl'
+import FormHelperText from '@material-ui/core/FormHelperText'
+import ListItem from '@material-ui/core/ListItem'
 import { controlStyle } from './constants'
 
 export default class MuiAutocomplete extends Component {
@@ -37,7 +39,8 @@ export default class MuiAutocomplete extends Component {
       onChange: onChangeFromField,
       style,
       customItem,
-      value
+      value,
+      hideLabel
     } = this.props
 
     const inputValue = (input && input.value) || value
@@ -50,18 +53,22 @@ export default class MuiAutocomplete extends Component {
         error={!!(meta && meta.error)}
         disabled={disabled}
       >
-        <div />
+        {!hideLabel && (
+          <InputLabel style={floatingLabelStyle} shrink>
+            {label}
+          </InputLabel>
+        )}
         <MuiDownshift
           getInputProps={() => ({
             disabled,
             error: !!(meta && meta.error),
-            label: label,
-            labelProps: {
-              error: !!(meta && meta.error),
-              style: { floatingLabelStyle },
-              shrink: true,
-              required
-            },
+            // label: label,
+            // labelProps: {
+            //   error: !!(meta && meta.error),
+            //   style: { floatingLabelStyle },
+            //   shrink: true,
+            //   required
+            // },
             style: { ...controlStyle, ...style }
           })}
           margin={margin || 'normal'}

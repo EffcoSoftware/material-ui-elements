@@ -1,11 +1,11 @@
 import React from 'react'
 import _ from 'lodash'
 // import MuiTextField from '../../MuiTextfield'
-import Menu, { MenuItem } from 'material-ui/Menu'
-import IconButton from 'material-ui/IconButton'
-import MoreVertIcon from 'material-ui-icons/MoreVert'
-import Divider from 'material-ui/Divider'
-import SelectedIcon from 'material-ui-icons/Done'
+import Menu, { MenuItem } from '@material-ui/core/Menu'
+import IconButton from '@material-ui/core/IconButton'
+import MoreVertIcon from 'mdi-material-ui/ChevronDown'
+import Divider from '@material-ui/core/Divider'
+import SelectedIcon from 'mdi-material-ui/Check'
 
 const ITEM_HEIGHT = 48
 const ITEM_ROWS = 8.5
@@ -92,7 +92,8 @@ const OptionsMenu = props => {
                             value: 0
                           },
                           'filter'
-                        )}
+                        )
+                  }
                 >
                   {'All'}
                 </MenuItem>
@@ -130,7 +131,8 @@ const OptionsMenu = props => {
                                 value: option.id
                               },
                               'filter'
-                            )}
+                            )
+                      }
                     >
                       {option.label}
                     </MenuItem>

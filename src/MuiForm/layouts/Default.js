@@ -1,5 +1,5 @@
 import React from 'react'
-import Hidden from 'material-ui/Hidden'
+import Hidden from '@material-ui/core/Hidden'
 import Basic from './Basic'
 import Modal from './Modal'
 

@@ -3,10 +3,10 @@ import ExpansionPanel, {
   ExpansionPanelSummary,
   ExpansionPanelDetails,
   ExpansionPanelActions
-} from 'material-ui/ExpansionPanel'
-import Typography from 'material-ui/Typography'
-// import Divider from 'material-ui/Divider'
-import Icon from 'material-ui/Icon'
+} from '@material-ui/core/ExpansionPanel'
+import Typography from '@material-ui/core/Typography'
+// import Divider from '@material-ui/core/Divider'
+import Icon from '@material-ui/core/Icon'
 import FormFields from '../elements/FormFields'
 import CrudButtons from '../../CrudButtons'
 

@@ -1,43 +1,39 @@
 import React from 'react'
-import TimePicker from 'material-ui-effco/TimePicker'
+import TimePicker from 'material-ui-pickers/TimePicker'
+import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider'
+import MomentUtils from 'material-ui-pickers/utils/moment-utils'
+import MuiTextfield from './MuiTextfield'
 
 const MuiTimePicker = props => {
   const {
     input,
     meta,
     format,
-    underlineDisabledStyle,
-    label,
-    onChange,
-    required,
-    minutesStep,
-    hint,
-    hideLabel,
+    onChange: onChangeFromField,
+    value,
     ...rest
   } = props
 
+  const inputValue = (input && input.value) || value
   return (
-    <TimePicker
-      onChange={(e, time) => {
-        input.onChange(time)
-        if (onChange) onChange(time)
-      }}
-      autoOk
-      {...rest}
-      value={input && input.value && new Date(input.value)}
-      format={format || '24hr'}
-      floatingLabelText={
-        !hideLabel && label ? `${label}${required ? ' *' : ''}` : ''
-      }
-      floatingLabelFixed
-      fullWidth
-      errorText={meta && meta.error && meta.error} //meta.touched && meta.error && meta.error}
-      underlineDisabledStyle={underlineDisabledStyle || { borderColor: '#ccc' }}
-      hintText={hint}
-      hintStyle={{ color: '#bbb' }}
-      minutesStep={minutesStep || 5}
-      underlineStyle={{ borderColor: '#999' }}
-    />
+    <MuiPickersUtilsProvider utils={MomentUtils}>
+      <TimePicker
+        onChange={e => {
+          input && input.onChange(e)
+          if (onChangeFromField) {
+            onChangeFromField(e)
+          }
+        }}
+        autoOk
+        {...rest}
+        value={inputValue || null}
+        format={format || 'HH:mm'}
+        ampm={false}
+        fullWidth
+        underlineStyle={{ borderColor: '#999' }}
+        TextFieldComponent={MuiTextfield}
+      />
+    </MuiPickersUtilsProvider>
   )
 }
 

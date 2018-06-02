@@ -1,7 +1,7 @@
 import React from 'react'
-import Toolbar from 'material-ui/Toolbar'
+import Toolbar from '@material-ui/core/Toolbar'
 import Search from './Search'
-import Typography from 'material-ui/Typography'
+import Typography from '@material-ui/core/Typography'
 import OptionsMenu from './OptionsMenu'
 
 const TopToolbar = props => {

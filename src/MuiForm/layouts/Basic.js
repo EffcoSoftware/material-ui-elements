@@ -1,5 +1,5 @@
 import React from 'react'
-import Drawer from 'material-ui/Drawer'
+import Drawer from '@material-ui/core/Drawer'
 import FormPapers from '../elements/FormPapers'
 import FormPaper from '../elements/FormPaper'
 import CrudButtons from '../../CrudButtons'

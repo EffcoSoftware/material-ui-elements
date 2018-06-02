@@ -1,6 +1,6 @@
 import React from 'react'
 import _ from 'lodash'
-import Typography from 'material-ui/Typography'
+import Typography from '@material-ui/core/Typography'
 import MuiTextfield from '../../MuiTextfield'
 import MuiSelectfield from '../../MuiSelectfield'
 import MuiAutocomplete from '../../MuiAutocomplete'

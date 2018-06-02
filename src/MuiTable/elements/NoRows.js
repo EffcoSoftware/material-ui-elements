@@ -1,5 +1,6 @@
 import React from 'react'
-import { TableRow, TableCell } from 'material-ui'
+import TableRow from '@material-ui/core/TableRow'
+import TableCell from '@material-ui/core/TableCell'
 
 export default ({
   text = 'Brak rekordów o podanych parametrach...',

@@ -1,5 +1,5 @@
 import React from 'react'
-import Hidden from 'material-ui/Hidden'
+import Hidden from '@material-ui/core/Hidden'
 // import FormField from './FormField'
 import FormFieldRedux from './FormFieldRedux'
 

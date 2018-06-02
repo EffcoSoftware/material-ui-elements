@@ -1,49 +1,43 @@
 import React from 'react'
-import DatePicker from 'material-ui-effco/DatePicker'
-import moment from 'moment'
+import DatePicker from 'material-ui-pickers/DatePicker'
+import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider'
+import MomentUtils from 'material-ui-pickers/utils/moment-utils'
+import MuiTextfield from './MuiTextfield'
 
 const MuiDatePicker = props => {
   const {
     locale,
     cancelLabel,
     input,
-    meta,
-    label,
-    required,
-    hideLabel,
-    dateFormat,
+    onChange: onChangeFromField,
+    format,
+    value,
     ...rest
   } = props
 
+  const inputValue = (input && input.value) || value
+
   return (
-    <DatePicker
-      onChange={(e, date) => input.onChange(date)}
-      autoOk
-      {...rest}
-      floatingLabelText={
-        !hideLabel && label ? `${label}${required ? ' *' : ''}` : ''
-      }
-      locale={locale}
-      cancelLabel={cancelLabel}
-      floatingLabelStyle={
-        input && input.floatingLabelStyle
-          ? input.floatingLabelStyle
-          : rest && rest.floatingLabelStyle
-            ? rest.floatingLabelStyle
-            : undefined
-      }
-      floatingLabelFixed
-      value={input.value ? new Date(input.value) : null}
-      underlineDisabledStyle={
-        rest.underlineDisabledStyle || { borderColor: '#ccc' }
-      }
-      hintStyle={{ color: '#aaa' }}
-      errorText={meta ? meta.touched && meta.error && meta.error : ''}
-      DateTimeFormat={Intl.DateTimeFormat}
-      formatDate={dateFormat ? date => moment(date).format(dateFormat) : null}
-      container="inline"
-      underlineStyle={{ borderColor: '#999' }}
-    />
+    <MuiPickersUtilsProvider utils={MomentUtils}>
+      <DatePicker
+        onChange={e => {
+          input && input.onChange(e)
+          if (onChangeFromField) {
+            onChangeFromField(e)
+          }
+        }}
+        autoOk
+        {...rest}
+        locale={locale}
+        cancelLabel={cancelLabel}
+        value={inputValue || null}
+        hintStyle={{ color: '#aaa' }}
+        format={format || 'DD/MM/YYYY'}
+        fullWidth
+        underlineStyle={{ borderColor: '#999' }}
+        TextFieldComponent={MuiTextfield}
+      />
+    </MuiPickersUtilsProvider>
   )
 }
 export default MuiDatePicker

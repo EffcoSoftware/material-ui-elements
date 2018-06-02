@@ -1,7 +1,9 @@
 import React from 'react'
-import Input, { InputLabel } from 'material-ui/Input'
-import { FormControl, FormHelperText } from 'material-ui/Form'
-import { InputAdornment } from 'material-ui/Input'
+import Input from '@material-ui/core/Input'
+import InputLabel from '@material-ui/core/InputLabel'
+import FormControl from '@material-ui/core/FormControl'
+import FormHelperText from '@material-ui/core/FormHelperText'
+import InputAdornment from '@material-ui/core/InputAdornment'
 import { controlStyle } from './constants'
 
 const MuiTextfield = props => {
@@ -20,7 +22,9 @@ const MuiTextfield = props => {
     required,
     onChange: onChangeFromField,
     value,
-    margin
+    margin,
+    onClick,
+    hideLabel
   } = props
 
   return (
@@ -32,10 +36,13 @@ const MuiTextfield = props => {
       required={required}
       disabled={disabled}
     >
-      <InputLabel style={floatingLabelStyle} shrink>
-        {label}
-      </InputLabel>
+      {!hideLabel && (
+        <InputLabel style={floatingLabelStyle} shrink>
+          {label}
+        </InputLabel>
+      )}
       <Input
+        onClick={onClick && onClick}
         {...input}
         value={input ? input.value : value}
         onChange={e => {

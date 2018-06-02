@@ -1,6 +1,6 @@
 import React from 'react'
-import Button from 'material-ui/Button'
-import Icon from 'material-ui/Icon'
+import Button from '@material-ui/core/Button'
+import Icon from '@material-ui/core/Icon'
 
 export default props => {
   const { action, icon, label, ...rest } = props
