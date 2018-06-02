@@ -16,6 +16,7 @@ const MuiSelectfield = props => {
     meta,
     hint,
     floatingLabelStyle,
+    helperTextStyle,
     multiple,
     customRenderValue,
     onChange: onChangeFromField,
@@ -99,7 +100,7 @@ const MuiSelectfield = props => {
             })
           : null}
       </Select>
-      <FormHelperText>
+      <FormHelperText style={helperTextStyle}>
         {meta && meta.touched && meta.error && meta.error}
       </FormHelperText>
     </FormControl>
