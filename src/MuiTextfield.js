@@ -37,7 +37,7 @@ export default props => {
         fullWidth
         multiLine={!!rows}
         rows={rows}
-        errorText={meta ? meta.error && meta.error : ''} //meta.touched &&
+        errorText={meta ? meta.error && meta.touched && meta.error : ''}
         underlineShow={underlineShow}
         underlineDisabledStyle={
           underlineDisabledStyle || { borderColor: '#ccc' }
