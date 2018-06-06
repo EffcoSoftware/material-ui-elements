@@ -24,7 +24,8 @@ const MuiTextfield = props => {
     value,
     margin,
     onClick,
-    hideLabel
+    hideLabel,
+    helperText
   } = props
 
   return (
@@ -65,7 +66,7 @@ const MuiTextfield = props => {
         }
       />
       <FormHelperText>
-        {meta && meta.touched && meta.error && meta.error}
+        {helperText || (meta && meta.touched && meta.error && meta.error)}
       </FormHelperText>
     </FormControl>
   )

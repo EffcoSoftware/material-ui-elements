@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography'
 import Divider from '@material-ui/core/Divider'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
+import LinearProgress from '@material-ui/core/LinearProgress'
 import FormFields from '../elements/FormFields'
 import CrudButtons from '../../CrudButtons'
 
@@ -25,7 +26,8 @@ class FormModal extends Component {
       groups,
       fields,
       actions,
-      open
+      open,
+      loading
     } = this.props
 
     return (
@@ -73,6 +75,7 @@ class FormModal extends Component {
             <FormFields fields={fields} {...this.props} />
           )}
         </DialogContent>
+        {loading && <LinearProgress />}
         {actions && <Divider />}
         <DialogActions style={{ margin: 12 }}>
           {actions ? (

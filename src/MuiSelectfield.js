@@ -24,7 +24,8 @@ const MuiSelectfield = props => {
     value,
     required,
     margin,
-    hideLabel
+    hideLabel,
+    helperText
   } = props
 
   const inputValue = input && input.value !== undefined ? input.value : value
@@ -104,7 +105,7 @@ const MuiSelectfield = props => {
           : null}
       </Select>
       <FormHelperText>
-        {meta && meta.touched && meta.error && meta.error}
+        {helperText || (meta && meta.touched && meta.error && meta.error)}
       </FormHelperText>
     </FormControl>
   )

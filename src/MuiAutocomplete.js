@@ -62,13 +62,13 @@ export default class MuiAutocomplete extends Component {
           getInputProps={() => ({
             disabled,
             error: !!(meta && meta.error),
-            // label: label,
-            // labelProps: {
-            //   error: !!(meta && meta.error),
-            //   style: { floatingLabelStyle },
-            //   shrink: true,
-            //   required
-            // },
+            label: label,
+            labelProps: {
+              error: !!(meta && meta.error),
+              style: { floatingLabelStyle },
+              shrink: true,
+              required
+            },
             style: { ...controlStyle, ...style }
           })}
           margin={margin || 'normal'}
