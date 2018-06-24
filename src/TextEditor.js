@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactQuill from 'react-quill';
 
-const TextEditor = ({ input }) => (
-      <ReactQuill onChange={input.onChange} value={input.value} />
+const TextEditor = ({ input, style }) => (
+      <ReactQuill {...input} onChange={input.onChange} style={style}/>
     )
 
 export default TextEditor
