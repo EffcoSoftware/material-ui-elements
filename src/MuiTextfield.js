@@ -29,6 +29,7 @@ const MuiTextfield = props => {
       error={!!(meta && meta.touched && meta.error)}
       rows={rows}
       fullWidth
+        errorText={meta ? meta.error && meta.touched && meta.error : ''}
       required={required}
       disabled={disabled}
     >

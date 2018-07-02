@@ -87,11 +87,13 @@ const MuiTableRow = props => {
               numeric={h.numeric}
               style={h.style}
               onClick={
-                h.onClick && !fieldArray ? () => h.onClick(row.id, value) : null
+                h.onClick && !fieldArray
+                  ? () => h.onClick(row.id, data[index])
+                  : null
               }
             >
               {h.component ? (
-                h.component(value, data[index])
+                h.component(value, data[index], index)
               ) : (
                 <Typography nowrap={h.nowrap}>{value}</Typography>
               )}
