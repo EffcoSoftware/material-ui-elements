@@ -37,6 +37,17 @@ const MuiTableRow = props => {
               : h.disabled
             : disabled
 
+        const fieldName = `${fields.name}[${index}]${
+          h.name ? '.' + h.name : ''
+        }`
+
+        console.log(props)
+
+        const validateRow =
+          h.validate !== undefined
+            ? h.validate(value, props.deal, props, fieldName)
+            : undefined
+
         if (h.contentHidden && h.contentHidden(value, data[index]))
           return <TableCell key={i} />
         if (fieldArray && h.formField) {
@@ -58,7 +69,7 @@ const MuiTableRow = props => {
                   disabled={!add && disabledValue}
                   options={h.options}
                   numeric={h.numeric}
-                  validate={h.validate}
+                  validate={validateRow} //h.validate}
                   normalize={h.normalize}
                   onChange={h.input && h.input.onChange}
                 />
