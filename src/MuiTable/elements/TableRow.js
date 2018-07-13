@@ -37,16 +37,9 @@ const MuiTableRow = props => {
               : h.disabled
             : disabled
 
-        const fieldName = `${fields.name}[${index}]${
-          h.name ? '.' + h.name : ''
-        }`
-
-        console.log(props)
-
-        const validateRow =
-          h.validate !== undefined
-            ? h.validate(value, props.deal, props, fieldName)
-            : undefined
+        const fieldName = h.formField
+          ? `${fields.name}[${index}]${h.name ? '.' + h.name : ''}`
+          : undefined
 
         if (h.contentHidden && h.contentHidden(value, data[index]))
           return <TableCell key={i} />
@@ -65,11 +58,13 @@ const MuiTableRow = props => {
               {h.formField ? (
                 <FormFieldRedux
                   type={h.type}
-                  name={`${fields.name}[${index}]${h.name ? '.' + h.name : ''}`}
+                  name={fieldName} //`${fields.name}[${index}]${h.name ? '.' + h.name : ''}`}
                   disabled={!add && disabledValue}
                   options={h.options}
                   numeric={h.numeric}
-                  validate={validateRow} //h.validate}
+                  validate={
+                    h.validate && _.partial(h.validate, _, _, _, fieldName)
+                  }
                   normalize={h.normalize}
                   onChange={h.input && h.input.onChange}
                 />
