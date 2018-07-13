@@ -45,6 +45,7 @@ const Body = props => {
               />
             ) : (
               <TableRow
+                key={i}
                 style={detailsRow.rowStyles && { ...detailsRow.rowStyles }}
               >
                 <TableCell key={i} colSpan={columns.length + 1}>
