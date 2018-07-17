@@ -62,7 +62,15 @@ const MuiTableRow = props => {
                   normalize={h.normalize}
                   locale={h.locale}
                   cancelLabel={h.cancelLabel}
-                  onChange={h.input && h.input.onChange}
+                  onChange={
+                    h.input &&
+                    h.input.onChange &&
+                    _.partial(
+                      h.input.onChange,
+                      _,
+                      `${fields.name}[${index}]${h.name ? '.' + h.name : ''}`
+                    )
+                  }
                   customItem={h.customItem}
                 />
               ) : (
