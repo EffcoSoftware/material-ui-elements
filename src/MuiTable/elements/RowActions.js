@@ -3,14 +3,25 @@ import Icon from 'material-ui/Icon'
 import IconButton from 'material-ui/IconButton'
 
 const RowActions = props => {
-  const { fields, index, rowActions, disabled, customDeleteAction } = props
+  const {
+    fields,
+    index,
+    rowActions,
+    disabled,
+    customDeleteAction,
+    onAction,
+    data
+  } = props
   return (
     <div>
       {rowActions
         ? rowActions.map(a => (
             <IconButton
               key={a.icon}
-              onClick={() => a.action(index)}
+              onClick={() => {
+                a.action(index)
+                onAction && onAction(data.filter((f, i) => i !== index))
+              }}
               style={{ display: !!a.forceShow ? '' : disabled ? 'none' : '' }}
             >
               <Icon>{a.icon}</Icon>
@@ -21,6 +32,7 @@ const RowActions = props => {
         onClick={() => {
           customDeleteAction && customDeleteAction(index)
           fields.remove(index)
+          onAction && onAction(data.filter((f, i) => i !== index))
         }}
         style={{ display: disabled ? 'none' : '' }}
       >
