@@ -11,5 +11,6 @@ export default {
   timepicker: 'timepicker',
   table: 'table',
   radiogroup: 'radiogroup',
-  texteditor: 'texteditor'
+  texteditor: 'texteditor',
+  checkbox: 'checkbox'
 }
