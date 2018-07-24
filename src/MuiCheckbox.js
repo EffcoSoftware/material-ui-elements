@@ -1,11 +1,9 @@
 import React from 'react'
 import { FormControl, FormControlLabel, FormHelperText } from 'material-ui/Form'
 import { InputLabel } from 'material-ui/Input'
-import IconButton from 'material-ui/IconButton'
-import Typography from 'material-ui/Typography'
+import Tooltip from 'material-ui/Tooltip'
 import Icon from 'material-ui/Icon'
 import Checkbox from 'material-ui/Checkbox'
-import { controlStyle } from './constants'
 
 const MuiCheckbox = props => {
   const {
@@ -16,37 +14,82 @@ const MuiCheckbox = props => {
     iconButton,
     icon,
     checkedIcon,
+    indeterminate,
+    indeterminateIcon,
     text,
+    disableRipple,
+    tooltip,
+    tooltipPlacement,
     rows,
     required,
     onChange: onChangeFromField,
     value,
     style,
-    margin
+    margin,
+    compact,
+    ...rest
   } = props
 
+  const palette = rest && rest.theme && rest.theme.palette
+
   const localStyle = {
-    checkedColor: 'rgb(244, 67, 54)',
-    disabledColor: 'rgba(0, 0, 0, 0.87)'
+    checkedColor: (palette && palette.primary1Color) || 'rgb(244, 67, 54)',
+    disabledColor: (palette && palette.disabledColor) || 'rgb(97, 97, 97)'
   }
-  console.log(props)
+
   const checkBoxValue = input ? !!input.value : !!value
 
   const checkboxComponent = !iconButton && (
-    <Checkbox
-      onChange={(e, v) => {
-        console.log(v, e.target, e.target.value)
-        input && input.onChange(v)
-        if (onChangeFromField) {
-          onChangeFromField(v)
+    <Tooltip
+      disableHoverListener={true}
+      disableFocusListener={true}
+      disableTouchListener={true}
+      // PopperProps={{ style: { transform: 'translate3d(-6px, 35px, 0px)' } }}
+      PopperProps={{
+        style: {
+          position: 'relative',
+          transform: 'translate3d(0px, -15px, 0px)',
+          textAlign: 'center'
         }
       }}
-      // value={checkBoxValue}
-      checked={checkBoxValue}
-      icon={icon && <Icon>{icon} </Icon>}
-      checkedIcon={checkedIcon && <Icon>{checkedIcon} </Icon>}
-      color="primary"
-    />
+      style={{ height: 48 }}
+      title={tooltip ? (checkBoxValue ? 'Tak' : 'Nie') : ''}
+      placement={tooltipPlacement || 'bottom-start'}
+    >
+      <div>
+        <Checkbox
+          style={{
+            color: checkBoxValue
+              ? localStyle.checkedColor
+              : localStyle.disabledColor,
+            ...style
+          }}
+          onChange={(e, v) => {
+            console.log(v, e.target, e.target.value)
+            input && input.onChange(v)
+            if (onChangeFromField) {
+              onChangeFromField(v)
+            }
+          }}
+          // value={checkBoxValue}
+          checked={checkBoxValue}
+          icon={icon && <Icon>{icon} </Icon>}
+          checkedIcon={
+            checkedIcon ? (
+              <Icon>{checkedIcon} </Icon>
+            ) : (
+              icon && <Icon>{icon} </Icon>
+            )
+          }
+          indeterminateIcon={
+            indeterminateIcon && <Icon>{indeterminateIcon} </Icon>
+          }
+          indeterminate={indeterminate}
+          disableRipple={disableRipple}
+          color="primary"
+        />
+      </div>
+    </Tooltip>
   )
 
   return (
@@ -57,37 +100,14 @@ const MuiCheckbox = props => {
       fullWidth
       required={required}
       disabled={disabled}
+      style={{
+        alignItems: 'center'
+      }}
     >
       <InputLabel shrink>{label}</InputLabel>
-      <div style={{ marginBottom: 15 }} />
+      {!compact && <div style={{ marginBottom: 15 }} />}
 
-      {iconButton ? (
-        <IconButton
-          tooltip={iconButton.tooltip || ''} //?  value ? 'Tak' : 'Nie' : ''}
-          disableTouchRipple={disabled}
-          style={{
-            ...controlStyle,
-            ...style,
-            color:
-              (input ? input.value : value) === value
-                ? localStyle.checkedColor
-                : localStyle.disabledColor
-          }}
-          hoveredStyle={{ cursor: disabled ? 'auto' : 'pointer' }}
-          onClick={e => {
-            input && input.onChange(e.target.value)
-          }}
-          //   !disabled
-          //     ? props.onClick ||
-          //       (() => this.props.change('MuiForm', 'continuation', !value))
-          //     : () => {
-          //         return undefined
-          //       }
-          // }
-        >
-          <Icon>{iconButton.icon || 'block'}</Icon>
-        </IconButton>
-      ) : text ? (
+      {text ? (
         <FormControlLabel control={checkboxComponent} label={text} />
       ) : (
         checkboxComponent
