@@ -44,7 +44,6 @@ const MuiCheckbox = props => {
       disableHoverListener={true}
       disableFocusListener={true}
       disableTouchListener={true}
-      // PopperProps={{ style: { transform: 'translate3d(-6px, 35px, 0px)' } }}
       PopperProps={{
         style: {
           position: 'relative',
@@ -65,7 +64,6 @@ const MuiCheckbox = props => {
             ...style
           }}
           onChange={(e, v) => {
-            console.log(v, e.target, e.target.value)
             input && input.onChange(v)
             if (onChangeFromField) {
               onChangeFromField(v)
