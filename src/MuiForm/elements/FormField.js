@@ -3,6 +3,7 @@ import Typography from 'material-ui/Typography'
 import MuiTextfield from '../../MuiTextfield'
 import MuiSelectfield from '../../MuiSelectfield'
 import MuiAutocomplete from '../../MuiAutocomplete'
+// import CrudButtons from '../../CrudButtons'
 
 const FormField = props => {
   const {
@@ -72,6 +73,12 @@ const FormField = props => {
       return component
     case 'typography':
       return <Typography type={text}>{label}</Typography>
+    // case 'crud':
+    //   return (
+    //     <div style={{ margin: 12 }}>
+    //       <CrudButtons {...props} />
+    //     </div>
+    //   )
     default:
       return (
         <MuiTextfield

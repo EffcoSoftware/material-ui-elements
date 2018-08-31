@@ -24,11 +24,7 @@ export default ({
         color={color}
         dense={compact}
       >
-        {icon
-          ? <Icon style={{ marginRight: 5 }}>
-              {icon}
-            </Icon>
-          : null}
+        {icon ? <Icon style={{ marginRight: 5 }}>{icon}</Icon> : null}
         {label}
       </Button>
     )

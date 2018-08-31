@@ -6,5 +6,6 @@ export default {
   spacer: 'spacer',
   component: 'component',
   autocomplete: 'autocomplete',
+  crud: 'crud',
   password: 'password'
 }

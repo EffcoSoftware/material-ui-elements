@@ -16,38 +16,41 @@ const FormPaper = props => {
     invalid,
     title,
     fields,
-    actions
+    actions,
+    customLayout
   } = props
+
   const formLabel = label || title || ''
   return (
     <Paper>
-      {formLabel
-        ? <Toolbar>
-            <Typography type="title">
-              {formLabel}
-            </Typography>
-          </Toolbar>
-        : null}
+      {formLabel ? (
+        <Toolbar>
+          <Typography type="title">{formLabel}</Typography>
+        </Toolbar>
+      ) : null}
       <FormFields fields={fieldsGroup || fields} {...props} />
-      {!fieldsGroup
-        ? <div
-            style={{
-              marginLeft: 24,
-              marginRight: 24,
-              marginTop: 24,
-              paddingBottom: 12
-            }}
-          >
-            {!actions.drawer &&
+      {!fieldsGroup ? (
+        <div
+          style={{
+            marginLeft: 24,
+            marginRight: 24,
+            marginTop: 24,
+            paddingBottom: 12
+          }}
+        >
+          {!customLayout &&
+            actions &&
+            !actions.drawer && (
               <CrudButtons
                 add={add}
                 submittable={!(pristine || submitting || invalid)}
                 disabled={disabled}
                 actions={actions}
                 {...props}
-              />}
-          </div>
-        : null}
+              />
+            )}
+        </div>
+      ) : null}
     </Paper>
   )
 }

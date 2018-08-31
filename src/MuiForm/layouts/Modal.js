@@ -28,7 +28,10 @@ const FormModal = props => {
     <Dialog
       open={open}
       maxWidth="lg"
-      onRequestClose={actions.cancel.action || actions.cancel}
+      onRequestClose={
+        (actions && actions.cancel && actions.cancel.action) ||
+        (actions && actions.cancel)
+      }
     >
       <AppBar
         style={{
@@ -44,9 +47,7 @@ const FormModal = props => {
             </IconButton>*/}
           <div style={{ flex: 1 }} />
           <Typography type="title" color="inherit">
-            <div style={{ color: 'white' }}>
-              {title || 'Details'}
-            </div>
+            <div style={{ color: 'white' }}>{title || 'Details'}</div>
           </Typography>
           <div style={{ flex: 1 }} />
           {/*<IconButton>
@@ -60,20 +61,22 @@ const FormModal = props => {
           overflow: 'auto'
         }}
       >
-        {groups
-          ? <FormTabs {...props} />
-          : <FormFields fields={fields} {...props} />}
+        {groups ? (
+          <FormTabs {...props} />
+        ) : (
+          <FormFields fields={fields} {...props} />
+        )}
       </div>
       <DialogActions>
-        {actions
-          ? <CrudButtons
-              add={add}
-              submittable={!(pristine || submitting || invalid)}
-              disabled={disabled}
-              actions={actions}
-              {...props}
-            />
-          : null}
+        {actions ? (
+          <CrudButtons
+            add={add}
+            submittable={!(pristine || submitting || invalid)}
+            disabled={disabled}
+            actions={actions}
+            {...props}
+          />
+        ) : null}
       </DialogActions>
     </Dialog>
   )

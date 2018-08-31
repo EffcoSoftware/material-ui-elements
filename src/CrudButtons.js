@@ -13,6 +13,8 @@ export default props => {
     handleSubmit,
     lang = 'en'
   } = props
+  console.log(props)
+
   if (!actions) return null
 
   const defaultLabels = {
