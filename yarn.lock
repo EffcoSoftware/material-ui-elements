@@ -2040,14 +2040,6 @@ lodash.cond@^4.3.0:
   version "4.5.2"
   resolved "https://registry.yarnpkg.com/lodash.cond/-/lodash.cond-4.5.2.tgz#f471a1da486be60f6ab955d17115523dd1d255d5"
 
-lodash.isarray@3.0.4:
-  version "3.0.4"
-  resolved "https://registry.yarnpkg.com/lodash.isarray/-/lodash.isarray-3.0.4.tgz#79e4eb88c36a8122af86f844aa9bcd851b5fbb55"
-
-lodash.isfinite@3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/lodash.isfinite/-/lodash.isfinite-3.2.0.tgz#aa69ffb93a37e82fab0ce18862655f9174ced339"
-
 lodash@^4.0.0, lodash@^4.15.0, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.2.0, lodash@^4.2.1, lodash@^4.3.0:
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
@@ -2067,13 +2059,6 @@ material-ui-icons@^1.0.0-beta.17:
   resolved "https://registry.yarnpkg.com/material-ui-icons/-/material-ui-icons-1.0.0-beta.17.tgz#5f19af54a2d99eeef347a55414a6853e1c850dc3"
   dependencies:
     recompose "^0.26.0"
-
-material-ui-superselectfield-effco@^1.5.9:
-  version "1.5.9"
-  resolved "https://registry.yarnpkg.com/material-ui-superselectfield-effco/-/material-ui-superselectfield-effco-1.5.9.tgz#7f597aedff4f6bee510bfd11d1547e8c970f2bb5"
-  dependencies:
-    prop-types "^15.5.10"
-    react-infinite "^0.12.1"
 
 micromatch@^2.1.5:
   version "2.3.11"
@@ -2127,9 +2112,9 @@ ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
 
-mui-downshift@^1.0.0-9:
-  version "1.0.0-11"
-  resolved "https://registry.yarnpkg.com/mui-downshift/-/mui-downshift-1.0.0-11.tgz#0a58950b8ce5a8e8e9ad38ebe2531e781f772b52"
+mui-downshift@1.0.0-10:
+  version "1.0.0-10"
+  resolved "http://registry.npmjs.org/mui-downshift/-/mui-downshift-1.0.0-10.tgz#5ad781bf47896c5925a285e98992a086004ac39a"
   dependencies:
     classnames "^2.2.5"
     downshift "^1.28.0"
@@ -2209,10 +2194,6 @@ number-is-nan@^1.0.0:
 oauth-sign@~0.8.1:
   version "0.8.2"
   resolved "https://registry.yarnpkg.com/oauth-sign/-/oauth-sign-0.8.2.tgz#46a6ab7f0aead8deae9ec0565780b7d4efeb9d43"
-
-object-assign@4.0.1:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.0.1.tgz#99504456c3598b5cad4fc59c26e8a9bb107fe0bd"
 
 object-assign@^4.0.1, object-assign@^4.1.0, object-assign@^4.1.1:
   version "4.1.1"
@@ -2448,14 +2429,6 @@ rc@^1.1.7:
 react-dom-factories@^1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/react-dom-factories/-/react-dom-factories-1.0.2.tgz#eb7705c4db36fb501b3aa38ff759616aa0ff96e0"
-
-react-infinite@^0.12.1:
-  version "0.12.1"
-  resolved "https://registry.yarnpkg.com/react-infinite/-/react-infinite-0.12.1.tgz#74c5981f9ddd23f065f414cbb00c6d204bf7eda1"
-  dependencies:
-    lodash.isarray "3.0.4"
-    lodash.isfinite "3.2.0"
-    object-assign "4.0.1"
 
 react-popper@0.8.2:
   version "0.8.2"

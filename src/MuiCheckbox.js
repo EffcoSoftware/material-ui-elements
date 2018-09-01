@@ -27,6 +27,7 @@ const MuiCheckbox = props => {
     style,
     margin,
     compact,
+    checkBoxStyle,
     ...rest
   } = props
 
@@ -98,9 +99,11 @@ const MuiCheckbox = props => {
       fullWidth
       required={required}
       disabled={disabled}
-      style={{
-        alignItems: 'center'
-      }}
+      style={
+        checkBoxStyle || {
+          alignItems: 'center'
+        }
+      }
     >
       <InputLabel shrink>{label}</InputLabel>
       {!compact && <div style={{ marginBottom: 15 }} />}
