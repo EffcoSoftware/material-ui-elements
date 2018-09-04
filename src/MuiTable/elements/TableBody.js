@@ -13,13 +13,12 @@ const Body = props => {
     detailsRow,
     columns
   } = props
-  if (!data) return null
 
   const tableData = fieldArray ? fields : data
   return (
     <TableBody>
       {!detailsRow
-      ? tableData.map((row, i) => (
+        ? tableData.map((row, i) => (
             <MuiTableRow
               key={i}
               index={i}

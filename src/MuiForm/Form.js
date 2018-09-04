@@ -6,15 +6,11 @@ import { compose } from 'recompose'
 
 class Form extends Component {
   render() {
-    const { layout: Layout, fields, groups, actions } = this.props
+    const { layout: Layout, fields, groups } = this.props
     if (!fields && !groups) {
       console.log(
         '[MuiForm] Please pass either "fields" or "groups" prop to render the form'
       )
-      return null
-    }
-    if (!actions) {
-      console.log('[MuiForm] Please pass "actions" prop to render the form')
       return null
     }
     return Layout ? (

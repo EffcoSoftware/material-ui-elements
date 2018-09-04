@@ -16,7 +16,7 @@ const FormBasic = props => {
   } = props
   return (
     <div>
-      {actions.drawer ? (
+      {actions && actions.drawer ? (
         <Drawer open docked type="persistent">
           <div style={{ margin: 24, display: 'flex' }}>
             <div style={{ flex: 1 }} />

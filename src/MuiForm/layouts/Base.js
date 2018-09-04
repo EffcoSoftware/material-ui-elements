@@ -26,13 +26,18 @@ const FormBasic = props => {
         </Toolbar>
       )}
       <FormFields fields={fields} {...props} />
-      <CrudButtons
-        add={add}
-        submittable={!(pristine || submitting || invalid)}
-        disabled={disabled}
-        actions={actions}
-        {...props}
-      />
+      <div style={{ display: 'flex', margin: 12 }}>
+        <div style={{ flex: 1 }} />
+        <div>
+          <CrudButtons
+            add={add}
+            submittable={!(pristine || submitting || invalid)}
+            disabled={disabled}
+            actions={actions}
+            {...props}
+          />
+        </div>
+      </div>
     </div>
   )
 }
