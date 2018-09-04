@@ -29,7 +29,7 @@ const MuiTableRow = props => {
     >
       {columns.map((h, i) => {
         if (h.hidden) return null
-        const value = _.get(data[index], h.name)
+        const value = _.get(data && data[index], h.name)
         const disabledValue =
           h.disabled !== undefined
             ? typeof h.disabled === 'function'
