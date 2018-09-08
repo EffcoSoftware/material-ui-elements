@@ -1,69 +1,59 @@
 import React from 'react'
+import _ from 'lodash'
 import Typography from 'material-ui/Typography'
 import MuiTextfield from '../../MuiTextfield'
 import MuiSelectfield from '../../MuiSelectfield'
 import MuiAutocomplete from '../../MuiAutocomplete'
 
 const FormField = props => {
-  const {
-    add,
-    type,
-    text,
-    component,
-    label,
-    hint,
-    required,
-    options,
-    disabled,
-    style,
-    input,
-    meta,
-    value,
-    showAutocompleteThreshold,
-    underlineShow,
-    numeric,
-    multiple
-  } = props
+  const { name, formField, ...rest } = props
+
+  const propsAdjusted = _.omit(rest, [
+    'clearAsyncError',
+    'clearSubmitErrors',
+    'clearSubmit',
+    'triggerSubmit',
+    'dateFormat',
+    'submitSucceeded',
+    'initialValues',
+    'handleSubmit',
+    'asyncValidate',
+    'anyTouched',
+    'add',
+    'pure',
+    'blur',
+    'change',
+    'destroy',
+    'initialize',
+    'reset',
+    'touch',
+    'untouch',
+    'layout',
+    'autofill',
+    'submit',
+    'info',
+    'expanded',
+    'valid',
+    'invalid',
+    'initialized',
+    'fieldWidths',
+    'toolbarTopStyles',
+    'maxChars'
+  ])
+
+  const { add, type, text, component, label, disabled, style } = props
 
   const disabledField = add && !disabled ? false : disabled
 
   switch (type) {
     case 'select':
-      return (
-        <MuiSelectfield
-          input={input}
-          meta={meta}
-          disabled={disabledField}
-          floatingLabelText={label}
-          hintText={hint}
-          required={required}
-          options={options}
-          style={style}
-          value={value}
-          numeric={numeric}
-          multiple={multiple}
-        />
-      )
+      return <MuiSelectfield {...propsAdjusted} disabled={disabledField} />
     case 'autocomplete':
-      return (
-        <MuiAutocomplete
-          input={input}
-          meta={meta}
-          disabled={disabledField}
-          floatingLabelText={label}
-          hintText={hint}
-          required={required}
-          options={options}
-          style={style}
-          value={value}
-          numeric={numeric}
-          showAutocompleteThreshold={showAutocompleteThreshold}
-        />
-      )
+      return <MuiAutocomplete {...propsAdjusted} disabled={disabledField} />
     case 'subheading':
       return (
         <div style={style || { marginTop: 30, marginBottom: 5 }}>
-          <Typography type="body2">{label}</Typography>
+          <Typography variant="body2">{label}</Typography>
         </div>
       )
     case 'spacer':
@@ -71,23 +61,9 @@ const FormField = props => {
     case 'component':
       return component
     case 'typography':
-      return <Typography type={text}>{label}</Typography>
+      return <Typography variant={text}>{label}</Typography>
     default:
-      return (
-        <MuiTextfield
-          input={input}
-          meta={meta}
-          type={type}
-          disabled={disabledField}
-          floatingLabelText={label}
-          hintText={hint}
-          required={required}
-          style={style}
-          value={value}
-          numeric={numeric}
-          underlineShow={underlineShow}
-        />
-      )
+      return <MuiTextfield {...propsAdjusted} disabled={disabledField} />
   }
 }
 

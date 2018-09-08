@@ -5,7 +5,7 @@ import IconButton from 'material-ui/IconButton'
 const RowActions = props => {
   const { fields, index, rowActions, disabled, customDeleteAction } = props
   return (
-    <div>
+    <div style={{ display: 'flex' }}>
       {rowActions
         ? rowActions.map(a => (
             <IconButton

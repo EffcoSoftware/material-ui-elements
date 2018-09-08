@@ -20,8 +20,7 @@ const TableHeader = ({
           <TableCell
             key={i}
             numeric={h.numeric}
-            compact={h.compact}
-            disablePadding={h.disablePadding}
+            padding={h.padding || 'dense'}
             style={h.style}
           >
             {orderBy && fieldArray !== true ? (
@@ -39,7 +38,7 @@ const TableHeader = ({
         )
       })}
       {fieldArray && !(!add && disabled) && !hideEditButtons ? (
-        <TableCell style={{ width: 1 }} compact disablePadding />
+        <TableCell padding="dense" />
       ) : null}
     </TableRow>
   )

@@ -45,7 +45,7 @@ export default props => {
             <CrudButton
               key={i}
               action={b.action}
-              raised={b.raised}
+              variant={b.variant}
               label={b.label}
               disabled={b.disabled}
               icon={b.icon}
@@ -61,7 +61,7 @@ export default props => {
           action={
             disabled || add ? null : actions.delete.action || actions.delete
           }
-          raised={actions.raised}
+          variant={actions.variant}
           label={actions.delete.label || defaultLabels[lang].delete}
           disabled={false}
           icon={
@@ -81,7 +81,7 @@ export default props => {
               ? null
               : handleSubmit(actions.save.action || actions.save)
           }
-          raised={actions.raised}
+          variant={actions.variant}
           label={actions.save.label || defaultLabels[lang].save}
           disabled={!submittable}
           icon={
@@ -104,7 +104,7 @@ export default props => {
                   actions.undo.action ? actions.undo.action() : actions.undo()
                 }
           }
-          raised={actions.raised}
+          variant={actions.variant}
           label={actions.undo.label || defaultLabels[lang].undo}
           disabled={false}
           icon={
@@ -120,7 +120,7 @@ export default props => {
       {actions.edit ? (
         <CrudButton
           action={disabled && !add ? actions.edit.action || actions.edit : null}
-          raised={actions.raised}
+          variant={actions.variant}
           label={actions.edit.label || defaultLabels[lang].edit}
           disabled={actions.edit.disabled || false}
           icon={
@@ -136,7 +136,7 @@ export default props => {
       {actions.add ? (
         <CrudButton
           action={add ? handleSubmit(actions.add.action || actions.add) : null}
-          raised={actions.raised}
+          variant={actions.variant}
           label={actions.add.label || defaultLabels[lang].add}
           disabled={!submittable}
           icon={
@@ -154,7 +154,7 @@ export default props => {
           action={
             disabled || add ? actions.cancel.action || actions.cancel : null
           }
-          raised={actions.raised}
+          variant={actions.variant}
           label={actions.cancel.label || defaultLabels[lang].cancel}
           disabled={false}
           icon={

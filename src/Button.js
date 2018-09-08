@@ -9,7 +9,7 @@ export default ({
   className,
   icon,
   style,
-  raised,
+  variant,
   color,
   compact
 }) => {
@@ -20,15 +20,11 @@ export default ({
         onClick={action}
         disabled={disabled}
         style={style}
-        raised={raised}
+        variant={variant}
         color={color}
         dense={compact}
       >
-        {icon
-          ? <Icon style={{ marginRight: 5 }}>
-              {icon}
-            </Icon>
-          : null}
+        {icon ? <Icon style={{ marginRight: 5 }}>{icon}</Icon> : null}
         {label}
       </Button>
     )

@@ -1,56 +1,72 @@
 import React from 'react'
-import { TextField } from 'material-ui-effco'
+import Input, { InputLabel } from 'material-ui/Input'
+import { FormControl, FormHelperText } from 'material-ui/Form'
+import { InputAdornment } from 'material-ui/Input'
+import { controlStyle } from './constants'
 
-export default props => {
+const MuiTextfield = props => {
   const {
-    disabled,
-    style,
-    hintText,
-    floatingLabelText,
-    rows,
-    type,
-    underlineShow,
-    underlineDisabledStyle,
-    required,
-    onChange,
     input,
     meta,
+    disabled,
+    label,
+    hint,
+    rows,
+    startAdo,
+    endAdo,
+    floatingLabelStyle,
+    style,
+    InputProps,
+    required,
+    onChange: onChangeFromField,
     value,
-    numeric,
-    inputStyle
+    margin,
+    numeric
   } = props
+  console.log(props)
+
+  if (numeric) controlStyle.textAlign = 'right'
+
   return (
-    <div>
-      <TextField
-        value={value}
+    <FormControl
+      margin={margin || 'normal'}
+      error={!!(meta && meta.touched && meta.error)}
+      rows={rows}
+      fullWidth
+      errorText={meta ? meta.error && meta.touched && meta.error : ''}
+      required={required}
+      disabled={disabled}
+    >
+      <InputLabel style={floatingLabelStyle} shrink>
+        {label}
+      </InputLabel>
+      <Input
         {...input}
-        hintText={hintText}
-        // onChange={v =>
-        //   (input && input.onChange(v ? v.value || v : v)) ||
-        //   (onChange ? onChange(v) : () => null)
-        // }
-        onChange={input ? input.onChange : onChange}
-        floatingLabelText={
-          floatingLabelText ? `${floatingLabelText}${required ? ' *' : ''}` : ''
-        }
-        disabled={disabled}
-        fullWidth
-        multiLine={!!rows}
-        rows={rows}
-        errorText={meta ? meta.error && meta.touched && meta.error : ''}
-        underlineShow={underlineShow}
-        underlineDisabledStyle={
-          underlineDisabledStyle || { borderColor: '#ccc' }
-        }
-        hintStyle={{ color: '#aaa' }}
-        floatingLabelFixed
-        type={type}
-        style={style}
-        inputStyle={{
-          ...inputStyle,
-          ...(numeric ? { textAlign: 'right' } : {})
+        value={input ? input.value : value}
+        onChange={e => {
+          input && input.onChange(e.target.value)
+          if (onChangeFromField) {
+            onChangeFromField(e.target.value)
+          }
         }}
+        inputProps={InputProps}
+        multiline={!!rows}
+        placeholder={hint}
+        style={{ ...controlStyle, ...style }}
+        startAdornment={
+          startAdo && (
+            <InputAdornment position="start">{startAdo}</InputAdornment>
+          )
+        }
+        endAdornment={
+          endAdo && <InputAdornment position="end">{endAdo}</InputAdornment>
+        }
       />
-    </div>
+      <FormHelperText>
+        {meta && meta.touched && meta.error && meta.error}
+      </FormHelperText>
+    </FormControl>
   )
 }
+
+export default MuiTextfield
