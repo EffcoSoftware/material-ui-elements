@@ -15,14 +15,9 @@ const BottomToolbar = props => {
       : `Displaying ${helpers.editingWording(rows, 'row', '', 's', 's', 's')}`
 
   const rowCountDisplay =
-    rowCount === false
-      ? null
-      : <Typography>
-          {rowCountText}
-        </Typography>
+    rowCount === false ? null : <Typography>{rowCountText}</Typography>
   return (
     <div>
-      <Divider />
       <Toolbar>
         <ButtonAdd {...props} />
         <div style={{ flex: 1 }} />

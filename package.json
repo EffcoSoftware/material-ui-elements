@@ -42,6 +42,7 @@
     "dataobject-parser": "^1.1.3",
     "lodash": "^4.17.4",
     "material-ui-superselectfield-effco": "^1.5.9",
+    "mui-downshift": "1.0.0-10",
     "react-redux": "^5.0.5",
     "redux": "^3.7.0",
     "redux-form": "^6.8.0"

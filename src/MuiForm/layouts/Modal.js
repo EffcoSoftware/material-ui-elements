@@ -1,6 +1,7 @@
 import React from 'react'
 import Dialog, { DialogActions } from 'material-ui/Dialog'
 import AppBar from 'material-ui/AppBar'
+import Divider from 'material-ui/Divider'
 import Toolbar from 'material-ui/Toolbar'
 import Typography from 'material-ui/Typography'
 // import IconButton from 'material-ui/IconButton'
@@ -43,10 +44,8 @@ const FormModal = props => {
               <ChevronLeft />
             </IconButton>*/}
           <div style={{ flex: 1 }} />
-          <Typography type="title" color="inherit">
-            <div style={{ color: 'white' }}>
-              {title || 'Details'}
-            </div>
+          <Typography variant="title" color="inherit">
+            <div style={{ color: 'white' }}>{title || 'Details'}</div>
           </Typography>
           <div style={{ flex: 1 }} />
           {/*<IconButton>
@@ -60,20 +59,23 @@ const FormModal = props => {
           overflow: 'auto'
         }}
       >
-        {groups
-          ? <FormTabs {...props} />
-          : <FormFields fields={fields} {...props} />}
+        {groups ? (
+          <FormTabs {...props} />
+        ) : (
+          <FormFields fields={fields} {...props} />
+        )}
       </div>
+      {actions && <Divider />}
       <DialogActions>
-        {actions
-          ? <CrudButtons
-              add={add}
-              submittable={!(pristine || submitting || invalid)}
-              disabled={disabled}
-              actions={actions}
-              {...props}
-            />
-          : null}
+        {actions ? (
+          <CrudButtons
+            add={add}
+            submittable={!(pristine || submitting || invalid)}
+            disabled={disabled}
+            actions={actions}
+            {...props}
+          />
+        ) : null}
       </DialogActions>
     </Dialog>
   )

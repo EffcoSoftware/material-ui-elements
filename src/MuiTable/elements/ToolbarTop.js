@@ -9,7 +9,7 @@ const TopToolbar = props => {
 
   return (
     <Toolbar>
-      <Typography type="title">{title}</Typography>
+      <Typography variant="title">{title}</Typography>
       <div style={{ flex: 1 }} />
       {topComponent && topComponent}
       <div style={{ margin: 12 }} />
