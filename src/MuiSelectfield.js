@@ -1,50 +1,110 @@
 import React from 'react'
-import { SelectField, MenuItem } from 'material-ui-effco'
+import Select from 'material-ui/Select'
+import _c from 'lodash-checkit'
+import { InputLabel } from 'material-ui/Input'
+import Checkbox from 'material-ui/Checkbox'
+import { FormControl, FormHelperText } from 'material-ui/Form'
+import { MenuItem } from 'material-ui/Menu'
+import { controlStyle } from './constants'
 
-export default ({
-  disabled,
-  style,
-  hintText,
-  floatingLabelText,
-  options,
-  onChange,
-  multiple,
-  required,
-  input,
-  meta,
-  value
-}) => {
+const MuiSelectfield = props => {
+  const {
+    options,
+    input,
+    disabled,
+    label,
+    meta,
+    hint,
+    floatingLabelStyle,
+    helperTextStyle,
+    multiple,
+    customRenderValue,
+    onChange: onChangeFromField,
+    style,
+    value,
+    required,
+    margin
+  } = props
+
+  const inputValue = input && input.value !== undefined ? input.value : value
+  const renderValue = (v = multiple ? [] : '') =>
+    multiple ? customRenderValue || v.join(', ') : v
+
+  const handleMultipleChange = (existingValues, newValue) => {
+    const values = existingValues.slice()
+    if (values.includes(newValue)) {
+      values.splice(values.indexOf(newValue), 1)
+      return values
+    }
+    values.push(newValue)
+    return values
+  }
+
   return (
-    <SelectField
-      value={value}
-      {...input}
-      onChange={(e, i, v) => input.onChange(v)}
-      hintText={hintText}
-      floatingLabelText={
-        floatingLabelText ? `${floatingLabelText}${required ? ' *' : ''}` : ''
-      }
+    <FormControl
+      margin={margin || 'normal'}
       fullWidth
-      errorText={meta ? meta.touched && meta.error && meta.error : null}
-      disabled={disabled}
-      style={style}
-      underlineDisabledStyle={{ borderColor: '#ccc' }}
-      hintStyle={{ color: '#aaa' }}
-      floatingLabelFixed
       multiple={multiple}
+      required={required}
+      error={!!(meta && meta.touched && meta.error)}
+      disabled={disabled}
     >
-      {options
-        ? options.map(o =>
-            <MenuItem
-              key={
-                o.key
-                  ? o.key
-                  : [false, 0].indexOf(o.value) > -1 ? o.value : o.value || o
-              }
-              value={[false, 0].indexOf(o.value) > -1 ? o.value : o.value || o}
-              primaryText={o.label || o}
-            />
-          )
-        : null}
-    </SelectField>
+      <InputLabel style={floatingLabelStyle} shrink>
+        {label}
+      </InputLabel>
+      <Select
+        value={inputValue}
+        renderValue={multiple && renderValue}
+        inputProps={{ placeholder: hint }}
+        onChange={e => {
+          input &&
+            input.onChange(
+              multiple
+                ? handleMultipleChange(inputValue, e.target.value)
+                : e.target.value
+            )
+          if (onChangeFromField) {
+            onChangeFromField(
+              multiple
+                ? handleMultipleChange(inputValue, e.target.value)
+                : e.target.value
+            )
+          }
+        }}
+        MenuProps={{
+          PaperProps: {
+            style: {
+              transform: 'translate3d(0, 0, 0)'
+            }
+          }
+        }}
+        style={{ ...controlStyle, ...style }}
+      >
+        {options
+          ? options.map(o => {
+              const key = o.key || o.value || o
+              const value = _c.isExists(o.value) ? o.value : o
+              const label = o.label || o
+              const isSelected = multiple
+                ? inputValue.includes(value)
+                : inputValue === value
+              const style = isSelected ? { fontWeight: '600' } : {}
+              return (
+                <MenuItem style={style} key={key} value={value}>
+                  {multiple && (
+                    <Checkbox color="primary" checked={isSelected} />
+                  )}
+                  {label}
+                </MenuItem>
+              )
+            })
+          : null}
+      </Select>
+      <FormHelperText style={helperTextStyle}>
+        {meta && meta.touched && meta.error && meta.error}
+      </FormHelperText>
+    </FormControl>
   )
 }
+
+export default MuiSelectfield

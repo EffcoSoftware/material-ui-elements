@@ -102,8 +102,14 @@ class TablePaper extends Component {
       menuOptionsConfig
     } = this.props
     const externalFilters = true
-    // console.log(this.props)
-    // console.log(this.state)
+
+    const filteredData = this.filterData(
+      data,
+      filterBy,
+      this.state.filterString,
+      this.state.filters
+    )
+
     return (
       <Paper>
         {toolbarTop !== false ? (
@@ -123,16 +129,10 @@ class TablePaper extends Component {
             )}
           />
         ) : null}
-        <Table
-          {...this.props}
-          data={this.filterData(
-            data,
-            filterBy,
-            this.state.filterString,
-            this.state.filters
-          )}
-        />
-        {toolbarBottom !== false ? <ToolbarBottom {...this.props} /> : null}
+        <Table {...this.props} data={filteredData} />
+        {toolbarBottom !== false ? (
+          <ToolbarBottom filteredData={filteredData} {...this.props} />
+        ) : null}
       </Paper>
     )
   }

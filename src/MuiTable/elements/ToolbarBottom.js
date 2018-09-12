@@ -1,18 +1,32 @@
 import React from 'react'
 import Toolbar from 'material-ui/Toolbar'
 import Typography from 'material-ui/Typography'
-import Divider from 'material-ui/Divider'
 import ButtonAdd from './ButtonAdd'
 import * as helpers from '../../helpers'
 
 const BottomToolbar = props => {
-  const { data, lang, rowCount, fieldArray, fields } = props
-  const rows = fieldArray ? fields.length : data ? data.length : 0
+  const { data, lang, rowCount, filteredData } = props
+  const allRows = (data || []).length
+  const visibleRows = (filteredData || []).length
+  console.log(props)
 
   const rowCountText =
     lang === 'pl'
-      ? `Wyświetlono ${helpers.editingWording(rows, 'rekord', '', 'ów', 'y')} `
-      : `Displaying ${helpers.editingWording(rows, 'row', '', 's', 's', 's')}`
+      ? `Wyświetlono ${helpers.editingWording(
+          visibleRows,
+          'rekord',
+          '',
+          'ów',
+          'y'
+        )}${allRows !== visibleRows ? ' (filtered)' : ''}`
+      : `Displaying ${helpers.editingWording(
+          visibleRows,
+          'row',
+          '',
+          's',
+          's',
+          's'
+        )}${allRows !== visibleRows ? ' (filtered)' : ''}`
 
   const rowCountDisplay =
     rowCount === false ? null : <Typography>{rowCountText}</Typography>

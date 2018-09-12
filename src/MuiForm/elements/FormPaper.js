@@ -2,6 +2,7 @@ import React from 'react'
 import Paper from 'material-ui/Paper'
 import Toolbar from 'material-ui/Toolbar'
 import Typography from 'material-ui/Typography'
+import Divider from 'material-ui/Divider'
 import FormFields from '../elements/FormFields'
 import CrudButtons from '../../CrudButtons'
 
@@ -16,38 +17,53 @@ const FormPaper = props => {
     invalid,
     title,
     fields,
-    actions
+    actions,
+    bottomComponent
   } = props
+  console.log(props)
+
   const formLabel = label || title || ''
   return (
     <Paper>
-      {formLabel
-        ? <Toolbar>
-            <Typography type="title">
-              {formLabel}
-            </Typography>
-          </Toolbar>
-        : null}
+      {formLabel ? (
+        <Toolbar>
+          <Typography type="title">{formLabel}</Typography>
+        </Toolbar>
+      ) : (
+        <div style={{ height: 1 }} />
+      )}
       <FormFields fields={fieldsGroup || fields} {...props} />
-      {!fieldsGroup
-        ? <div
-            style={{
-              marginLeft: 24,
-              marginRight: 24,
-              marginTop: 24,
-              paddingBottom: 12
-            }}
-          >
-            {!actions.drawer &&
-              <CrudButtons
-                add={add}
-                submittable={!(pristine || submitting || invalid)}
-                disabled={disabled}
-                actions={actions}
-                {...props}
-              />}
+      {actions && <Divider />}
+      {!fieldsGroup ? (
+        <div
+          style={{
+            marginLeft: 6,
+            marginRight: 6,
+            marginTop: 6,
+            paddingBottom: 6
+          }}
+        >
+          <div style={{ flex: 1 }} />
+          <div>
+            {actions &&
+              !actions.drawer && (
+                <div style={{ display: 'flex' }}>
+                  <div style={{ flex: 1 }} />
+                  {bottomComponent && (
+                    <div style={{ marginLeft: 24 }}>{bottomComponent}</div>
+                  )}
+                  <CrudButtons
+                    add={add}
+                    submittable={!(pristine || submitting || invalid)}
+                    disabled={disabled}
+                    actions={actions}
+                    {...props}
+                  />
+                </div>
+              )}
           </div>
-        : null}
+        </div>
+      ) : null}
     </Paper>
   )
 }

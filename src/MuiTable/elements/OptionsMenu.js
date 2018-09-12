@@ -45,7 +45,7 @@ const OptionsMenu = props => {
         id="vertmenu"
         anchorEl={optionsAnchorEl}
         open={optionsOpen}
-        onRequestClose={() => handleOptionsRequestClose()}
+        onClose={() => handleOptionsRequestClose()}
         PaperProps={{
           style: {
             maxHeight: maxHeight || ITEM_HEIGHT * ITEM_ROWS,
@@ -92,7 +92,8 @@ const OptionsMenu = props => {
                             value: 0
                           },
                           'filter'
-                        )}
+                        )
+                  }
                 >
                   {'All'}
                 </MenuItem>
@@ -130,7 +131,8 @@ const OptionsMenu = props => {
                                 value: option.id
                               },
                               'filter'
-                            )}
+                            )
+                      }
                     >
                       {option.label}
                     </MenuItem>

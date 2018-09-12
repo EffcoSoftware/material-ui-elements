@@ -1,5 +1,6 @@
 import React from 'react'
 import { TableBody, TableRow, TableCell } from 'material-ui/Table'
+
 import MuiTableRow from './TableRow'
 
 import { getDetails } from '../helpers'

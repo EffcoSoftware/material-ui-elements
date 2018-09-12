@@ -11,6 +11,7 @@ export const editingWording = (
 ) => {
   switch (count) {
     case 0:
+      return `${count} ${name}${zeroEnding}`
     case 1:
       return `${count} ${name}${singularEnding}`
     case 2:
@@ -18,7 +19,7 @@ export const editingWording = (
     case 4:
       return `${count} ${name}${pluralEnding2 || pluralEnding}`
     default:
-      return `${count}  ${name}${singularEnding}`
+      return `${count}  ${name}${pluralEnding}`
   }
 }
 

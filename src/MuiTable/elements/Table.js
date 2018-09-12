@@ -15,12 +15,6 @@ class MuiTable extends Component {
       orderBy,
       order: 'asc'
     }
-
-    // if (fieldArray) {
-    //   extractFormFieldsData(this.props.columns, this.props.data).map(x =>
-    //     fields.push(x)
-    //   )
-    // }
   }
   shouldComponentUpdate(nextProps, nextState) {
     return !this.props.disableRefreshTable
@@ -40,7 +34,7 @@ class MuiTable extends Component {
 
   render() {
     const { orderBy, order } = this.state
-    const { data, fieldArray, disabled, paper } = this.props
+    const { data, fieldArray, disabled, paper, noAddButton } = this.props
 
     return (
       <div>
@@ -63,7 +57,7 @@ class MuiTable extends Component {
         </Table>
         {fieldArray && !disabled && !paper ? (
           <div style={{ marginTop: 24 }}>
-            <ButtonAdd {...this.props} />
+            {!noAddButton && <ButtonAdd {...this.props} />}
             <div style={{ flex: 1 }} />
           </div>
         ) : null}

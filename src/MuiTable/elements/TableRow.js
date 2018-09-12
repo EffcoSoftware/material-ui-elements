@@ -49,7 +49,7 @@ const MuiTableRow = props => {
               key={i}
               numeric={h.numeric}
               padding={h.padding || 'dense'}
-              style={h.style}
+              style={h.cellStyle}
               onClick={
                 h.onClick && !fieldArray ? () => h.onClick(row.id) : null
               }
@@ -58,7 +58,7 @@ const MuiTableRow = props => {
                 <FormFieldRedux
                   type={h.type}
                   name={fieldName} //`${fields.name}[${index}]${h.name ? '.' + h.name : ''}`}
-                  margin={h.margin || 'none'}
+                  margin={h.margin}
                   disabled={!add && disabledValue}
                   options={h.options}
                   numeric={h.numeric}
@@ -66,7 +66,10 @@ const MuiTableRow = props => {
                     h.validate && _.partial(h.validate, _, _, _, fieldName)
                   }
                   normalize={h.normalize}
-                  onChange={h.input && h.input.onChange}
+                  onChange={h.onChange}
+                  cellStyle={h.cellStyle}
+                  formControlStyle={h.formControlStyle}
+                  inputStyle={h.inputStyle}
                 />
               ) : (
                 <Typography>{h.value ? h.value(data[i]) : data[i]}</Typography>
@@ -79,7 +82,7 @@ const MuiTableRow = props => {
               key={i}
               numeric={h.numeric}
               padding={h.padding || 'dense'}
-              style={h.style}
+              style={h.cellStyle}
               onClick={
                 h.onClick && !fieldArray
                   ? () => h.onClick(row.id, data[index])
@@ -98,7 +101,7 @@ const MuiTableRow = props => {
       {fieldArray &&
       (!(!add && disabled) || forceShowEditButtons) &&
       !hideEditButtons ? (
-        <TableCell padding="dense" key={columns.length + 1}>
+        <TableCell padding="none" key={columns.length + 1}>
           <RowActions {...props} />
         </TableCell>
       ) : null}

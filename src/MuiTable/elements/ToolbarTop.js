@@ -5,7 +5,9 @@ import Typography from 'material-ui/Typography'
 import OptionsMenu from './OptionsMenu'
 
 const TopToolbar = props => {
-  const { title, topComponent } = props
+  const { title, topComponent, customTopComponent: CustomTopComponent } = props
+
+  if (CustomTopComponent) return <CustomTopComponent {...props} />
 
   return (
     <Toolbar>

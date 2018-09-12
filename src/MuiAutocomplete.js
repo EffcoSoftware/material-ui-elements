@@ -37,7 +37,8 @@ export default class MuiAutocomplete extends Component {
       onChange: onChangeFromField,
       style,
       customItem,
-      value
+      value,
+      noFormHelper
     } = this.props
 
     const inputValue = (input && input.value) || value
@@ -85,7 +86,9 @@ export default class MuiAutocomplete extends Component {
             ))
           }
         />
-        <FormHelperText>{meta && meta.error && meta.error}</FormHelperText>
+        {!noFormHelper && (
+          <FormHelperText>{meta && meta.error && meta.error}</FormHelperText>
+        )}
       </FormControl>
     )
   }

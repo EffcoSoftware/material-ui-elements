@@ -9,7 +9,7 @@ const Search = ({ lang, filterString, filterChange, filterBy, fieldArray }) => {
         value={filterString}
         hintText={lang === 'pl' ? 'Wyszukaj' : 'Search'}
         style={{ padding: 0 }}
-        onChange={(e, v) => filterChange(v)}
+        onChange={v => filterChange(v)}
       />
     </div>
   )

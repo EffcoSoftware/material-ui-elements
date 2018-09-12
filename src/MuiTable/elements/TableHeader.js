@@ -7,6 +7,7 @@ const TableHeader = ({
   order,
   handleSort,
   fieldArray,
+  rowActions,
   disabled,
   add,
   hideEditButtons
@@ -21,7 +22,7 @@ const TableHeader = ({
             key={i}
             numeric={h.numeric}
             padding={h.padding || 'dense'}
-            style={h.style}
+            style={h.cellStyle}
           >
             {orderBy && fieldArray !== true ? (
               <TableSortLabel
@@ -37,9 +38,8 @@ const TableHeader = ({
           </TableCell>
         )
       })}
-      {fieldArray && !(!add && disabled) && !hideEditButtons ? (
-        <TableCell padding="dense" />
-      ) : null}
+      {fieldArray &&
+        rowActions && <TableCell style={{ width: 10 }} padding="none" />}
     </TableRow>
   )
 }

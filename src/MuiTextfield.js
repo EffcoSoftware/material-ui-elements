@@ -16,26 +16,26 @@ const MuiTextfield = props => {
     endAdo,
     floatingLabelStyle,
     style,
-    InputProps,
     required,
     onChange: onChangeFromField,
     value,
     margin,
-    numeric
+    numeric,
+    inputStyle,
+    formControlStyle
   } = props
-  console.log(props)
 
   if (numeric) controlStyle.textAlign = 'right'
 
   return (
     <FormControl
       margin={margin || 'normal'}
-      error={!!(meta && meta.touched && meta.error)}
       rows={rows}
       fullWidth
-      errorText={meta ? meta.error && meta.touched && meta.error : ''}
+      error={meta ? meta.error && meta.touched && meta.error : false}
       required={required}
       disabled={disabled}
+      style={formControlStyle}
     >
       <InputLabel style={floatingLabelStyle} shrink>
         {label}
@@ -46,10 +46,10 @@ const MuiTextfield = props => {
         onChange={e => {
           input && input.onChange(e.target.value)
           if (onChangeFromField) {
-            onChangeFromField(e.target.value)
+            onChangeFromField(e.target.value, e)
           }
         }}
-        inputProps={InputProps}
+        inputProps={{ style: inputStyle }}
         multiline={!!rows}
         placeholder={hint}
         style={{ ...controlStyle, ...style }}
