@@ -66,10 +66,11 @@ const MuiTableRow = props => {
                     h.validate && _.partial(h.validate, _, _, _, fieldName)
                   }
                   normalize={h.normalize}
-                  onChange={h.onChange}
+                  onChangeFromField={h.onChangeFromField}
                   cellStyle={h.cellStyle}
                   formControlStyle={h.formControlStyle}
                   inputStyle={h.inputStyle}
+                  noAdornment={h.noAdornment}
                 />
               ) : (
                 <Typography>{h.value ? h.value(data[i]) : data[i]}</Typography>

@@ -20,7 +20,6 @@ const FormPaper = props => {
     actions,
     bottomComponent
   } = props
-  console.log(props)
 
   const formLabel = label || title || ''
   return (

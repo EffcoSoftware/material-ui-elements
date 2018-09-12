@@ -17,7 +17,7 @@ const MuiTextfield = props => {
     floatingLabelStyle,
     style,
     required,
-    onChange: onChangeFromField,
+    onChangeFromField,
     value,
     margin,
     numeric,
@@ -32,7 +32,7 @@ const MuiTextfield = props => {
       margin={margin || 'normal'}
       rows={rows}
       fullWidth
-      error={meta ? meta.error && meta.touched && meta.error : false}
+      error={meta ? !!(meta.error && meta.touched && meta.error) : false}
       required={required}
       disabled={disabled}
       style={formControlStyle}

@@ -12,6 +12,7 @@ const ButtonAdd = props => {
     defaultNew,
     newDeviceId,
     bottomComponent,
+    bottomComponentLabel = 'Add',
     customAddAction
   } = props
 
@@ -19,17 +20,16 @@ const ButtonAdd = props => {
   return (
     <div style={{ display: 'flex' }}>
       {bottomComponent && bottomComponent}
-      {newDeviceId !== -1 && (
-        <Button
-          label={lang === 'pl' ? 'Dodaj nowy' : 'Add'}
-          icon="add"
-          action={() => {
-            customAddAction && customAddAction()
-            fields.push(defaultNew || {})
-          }}
-          color="primary"
-        />
-      )}
+      <Button
+        disabled={!(newDeviceId !== -1)}
+        label={lang === 'pl' ? 'Dodaj nowy' : bottomComponentLabel}
+        icon="add"
+        action={() => {
+          customAddAction && customAddAction()
+          fields.push(defaultNew || {})
+        }}
+        color="primary"
+      />
     </div>
   )
 }

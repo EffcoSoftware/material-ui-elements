@@ -38,8 +38,7 @@ const TableHeader = ({
           </TableCell>
         )
       })}
-      {fieldArray &&
-        rowActions && <TableCell style={{ width: 10 }} padding="none" />}
+      {fieldArray && <TableCell style={{ width: 10 }} padding="none" />}
     </TableRow>
   )
 }

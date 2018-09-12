@@ -38,10 +38,13 @@ export default class MuiAutocomplete extends Component {
       style,
       customItem,
       value,
-      noFormHelper
+      noFormHelper,
+      noAdornment
     } = this.props
 
     const inputValue = (input && input.value) || value
+    let inputProps = {}
+    if (noAdornment) inputProps.endAdornment = null
 
     return (
       <FormControl
@@ -54,6 +57,7 @@ export default class MuiAutocomplete extends Component {
         <div />
         <MuiDownshift
           getInputProps={() => ({
+            ...inputProps,
             disabled,
             error: !!(meta && meta.error),
             label: label,

@@ -19,14 +19,17 @@ const FormModal = props => {
     groups,
     fields,
     actions,
-    open
+    open,
+    bottomComponent
   } = props
+
+  console.log(bottomComponent)
 
   return (
     <Dialog
       open={open}
       maxWidth="lg"
-      onRequestClose={actions.cancel.action || actions.cancel}
+      onClose={actions.cancel.action || actions.cancel}
     >
       <AppBar
         style={{
@@ -64,6 +67,9 @@ const FormModal = props => {
       </div>
       {actions && <Divider />}
       <DialogActions>
+        {bottomComponent && (
+          <div style={{ marginLeft: 24 }}>{bottomComponent}</div>
+        )}
         {actions ? (
           <CrudButtons
             add={add}

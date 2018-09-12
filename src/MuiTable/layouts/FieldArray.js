@@ -3,8 +3,9 @@ import FieldArrayForm from './FieldArrayForm'
 import FieldArraySubform from './FieldArraySubform'
 
 const FieldArray = props => {
-  if (props.subform) return <FieldArraySubform {...props} />
-  return <FieldArrayForm {...props} />
+  const propsAdjusted = { ...props, fieldArray: true }
+  if (props.subform) return <FieldArraySubform {...propsAdjusted} />
+  return <FieldArrayForm {...propsAdjusted} />
 }
 
 export default FieldArray
