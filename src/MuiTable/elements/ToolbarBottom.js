@@ -8,7 +8,6 @@ const BottomToolbar = props => {
   const { data, lang, rowCount, filteredData } = props
   const allRows = (data || []).length
   const visibleRows = (filteredData || []).length
-  console.log(props)
 
   const rowCountText =
     lang === 'pl'

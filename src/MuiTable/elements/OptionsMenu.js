@@ -30,7 +30,6 @@ const OptionsMenu = props => {
     style && style.rowHeight && style.rows
       ? style.rowHeight * style.rows
       : undefined
-  // console.log(menuOptionsConfig)
   return (
     <div>
       <IconButton

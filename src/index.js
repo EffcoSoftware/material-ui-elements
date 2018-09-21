@@ -1,4 +1,6 @@
 export MuiTextfield from './MuiTextfield'
+export MuiTextfieldPrint from './MuiTextfieldPrint'
+export MuiSelectfieldPrint from './MuiSelectfieldPrint'
 export MuiSelectfield from './MuiSelectfield'
 export MuiAutocomplete from './MuiAutocomplete'
 export MuiTable from './MuiTable'

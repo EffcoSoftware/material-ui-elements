@@ -3,10 +3,11 @@ import _ from 'lodash'
 // import FormField from './FormField'
 import FormFieldRedux from './FormFieldRedux'
 import FormFieldsHorizontal from './FormFieldsHorizontal'
+import FormFieldsHorizontalPrint from './FormFieldsHorizontalPrint'
 import FormFieldsVertical from './FormFieldsVertical'
 
 const FormFields = props => {
-  const { fields } = props
+  const { fields, printLayout } = props
   // const formField = !props.noRedux ? FormFieldRedux : FormField
 
   return (
@@ -15,10 +16,14 @@ const FormFields = props => {
         fields.map(
           (f, i) =>
             _.isArray(f) ? (
-              <div key={i}>
-                <FormFieldsHorizontal {...props} fields={f} />
-                <FormFieldsVertical {...props} fields={f} />
-              </div>
+              printLayout ? (
+                <FormFieldsHorizontalPrint {...props} fields={f} />
+              ) : (
+                <div key={i}>
+                  <FormFieldsHorizontal {...props} fields={f} />
+                  <FormFieldsVertical {...props} fields={f} />
+                </div>
+              )
             ) : (
               !f.hidden && <FormFieldRedux key={i} {...props} {...f} />
             )

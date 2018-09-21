@@ -16,12 +16,17 @@ class Form extends Component {
     const { layout, fields, groups } = this.props
     const Layout = layout
     if (!fields && !groups) return null
-    return layout
-      ? <Layout {...this.props} />
-      : <DefaultLayout {...this.props} />
+    return layout ? (
+      <Layout {...this.props} />
+    ) : (
+      <DefaultLayout {...this.props} />
+    )
   }
 }
 
-const connectedForm = connect(null, { initialize, reset })(Form)
+const connectedForm = connect(
+  null,
+  { initialize, reset }
+)(Form)
 
 export default reduxForm({ form: formName })(connectedForm)

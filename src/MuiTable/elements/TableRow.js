@@ -16,7 +16,7 @@ const MuiTableRow = props => {
     add,
     data,
     index,
-    fields,
+    fields = {},
     hideEditButtons,
     forceShowEditButtons
   } = props

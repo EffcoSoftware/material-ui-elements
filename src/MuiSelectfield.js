@@ -6,6 +6,7 @@ import Checkbox from 'material-ui/Checkbox'
 import { FormControl, FormHelperText } from 'material-ui/Form'
 import { MenuItem } from 'material-ui/Menu'
 import { controlStyle } from './constants'
+import MuiSelectfieldPrint from './MuiSelectfieldPrint'
 
 const MuiSelectfield = props => {
   const {
@@ -23,8 +24,11 @@ const MuiSelectfield = props => {
     style,
     value,
     required,
-    margin
+    margin,
+    printLayout
   } = props
+
+  if (printLayout) return <MuiSelectfieldPrint {...props} />
 
   const inputValue = input && input.value !== undefined ? input.value : value
   const renderValue = (v = multiple ? [] : '') =>

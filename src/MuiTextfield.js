@@ -3,6 +3,7 @@ import Input, { InputLabel } from 'material-ui/Input'
 import { FormControl, FormHelperText } from 'material-ui/Form'
 import { InputAdornment } from 'material-ui/Input'
 import { controlStyle } from './constants'
+import MuiTextfieldPrint from './MuiTextfieldPrint'
 
 const MuiTextfield = props => {
   const {
@@ -22,9 +23,11 @@ const MuiTextfield = props => {
     margin,
     numeric,
     inputStyle,
-    formControlStyle
+    formControlStyle,
+    printLayout
   } = props
 
+  if (printLayout) return <MuiTextfieldPrint {...props} />
   if (numeric) controlStyle.textAlign = 'right'
 
   return (

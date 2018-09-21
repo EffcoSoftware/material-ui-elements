@@ -23,8 +23,6 @@ const FormModal = props => {
     bottomComponent
   } = props
 
-  console.log(bottomComponent)
-
   return (
     <Dialog
       open={open}

@@ -4,7 +4,9 @@ import Hidden from 'material-ui/Hidden'
 import FormFieldRedux from './FormFieldRedux'
 
 const FormFieldsVertical = props => {
-  const { fields } = props
+  const { fields, printLayout } = props
+
+  if (printLayout) return null
   // const formField = !props.noRedux ? FormFieldRedux : FormField
   return (
     <Hidden smUp>

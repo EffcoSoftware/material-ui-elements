@@ -33,8 +33,6 @@ export const extractFormFieldsData = (columns, data) => {
     return dataFields
   })
   return formFieldsDataFlat.map(x => {
-    // console.log(x)
-    // console.log(objectParser.transpose(x))
     objectParser.transpose(x)
     return x
   })
