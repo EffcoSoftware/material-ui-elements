@@ -8,7 +8,8 @@ const MuiTextfieldPrint = props => {
     input = {},
     valueVariant = 'body1',
     labelVariant = 'caption',
-    style
+    style,
+    format = v => v
   } = props
 
   const inputValue = input.value || ''
@@ -16,7 +17,7 @@ const MuiTextfieldPrint = props => {
   return (
     <div style={{ margin: 0, ...style }}>
       <Typography variant={valueVariant}>
-        {inputValue || value || '-'}
+        {format(inputValue || value || '-')}
       </Typography>
       <Typography variant={labelVariant}>{label}</Typography>
     </div>
