@@ -1,5 +1,6 @@
 import React from 'react'
 import Select from 'material-ui/Select'
+import _ from 'lodash'
 import _c from 'lodash-checkit'
 import { InputLabel } from 'material-ui/Input'
 import Checkbox from 'material-ui/Checkbox'
@@ -18,6 +19,7 @@ const MuiSelectfield = props => {
     floatingLabelStyle,
     helperTextStyle,
     multiple,
+    multipleNew,
     customRenderValue,
     onChange: onChangeFromField,
     style,
@@ -32,19 +34,26 @@ const MuiSelectfield = props => {
 
   const handleMultipleChange = (existingValues, newValue) => {
     const values = existingValues.slice()
-    if (values.includes(newValue)) {
-      values.splice(values.indexOf(newValue), 1)
+    if (multipleNew) {
+      if (_.size(values) > _.size(newValue)) {
+        return newValue
+      }
+      return _.uniqBy(_.concat(values, newValue))
+    } else {
+      if (values.includes(newValue)) {
+        values.splice(values.indexOf(newValue), 1)
+        return values
+      }
+      values.push(newValue)
       return values
     }
-    values.push(newValue)
-    return values
   }
 
   return (
     <FormControl
       margin={margin || 'normal'}
       fullWidth
-      multiple={multiple}
+      multiple={multiple && !multipleNew}
       required={required}
       error={!!(meta && meta.touched && meta.error)}
       disabled={disabled}
@@ -53,6 +62,7 @@ const MuiSelectfield = props => {
         {label}
       </InputLabel>
       <Select
+        multiple={multipleNew}
         value={inputValue}
         renderValue={multiple && renderValue}
         inputProps={{ placeholder: hint }}
