@@ -19,7 +19,6 @@ const MuiSelectfield = props => {
     floatingLabelStyle,
     helperTextStyle,
     multiple,
-    multipleNew,
     customRenderValue,
     onChange: onChangeFromField,
     style,
@@ -34,26 +33,16 @@ const MuiSelectfield = props => {
 
   const handleMultipleChange = (existingValues, newValue) => {
     const values = existingValues.slice()
-    if (multipleNew) {
-      if (_.size(values) > _.size(newValue)) {
-        return newValue
-      }
-      return _.uniqBy(_.concat(values, newValue))
-    } else {
-      if (values.includes(newValue)) {
-        values.splice(values.indexOf(newValue), 1)
-        return values
-      }
-      values.push(newValue)
-      return values
+    if (_.size(values) > _.size(newValue)) {
+      return newValue
     }
+    return _.uniqBy(_.concat(values, newValue))
   }
 
   return (
     <FormControl
       margin={margin || 'normal'}
       fullWidth
-      multiple={multiple && !multipleNew}
       required={required}
       error={!!(meta && meta.touched && meta.error)}
       disabled={disabled}
@@ -62,7 +51,7 @@ const MuiSelectfield = props => {
         {label}
       </InputLabel>
       <Select
-        multiple={multipleNew}
+        multiple={multiple}
         value={inputValue}
         renderValue={multiple && renderValue}
         inputProps={{ placeholder: hint }}
