@@ -1,4 +1,5 @@
 import React from 'react'
+import _ from 'lodash'
 import { FormControl, FormControlLabel, FormHelperText } from 'material-ui/Form'
 import { InputLabel } from 'material-ui/Input'
 import Tooltip from 'material-ui/Tooltip'
@@ -53,7 +54,15 @@ const MuiCheckbox = props => {
         }
       }}
       style={{ height: 48 }}
-      title={tooltip ? (checkBoxValue ? 'Tak' : 'Nie') : ''}
+      title={
+        tooltip
+          ? _.isString(tooltip)
+            ? tooltip
+            : checkBoxValue
+              ? 'Tak'
+              : 'Nie'
+          : ''
+      }
       placement={tooltipPlacement || 'bottom-start'}
     >
       <div>
