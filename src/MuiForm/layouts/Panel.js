@@ -29,6 +29,7 @@ class MuiExpansionPanel extends Component {
       title,
       icon,
       info,
+      summary,
       pristine,
       submitting,
       invalid,
@@ -105,10 +106,24 @@ class MuiExpansionPanel extends Component {
                   ? styles.titleStyles.fontSize
                   : 18
                 : undefined,
-              fontWeight: expanded && 500,
-              marginTop: expanded && 9,
+              fontWeight: expanded
+                ? styles && styles.titleStyles && styles.titleStyles.fontWeight
+                  ? styles.titleStyles.fontWeight
+                  : 500
+                : styles &&
+                  styles.titleStyles &&
+                  styles.titleStyles.fontWeightCollapsed,
+              marginTop: expanded
+                ? styles && styles.titleStyles && styles.titleStyles.marginTop
+                  ? styles.titleStyles.marginTop
+                  : 9
+                : styles &&
+                  styles.titleStyles &&
+                  styles.titleStyles.marginTopCollapsed,
               marginBottom: expanded && 5,
-              color: '#004a6a'
+              color:
+                (styles && styles.titleStyles && styles.titleStyles.color) ||
+                '#004a6a'
             }}
             onClick={this.expand.bind(this)}
           >
@@ -129,6 +144,9 @@ class MuiExpansionPanel extends Component {
         )}
         {!expanded && info && info.component ? (
           <info.component compact {...rest} />
+        ) : null}
+        {summary && summary.component ? (
+          <summary.component compact {...rest} />
         ) : null}
       </ExpansionPanelSummary>
     )
